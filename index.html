@@ -147,9 +147,36 @@
                 }
 
                 const data = await response.json();
+                const races = data.races;
 
-                // Transformera loppen direkt
-                const transformedRaces = transformRaces(data.races);
+                // Fetch starts data for each horse
+                const startsData = {};
+
+                // Loop over races and fetch start info for each horse
+                for (const race of races) {
+                    for (const start of race.starts) {
+                        const horseId = start.horse.id;
+                        const raceId = race.id;
+                        const startNumber = start.number;
+
+                        const startApiUrl = `https://www.atg.se/services/racinginfo/v1/api/races/${raceId}/start/${startNumber}`;
+
+                        try {
+                            const startResponse = await fetch(startApiUrl);
+                            if (startResponse.ok) {
+                                const startData = await startResponse.json();
+                                startsData[horseId] = startData;
+                            } else {
+                                console.warn(`Failed to fetch starts data for horse ID ${horseId}`);
+                            }
+                        } catch (error) {
+                            console.error(`Error fetching starts data for horse ID ${horseId}:`, error);
+                        }
+                    }
+                }
+
+                // Transform races with both race data and starts data
+                const transformedRaces = transformRaces(races, startsData);
 
                 // Visa transformerade lopp i listan
                 displayRaces(transformedRaces);

@@ -1,125 +1,155 @@
-export function transformRaces(races) {
+export function transformRaces(races, startsData) {
+    const THREE_MONTHS_MS = 3 * 30 * 24 * 60 * 60 * 1000; // Approximation of 3 months
+    const now = new Date();
+
     return races.map(race => ({
         id: race.id,
-        name: race.name,
+        //   name: race.name,
         number: race.number,
         distance: race.distance,
         startMethod: race.startMethod,
         startTime: race.startTime,
         trackName: race.track.name,
-        horses: race.starts.map(start => ({
-            startNumber: start.number,
-            horse: {
-                name: start.horse.name,
-                odds: start.pools?.vinnare?.odds
-                    ? (start.pools.vinnare.odds / 100).toFixed(2)
-                    : "N/A",
-                V75: start.pools?.V75?.betDistribution
-                    ? (start.pools.V75.betDistribution / 100).toFixed(2) + " %"
-                    : "N/A",
-                GS75: start.pools?.GS75?.betDistribution
-                    ? (start.pools.GS75.betDistribution / 100).toFixed(2) + " %"
-                    : "N/A",
-                V4: start.pools?.V4?.betDistribution
-                    ? (start.pools.V4.betDistribution / 100).toFixed(2) + " %"
-                    : "N/A",
-                earnings: start.horse.money
-                    ? `${(start.horse.money / 100).toFixed(0)} kr`
-                    : "Unknown",
-                record: start.horse.record
-                    ? `${start.horse.record.time.minutes}.${start.horse.record.time.seconds},${start.horse.record.time.tenths}`
-                    : "Unknown",
-                shoes: start.horse.shoes
-                    ? {
-                        front: start.horse.shoes.front
-                            ? {
-                                hasShoe: start.horse.shoes.front.hasShoe || false,
-                                changed: start.horse.shoes.front.changed || false
-                            }
-                            : { hasShoe: false, changed: false },
-                        back: start.horse.shoes.back
-                            ? {
-                                hasShoe: start.horse.shoes.back.hasShoe || false,
-                                changed: start.horse.shoes.back.changed || false
-                            }
-                            : { hasShoe: false, changed: false }
-                    }
-                    : { front: { hasShoe: false, changed: false }, back: { hasShoe: false, changed: false } },
-                sulky: start.horse.sulky
-                    ? {
-                        type: start.horse.sulky.type
-                            ? {
-                                changed: start.horse.sulky.type.changed || false
-                            }
-                            : { changed: false }
-                    }
-                    : { reported: false, type: { code: "Unknown", text: "Unknown", engText: "Unknown", changed: false }, colour: { code: "Unknown", text: "Unknown", engText: "Unknown", changed: false } },
-                statistics: start.horse.statistics
-                    ? {
-                        years: Object.keys(start.horse.statistics.years).reduce((stats, year) => {
-                            stats[year] = {
-                                starts: start.horse.statistics.years[year].starts,
-                                earnings: `${(start.horse.statistics.years[year].earnings / 100).toFixed(0)} kr`,
-                                placement: start.horse.statistics.years[year].placement,
-                                records: start.horse.statistics.years[year].records || []
-                            };
-                            return stats;
-                        }, {}),
-                        life: {
-                            starts: start.horse.statistics.life.starts,
-                            earnings: `${(start.horse.statistics.life.earnings / 100).toFixed(0)} kr`,
-                            placement: start.horse.statistics.life.placement,
-                            records: start.horse.statistics.life.records || [],
-                            winPercentage: (start.horse.statistics.life.winPercentage / 100).toFixed(2) + " %",
-                            placePercentage: (start.horse.statistics.life.placePercentage / 100).toFixed(2) + " %",
-                            earningsPerStart: `${(start.horse.statistics.life.earningsPerStart / 100).toFixed(0)} kr`,
-                            startPoints: start.horse.statistics.life.startPoints
-                        },
-                        lastFiveStarts: {
-                            averageOdds: (start.horse.statistics.lastFiveStarts.averageOdds / 100).toFixed(2) || "N/A"
-                        }
-                    }
-                    : {}
-            },
-            driver: start.driver
-                ? {
-                    name: `${start.driver.firstName} ${start.driver.lastName}`,
-                    statistics: start.driver.statistics
+        horses: race.starts.map(start => {
+            const horseId = start.horse.id;
+            const horseRecords = (startsData[horseId]?.horse?.results?.records || []);
+
+            // Last Five Starts
+            const lastFiveStarts = horseRecords
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 5)
+                .map(record => ({
+                    date: record.date,
+                    track: record.track?.name || "Unknown",
+                    distance: record.start?.distance || "Unknown",
+                    position: record.place || "N/A",
+                    firstPrize: record.race.firstPrize || "N/A",
+                    time: record.kmTime
+                        ? `${record.kmTime.minutes}.${record.kmTime.seconds},${record.kmTime.tenths}`
+                        : "N/A",
+                    odds: record.odds ? (record.odds / 100).toFixed(2) : "N/A"
+                }));
+
+            // Last 3 Months Summary
+            const last3MonthsRecords = horseRecords.filter(record => {
+                const recordDate = new Date(record.date);
+                return now - recordDate <= THREE_MONTHS_MS;
+            });
+
+            const last3MonthsSummary = last3MonthsRecords.reduce((summary, record) => {
+                summary.starts += 1;
+
+                // Ensure firstPrize is a valid number before adding
+                const firstPrize = record.race?.firstPrize ? parseInt(record.race.firstPrize, 10) : 0;
+                summary.totalFirstPrize += firstPrize;
+
+                const place = parseInt(record.place, 10);
+                if (place === 1) summary.placement["1"] += 1;
+                else if (place === 2) summary.placement["2"] += 1;
+                else if (place === 3) summary.placement["3"] += 1;
+                return summary;
+            }, {
+                starts: 0,
+                totalFirstPrize: 0,
+                placement: { "1": 0, "2": 0, "3": 0 }
+            });
+
+            // Calculate average first prize, handling division by zero
+            const averageFirstPrize = last3MonthsSummary.starts > 0
+                ? (last3MonthsSummary.totalFirstPrize / last3MonthsSummary.starts).toFixed(0) 
+                : "0";
+
+            return {
+                startNumber: start.number,
+                horse: {
+                    name: start.horse.name,
+                    odds: start.pools?.vinnare?.odds
+                        ? (start.pools.vinnare.odds / 100).toFixed(2)
+                        : "N/A",
+                    V75: start.pools?.V75?.betDistribution
+                        ? (start.pools.V75.betDistribution / 100).toFixed(2) + "%"
+                        : "N/A",
+                    GS75: start.pools?.GS75?.betDistribution
+                        ? (start.pools.GS75.betDistribution / 100).toFixed(2) + "%"
+                        : "N/A",
+                    V4: start.pools?.V4?.betDistribution
+                        ? (start.pools.V4.betDistribution / 100).toFixed(2) + "%"
+                        : "N/A",
+                    earnings: start.horse.money
+                        ? `${(start.horse.money / 100).toFixed(0)}`
+                        : "Unknown",
+                    record: start.horse.record
+                        ? `${start.horse.record.time.minutes}.${start.horse.record.time.seconds},${start.horse.record.time.tenths}`
+                        : "Unknown",
+                    shoes: start.horse.shoes
                         ? {
-                            years: Object.keys(start.driver.statistics.years).reduce((stats, year) => {
-                                stats[year] = {
-                                    starts: start.driver.statistics.years[year].starts,
-                                    earnings: `${(start.driver.statistics.years[year].earnings / 100).toFixed(0)} kr`,
-                                    placement: start.driver.statistics.years[year].placement,
-                                    winPercentage: (start.driver.statistics.years[year].winPercentage / 100).toFixed(2) + " %"
-                                };
-                                return stats;
-                            }, {})
+                            front: start.horse.shoes.front
+                                ? {
+                                    hasShoe: start.horse.shoes.front.hasShoe || false,
+                                    changed: start.horse.shoes.front.changed || false
+                                }
+                                : { hasShoe: false, changed: false },
+                            back: start.horse.shoes.back
+                                ? {
+                                    hasShoe: start.horse.shoes.back.hasShoe || false,
+                                    changed: start.horse.shoes.back.changed || false
+                                }
+                                : { hasShoe: false, changed: false }
                         }
-                        : {}  // Fix: Ensures statistics is an empty object if missing
-                }
-                : { name: "Unknown", record: "N/A", statistics: {} },
-            trainer: start.horse.trainer
-                ? {
-                    name: `${start.horse.trainer.firstName} ${start.horse.trainer.lastName}`,
-                    homeTrack: start.horse.trainer.homeTrack ? start.horse.trainer.homeTrack.name : "Unknown",
-                    statistics: start.horse.trainer.statistics
+                        : { front: { hasShoe: false, changed: false }, back: { hasShoe: false, changed: false } },
+                    sulky: start.horse.sulky
                         ? {
-                            years: Object.keys(start.horse.trainer.statistics.years).reduce((stats, year) => {
+                            type: start.horse.sulky.type
+                                ? {
+                                    changed: start.horse.sulky.type.changed || false
+                                }
+                                : { changed: false }
+                        }
+                        : { reported: false, type: { code: "Unknown", text: "Unknown", engText: "Unknown", changed: false }, colour: { code: "Unknown", text: "Unknown", engText: "Unknown", changed: false } },
+                },
+                driver: start.driver
+                    ? {
+                        name: `${start.driver.firstName} ${start.driver.lastName}`,
+                        statistics: start.driver.statistics
+                            ? {
+                                years: Object.keys(start.driver.statistics.years).reduce((stats, year) => {
+                                    stats[year] = {
+                                        starts: start.driver.statistics.years[year].starts,
+                                        earnings: `${(start.driver.statistics.years[year].earnings / 100).toFixed(0)}`,
+                                        placement: start.driver.statistics.years[year].placement,
+                                        winPercentage: (start.driver.statistics.years[year].winPercentage / 100).toFixed(2) + "%"
+                                    };
+                                    return stats;
+                                }, {})
+                            }
+                            : {}
+                    }
+                    : { name: "Unknown", statistics: {} },
+                trainer: start.horse.trainer
+                    ? {
+                        name: `${start.horse.trainer.firstName} ${start.horse.trainer.lastName}`,
+                        homeTrack: start.horse.trainer.homeTrack?.name || "Unknown",
+                        statistics: start.horse.trainer.statistics
+                            ? Object.keys(start.horse.trainer.statistics.years).reduce((stats, year) => {
                                 stats[year] = {
                                     starts: start.horse.trainer.statistics.years[year].starts,
-                                    earnings: `${(start.horse.trainer.statistics.years[year].earnings / 100).toFixed(0)} kr`,
+                                    earnings: `${(start.horse.trainer.statistics.years[year].earnings / 100).toFixed(0)}`,
                                     placement: start.horse.trainer.statistics.years[year].placement,
-                                    winPercentage: (start.horse.trainer.statistics.years[year].winPercentage / 100).toFixed(2) + " %"
+                                    winPercentage: (start.horse.trainer.statistics.years[year].winPercentage / 100).toFixed(2) + "%"
                                 };
                                 return stats;
                             }, {})
-                        }
-                        : {}  // Fix: Ensures statistics is an empty object if missing
-                }
-                : { name: "Unknown", license: "Unknown" },
-            scratch: start.scratch || false
-        }))
+                            : {}
+                    }
+                    : { name: "Unknown", homeTrack: "Unknown", statistics: {} },
+                lastFiveStarts: lastFiveStarts,
+                last3MonthsSummary: {
+                    starts: last3MonthsSummary.starts,
+                    firstPrizeAverage: `${averageFirstPrize}`,
+                    placement: last3MonthsSummary.placement
+                },
+                scratch: start.scratch || false
+            };
+        })
     }));
-
 };
