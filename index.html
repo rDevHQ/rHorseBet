@@ -3,88 +3,132 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horse Racing Data</title>
     <style>
-        ul {
-            list-style-type: none;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
             padding: 0;
+            color: #333;
         }
 
-        ul li {
-            padding: 10px;
-            margin-bottom: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #f9f9f9;
-            transition: background-color 0.3s;
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
         }
 
-        ul li:hover {
-            background-color: #e0f7fa;
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         button {
-            padding: 10px;
-            margin-bottom: 10px;
-            font-size: 14px;
-            border: 1px solid #007bff;
-            background-color: #007bff;
-            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s;
         }
 
         button:hover {
             background-color: #0056b3;
         }
 
+        h2 {
+            margin-top: 40px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
         pre {
-            border: 1px solid #ccc;
-            padding: 10px;
-            background-color: #f9f9f9;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             overflow-x: auto;
+        }
+
+        #download-json {
+            display: none;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
         }
     </style>
 </head>
 
 <body>
-    <h1>Horse Racing Data</h1>
-    <div>
-        <button id="prev-day">Previous Day</button>
-        <button id="next-day">Next Day</button>
-        <p id="current-date"></p>
-    </div>
+    <header>Horse Racing Data</header>
 
-    <div>
+    <div class="container">
+        <div class="nav-buttons">
+            <button id="prev-day"><</button>
+            <p id="current-date"></p>
+            <button id="next-day">></button>
+        </div>
+
         <h2>Available Tracks</h2>
-        <ul id="tracks"></ul>
-    </div>
+        <div class="grid" id="tracks"></div>
 
-    <div>
         <h2>Games for Selected Track</h2>
-        <ul id="games"></ul>
-    </div>
+        <div class="grid" id="games"></div>
 
-    <div>
         <h2>Races for Selected Game</h2>
-        <ul id="races"></ul>
-    </div>
+        <div class="grid" id="races"></div>
 
-    <div>
         <h2>Details</h2>
         <button id="download-json">Download JSON</button>
         <pre id="details"></pre>
     </div>
 
     <script type="module">
-        import { transformRaces } from './transform.js'; // Importera funktionen
-
+        import { transformRaces } from './transform.js';
 
         const apiCalendarUrl = 'https://www.atg.se/services/racinginfo/v1/api/calendar/day/';
         const gameApiBaseUrl = 'https://www.atg.se/services/racinginfo/v1/api/games/';
         let currentDate = new Date();
-        let filterRaces = false;
 
         function formatDate(date) {
             return date.toISOString().split('T')[0];
@@ -92,23 +136,25 @@
 
         async function loadTracks(date) {
             const formattedDate = formatDate(date);
-            document.getElementById('current-date').textContent = `Selected Date: ${formattedDate}`;
+            document.getElementById('current-date').textContent = `${formattedDate}`;
             const response = await fetch(apiCalendarUrl + formattedDate);
 
+            const tracksList = document.getElementById('tracks');
+            tracksList.innerHTML = '';
+
             if (!response.ok) {
-                document.getElementById('tracks').innerHTML = '<li>Error loading tracks</li>';
+                tracksList.innerHTML = '<div class="card">Error loading tracks</div>';
                 return;
             }
 
             const data = await response.json();
-            const tracksList = document.getElementById('tracks');
-            tracksList.innerHTML = '';
 
             data.tracks.forEach(track => {
-                const li = document.createElement('li');
-                li.textContent = track.name;
-                li.addEventListener('click', () => displayGamesForTrack(track, data.games));
-                tracksList.appendChild(li);
+                const div = document.createElement('div');
+                div.classList.add('card');
+                div.textContent = track.name;
+                div.addEventListener('click', () => displayGamesForTrack(track, data.games));
+                tracksList.appendChild(div);
             });
         }
 
@@ -128,37 +174,35 @@
             });
 
             gamesForTrack.forEach(game => {
-                const li = document.createElement('li');
-                li.textContent = `${game.type} - Start Time: ${new Date(game.startTime).toLocaleString('sv-SE')}`;
-                li.addEventListener('click', () => fetchGameDetails(game.id));
-                gamesList.appendChild(li);
+                const div = document.createElement('div');
+                div.classList.add('card');
+                const gameTime = new Date(game.startTime).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
+                div.textContent = `${game.type} - ${gameTime}`;
+                div.addEventListener('click', () => fetchGameDetails(game.id));
+                gamesList.appendChild(div);
             });
         }
 
-        // Funktion för att hämta och visa lopp för ett specifikt spel
         async function fetchGameDetails(gameId) {
             const apiUrl = gameApiBaseUrl + gameId;
             try {
                 const response = await fetch(apiUrl);
+                const detailsContainer = document.getElementById('details');
 
                 if (!response.ok) {
-                    document.getElementById('details').textContent = 'Error loading game details';
+                    detailsContainer.textContent = 'Error loading game details';
                     return;
                 }
 
                 const data = await response.json();
                 const races = data.races;
-
-                // Fetch starts data for each horse
                 const startsData = {};
 
-                // Loop over races and fetch start info for each horse
                 for (const race of races) {
                     for (const start of race.starts) {
                         const horseId = start.horse.id;
                         const raceId = race.id;
                         const startNumber = start.number;
-
                         const startApiUrl = `https://www.atg.se/services/racinginfo/v1/api/races/${raceId}/start/${startNumber}`;
 
                         try {
@@ -166,8 +210,6 @@
                             if (startResponse.ok) {
                                 const startData = await startResponse.json();
                                 startsData[horseId] = startData;
-                            } else {
-                                console.warn(`Failed to fetch starts data for horse ID ${horseId}`);
                             }
                         } catch (error) {
                             console.error(`Error fetching starts data for horse ID ${horseId}:`, error);
@@ -175,17 +217,10 @@
                     }
                 }
 
-                // Transform races with both race data and starts data
                 const transformedRaces = transformRaces(races, startsData);
-
-                // Visa transformerade lopp i listan
                 displayRaces(transformedRaces);
-
-                // Visa transformerad JSON i "Details"
-                const detailsContainer = document.getElementById('details');
                 detailsContainer.textContent = JSON.stringify(transformedRaces, null, 2);
 
-                // Aktivera nedladdningsknappen
                 const downloadButton = document.getElementById('download-json');
                 downloadButton.style.display = 'block';
                 downloadButton.onclick = () => downloadJSON(transformedRaces, `${gameId}.json`);
@@ -196,37 +231,28 @@
             }
         }
 
-        // Funktion för att visa lopp
         function displayRaces(races) {
             const racesList = document.getElementById("races");
-            racesList.innerHTML = ""; // Rensa tidigare innehåll
+            racesList.innerHTML = "";
 
-            // Lägg till varje lopp som en knapp
             races.forEach(race => {
-                const li = document.createElement("li");
-                li.classList.add("list-group-item"); // Bootstrap-stilar
-                const button = document.createElement("button");
-                button.textContent = `Race ${race.number} - ${race.name || "undefined"} (Start Time: ${new Date(race.startTime).toLocaleString("sv-SE")})`;
-                button.classList.add("btn", "btn-outline-secondary", "w-100", "mb-1");
-                button.addEventListener("click", () => displayRaceDetails(race)); // Klick för att visa loppdetaljer
-                li.appendChild(button);
-                racesList.appendChild(li);
+                const div = document.createElement("div");
+                div.classList.add("card");
+                div.textContent = `Race ${race.number}`;
+                div.addEventListener("click", () => displayRaceDetails(race));
+                racesList.appendChild(div);
             });
         }
 
-        // Funktion för att visa detaljer för ett valt lopp
         function displayRaceDetails(race) {
             const detailsContainer = document.getElementById('details');
-            detailsContainer.textContent = JSON.stringify(race, null, 2); // Visa endast loppets detaljer
+            detailsContainer.textContent = JSON.stringify(race, null, 2);
 
-            // Aktivera nedladdningsknappen för det specifika loppet
             const downloadButton = document.getElementById('download-json');
             downloadButton.style.display = 'block';
-            downloadButton.onclick = () => downloadJSON(race, `${race.id}.json`); // Använd loppets id som filnamn
+            downloadButton.onclick = () => downloadJSON(race, `${race.id}.json`);
         }
 
-
-        // Funktion för att ladda ner JSON
         function downloadJSON(data, filename) {
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
