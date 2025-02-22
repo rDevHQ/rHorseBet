@@ -1,0 +1,2533 @@
+[
+  {
+    "id": "2025-02-08_5_6",
+    "name": "Salladsmagasinet - STL Klass III, Final Meeting 1",
+    "number": 6,
+    "distance": 2140,
+    "startMethod": "auto",
+    "startTime": "2025-02-08T16:43:22",
+    "trackName": "Solvalla",
+    "horses": [
+      {
+        "startNumber": 1,
+        "horse": {
+          "name": "Forget it Not",
+          "odds": "28.15",
+          "V75": "2.43 %",
+          "GS75": "N/A",
+          "earnings": "1745 kr",
+          "record": "1.13,0",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "VA",
+              "text": "Vanlig",
+              "engText": "Standard",
+              "changed": false
+            },
+            "colour": {
+              "code": "GU",
+              "text": "Gul",
+              "engText": "Yellow",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 12,
+                "earnings": "156500 kr",
+                "placement": {
+                  "1": 2,
+                  "2": 4,
+                  "3": 1
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 13,
+                      "tenths": 0
+                    },
+                    "place": 2
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 0
+                    },
+                    "place": 2
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 2,
+                "earnings": "18000 kr",
+                "placement": {
+                  "1": 0,
+                  "2": 0,
+                  "3": 1
+                },
+                "records": [
+                  {
+                    "code": "aM",
+                    "startMethod": "auto",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 7
+                    },
+                    "place": 7
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 14,
+              "earnings": "174500 kr",
+              "placement": {
+                "1": 2,
+                "2": 4,
+                "3": 2
+              },
+              "records": [
+                {
+                  "code": "aK",
+                  "startMethod": "auto",
+                  "distance": "short",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 13,
+                    "tenths": 0
+                  },
+                  "place": 2,
+                  "year": "2024"
+                },
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 2
+                  },
+                  "place": 6,
+                  "year": "2024"
+                },
+                {
+                  "code": "aL",
+                  "startMethod": "auto",
+                  "distance": "long",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 8
+                  },
+                  "place": 7,
+                  "year": "2024"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 0
+                  },
+                  "place": 2,
+                  "year": "2024"
+                }
+              ],
+              "winPercentage": "14.28 %",
+              "placePercentage": "57.14 %",
+              "earningsPerStart": "12464 kr",
+              "startPoints": 800
+            },
+            "lastFiveStarts": {
+              "averageOdds": "20.96"
+            }
+          }
+        },
+        "driver": {
+          "name": "Örjan Kihlström",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1013,
+                "earnings": "51275551 kr",
+                "placement": {
+                  "1": 179,
+                  "2": 135,
+                  "3": 112
+                },
+                "winPercentage": "17.67 %"
+              },
+              "2025": {
+                "starts": 74,
+                "earnings": "1480400 kr",
+                "placement": {
+                  "1": 9,
+                  "2": 6,
+                  "3": 9
+                },
+                "winPercentage": "12.16 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Johan Untersteiner",
+          "homeTrack": "Halmstad",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1373,
+                "earnings": "29985790 kr",
+                "placement": {
+                  "1": 236,
+                  "2": 218,
+                  "3": 157
+                },
+                "winPercentage": "17.18 %"
+              },
+              "2025": {
+                "starts": 103,
+                "earnings": "2715042 kr",
+                "placement": {
+                  "1": 28,
+                  "2": 16,
+                  "3": 12
+                },
+                "winPercentage": "27.18 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 2,
+        "horse": {
+          "name": "Le Roi Mearas",
+          "odds": "5.99",
+          "V75": "11.43 %",
+          "GS75": "N/A",
+          "earnings": "1755 kr",
+          "record": "1.14,2",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "AM",
+              "text": "Amerikansk",
+              "engText": "American",
+              "changed": false
+            },
+            "colour": {
+              "code": "BL",
+              "text": "Blå",
+              "engText": "Blue",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 10,
+                "earnings": "139000 kr",
+                "placement": {
+                  "1": 2,
+                  "2": 1,
+                  "3": 2
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 2
+                    },
+                    "place": 1
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 8
+                    },
+                    "place": 5
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 2,
+                "earnings": "36500 kr",
+                "placement": {
+                  "1": 0,
+                  "2": 0,
+                  "3": 1
+                },
+                "records": [
+                  {
+                    "code": "aM",
+                    "startMethod": "auto",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 2
+                    },
+                    "place": 3
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 12,
+              "earnings": "175500 kr",
+              "placement": {
+                "1": 2,
+                "2": 1,
+                "3": 3
+              },
+              "records": [
+                {
+                  "code": "aK",
+                  "startMethod": "auto",
+                  "distance": "short",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 2
+                  },
+                  "place": 1,
+                  "year": "2024"
+                },
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 2
+                  },
+                  "place": 3,
+                  "year": "2025"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 8
+                  },
+                  "place": 5,
+                  "year": "2024"
+                }
+              ],
+              "winPercentage": "16.66 %",
+              "placePercentage": "50.00 %",
+              "earningsPerStart": "14625 kr",
+              "startPoints": 2165
+            },
+            "lastFiveStarts": {
+              "averageOdds": "10.29"
+            }
+          }
+        },
+        "driver": {
+          "name": "Peter Untersteiner",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 467,
+                "earnings": "7086621 kr",
+                "placement": {
+                  "1": 56,
+                  "2": 66,
+                  "3": 61
+                },
+                "winPercentage": "11.99 %"
+              },
+              "2025": {
+                "starts": 30,
+                "earnings": "629700 kr",
+                "placement": {
+                  "1": 5,
+                  "2": 4,
+                  "3": 2
+                },
+                "winPercentage": "16.66 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Johan Untersteiner",
+          "homeTrack": "Halmstad",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1373,
+                "earnings": "29985790 kr",
+                "placement": {
+                  "1": 236,
+                  "2": 218,
+                  "3": 157
+                },
+                "winPercentage": "17.18 %"
+              },
+              "2025": {
+                "starts": 103,
+                "earnings": "2715042 kr",
+                "placement": {
+                  "1": 28,
+                  "2": 16,
+                  "3": 12
+                },
+                "winPercentage": "27.18 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 3,
+        "horse": {
+          "name": "Global Edition",
+          "odds": "7.81",
+          "V75": "10.48 %",
+          "GS75": "N/A",
+          "earnings": "1536 kr",
+          "record": "1.14,5",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "VA",
+              "text": "Vanlig",
+              "engText": "Standard",
+              "changed": false
+            },
+            "colour": {
+              "code": "GU",
+              "text": "Gul",
+              "engText": "Yellow",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 14,
+                "earnings": "151100 kr",
+                "placement": {
+                  "1": 3,
+                  "2": 1,
+                  "3": 1
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 5
+                    },
+                    "place": 7
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 16,
+                      "tenths": 7
+                    },
+                    "place": 4
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 1,
+                "earnings": "2500 kr",
+                "placement": {
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                },
+                "records": []
+              }
+            },
+            "life": {
+              "starts": 15,
+              "earnings": "153600 kr",
+              "placement": {
+                "1": 3,
+                "2": 1,
+                "3": 1
+              },
+              "records": [
+                {
+                  "code": "aK",
+                  "startMethod": "auto",
+                  "distance": "short",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 5
+                  },
+                  "place": 7,
+                  "year": "2024"
+                },
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 9
+                  },
+                  "place": 2,
+                  "year": "2024"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 7
+                  },
+                  "place": 4,
+                  "year": "2024"
+                }
+              ],
+              "winPercentage": "20.00 %",
+              "placePercentage": "33.33 %",
+              "earningsPerStart": "10240 kr",
+              "startPoints": 1200
+            },
+            "lastFiveStarts": {
+              "averageOdds": "4.61"
+            }
+          }
+        },
+        "driver": {
+          "name": "Stefan Persson",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1322,
+                "earnings": "19094576 kr",
+                "placement": {
+                  "1": 173,
+                  "2": 171,
+                  "3": 137
+                },
+                "winPercentage": "13.08 %"
+              },
+              "2025": {
+                "starts": 79,
+                "earnings": "1088000 kr",
+                "placement": {
+                  "1": 10,
+                  "2": 11,
+                  "3": 11
+                },
+                "winPercentage": "12.65 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Johan Untersteiner",
+          "homeTrack": "Halmstad",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1373,
+                "earnings": "29985790 kr",
+                "placement": {
+                  "1": 236,
+                  "2": 218,
+                  "3": 157
+                },
+                "winPercentage": "17.18 %"
+              },
+              "2025": {
+                "starts": 103,
+                "earnings": "2715042 kr",
+                "placement": {
+                  "1": 28,
+                  "2": 16,
+                  "3": 12
+                },
+                "winPercentage": "27.18 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 4,
+        "horse": {
+          "name": "Star Pulsion",
+          "odds": "29.75",
+          "V75": "2.27 %",
+          "GS75": "N/A",
+          "earnings": "1705 kr",
+          "record": "1.14,2",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "VA",
+              "text": "Vanlig",
+              "engText": "Standard",
+              "changed": false
+            },
+            "colour": {
+              "code": "GU",
+              "text": "Gul",
+              "engText": "Yellow",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 10,
+                "earnings": "152500 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 2,
+                  "3": 1
+                },
+                "records": [
+                  {
+                    "code": "aM",
+                    "startMethod": "auto",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 4
+                    },
+                    "place": 3
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 8
+                    },
+                    "place": 6
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 2,
+                "earnings": "18000 kr",
+                "placement": {
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 2
+                    },
+                    "place": 8
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 12,
+              "earnings": "170500 kr",
+              "placement": {
+                "1": 1,
+                "2": 2,
+                "3": 1
+              },
+              "records": [
+                {
+                  "code": "aK",
+                  "startMethod": "auto",
+                  "distance": "short",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 2
+                  },
+                  "place": 8,
+                  "year": "2025"
+                },
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 4
+                  },
+                  "place": 3,
+                  "year": "2024"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 8
+                  },
+                  "place": 6,
+                  "year": "2024"
+                }
+              ],
+              "winPercentage": "8.33 %",
+              "placePercentage": "33.33 %",
+              "earningsPerStart": "14208 kr",
+              "startPoints": 710
+            },
+            "lastFiveStarts": {
+              "averageOdds": "32.41"
+            }
+          }
+        },
+        "driver": {
+          "name": "Björn Goop",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1211,
+                "earnings": "35918188 kr",
+                "placement": {
+                  "1": 175,
+                  "2": 150,
+                  "3": 155
+                },
+                "winPercentage": "14.45 %"
+              },
+              "2025": {
+                "starts": 98,
+                "earnings": "1613399 kr",
+                "placement": {
+                  "1": 13,
+                  "2": 15,
+                  "3": 7
+                },
+                "winPercentage": "13.26 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Björn Goop",
+          "homeTrack": "Färjestad",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 913,
+                "earnings": "18124546 kr",
+                "placement": {
+                  "1": 132,
+                  "2": 125,
+                  "3": 120
+                },
+                "winPercentage": "14.45 %"
+              },
+              "2025": {
+                "starts": 75,
+                "earnings": "1333486 kr",
+                "placement": {
+                  "1": 12,
+                  "2": 11,
+                  "3": 8
+                },
+                "winPercentage": "16.00 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 5,
+        "horse": {
+          "name": "Just Gary",
+          "odds": "18.38",
+          "V75": "5.70 %",
+          "GS75": "N/A",
+          "earnings": "2708 kr",
+          "record": "1.12,0",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "VA",
+              "text": "Vanlig",
+              "engText": "Standard",
+              "changed": false
+            },
+            "colour": {
+              "code": "GU",
+              "text": "Gul",
+              "engText": "Yellow",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 13,
+                "earnings": "127300 kr",
+                "placement": {
+                  "1": 3,
+                  "2": 0,
+                  "3": 2
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 12,
+                      "tenths": 0
+                    },
+                    "place": 1
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 16,
+                      "tenths": 0
+                    },
+                    "place": 3
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 2,
+                "earnings": "122500 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 1,
+                  "3": 0
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 13,
+                      "tenths": 4
+                    },
+                    "place": 2
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 20,
+              "earnings": "270750 kr",
+              "placement": {
+                "1": 4,
+                "2": 1,
+                "3": 2
+              },
+              "records": [
+                {
+                  "code": "aK",
+                  "startMethod": "auto",
+                  "distance": "short",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 12,
+                    "tenths": 0
+                  },
+                  "place": 1,
+                  "year": "2024"
+                },
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 4
+                  },
+                  "place": 1,
+                  "year": "2024"
+                },
+                {
+                  "code": "aL",
+                  "startMethod": "auto",
+                  "distance": "long",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 9
+                  },
+                  "place": 0,
+                  "year": "2024"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 0
+                  },
+                  "place": 3,
+                  "year": "2024"
+                }
+              ],
+              "winPercentage": "20.00 %",
+              "placePercentage": "35.00 %",
+              "earningsPerStart": "13538 kr",
+              "startPoints": 2783
+            },
+            "lastFiveStarts": {
+              "averageOdds": "9.02"
+            }
+          }
+        },
+        "driver": {
+          "name": "Kaj Widell",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 431,
+                "earnings": "2575900 kr",
+                "placement": {
+                  "1": 22,
+                  "2": 28,
+                  "3": 26
+                },
+                "winPercentage": "5.10 %"
+              },
+              "2025": {
+                "starts": 36,
+                "earnings": "334200 kr",
+                "placement": {
+                  "1": 3,
+                  "2": 2,
+                  "3": 1
+                },
+                "winPercentage": "8.33 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Olli Keskinen",
+          "homeTrack": "Färjestad",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 30,
+                "earnings": "192400 kr",
+                "placement": {
+                  "1": 3,
+                  "2": 1,
+                  "3": 2
+                },
+                "winPercentage": "10.00 %"
+              },
+              "2025": {
+                "starts": 2,
+                "earnings": "122500 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 1,
+                  "3": 0
+                },
+                "winPercentage": "50.00 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 6,
+        "horse": {
+          "name": "S.G.Edison",
+          "odds": "3.59",
+          "V75": "30.02 %",
+          "GS75": "N/A",
+          "earnings": "2735 kr",
+          "record": "1.13,7",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "AM",
+              "text": "Amerikansk",
+              "engText": "American",
+              "changed": true
+            },
+            "colour": {
+              "code": "BL",
+              "text": "Blå",
+              "engText": "Blue",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 10,
+                "earnings": "238500 kr",
+                "placement": {
+                  "1": 3,
+                  "2": 0,
+                  "3": 3
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 13,
+                      "tenths": 7
+                    },
+                    "place": 3
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 1
+                    },
+                    "place": 7
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 1,
+                "earnings": "35000 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 0,
+                  "3": 0
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 5
+                    },
+                    "place": 1
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 11,
+              "earnings": "273500 kr",
+              "placement": {
+                "1": 4,
+                "2": 0,
+                "3": 3
+              },
+              "records": [
+                {
+                  "code": "aK",
+                  "startMethod": "auto",
+                  "distance": "short",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 13,
+                    "tenths": 7
+                  },
+                  "place": 3,
+                  "year": "2024"
+                },
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 6
+                  },
+                  "place": 1,
+                  "year": "2024"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 1
+                  },
+                  "place": 7,
+                  "year": "2024"
+                }
+              ],
+              "winPercentage": "36.36 %",
+              "placePercentage": "63.63 %",
+              "earningsPerStart": "24864 kr",
+              "startPoints": 3925
+            },
+            "lastFiveStarts": {
+              "averageOdds": "9.47"
+            }
+          }
+        },
+        "driver": {
+          "name": "Magnus A Djuse",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1661,
+                "earnings": "52136191 kr",
+                "placement": {
+                  "1": 344,
+                  "2": 226,
+                  "3": 165
+                },
+                "winPercentage": "20.71 %"
+              },
+              "2025": {
+                "starts": 115,
+                "earnings": "2757550 kr",
+                "placement": {
+                  "1": 31,
+                  "2": 17,
+                  "3": 12
+                },
+                "winPercentage": "26.95 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Nicklas Pettersson",
+          "homeTrack": "Solvalla",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 33,
+                "earnings": "324300 kr",
+                "placement": {
+                  "1": 5,
+                  "2": 2,
+                  "3": 3
+                },
+                "winPercentage": "15.15 %"
+              },
+              "2025": {
+                "starts": 4,
+                "earnings": "55500 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 1,
+                  "3": 0
+                },
+                "winPercentage": "25.00 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 7,
+        "horse": {
+          "name": "Howitends W.F.",
+          "odds": "25.94",
+          "V75": "2.27 %",
+          "GS75": "N/A",
+          "earnings": "2486 kr",
+          "record": "1.15,5",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "AM",
+              "text": "Amerikansk",
+              "engText": "American",
+              "changed": false
+            },
+            "colour": {
+              "code": "BL",
+              "text": "Blå",
+              "engText": "Blue",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 11,
+                "earnings": "188600 kr",
+                "placement": {
+                  "1": 2,
+                  "2": 3,
+                  "3": 1
+                },
+                "records": [
+                  {
+                    "code": "aM",
+                    "startMethod": "auto",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 5
+                    },
+                    "place": 5
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 0
+                    },
+                    "place": 2
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 1,
+                "earnings": "60000 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 0,
+                  "3": 0
+                },
+                "records": [
+                  {
+                    "code": "aL",
+                    "startMethod": "auto",
+                    "distance": "long",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 16,
+                      "tenths": 9
+                    },
+                    "place": 1
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 12,
+              "earnings": "248600 kr",
+              "placement": {
+                "1": 3,
+                "2": 3,
+                "3": 1
+              },
+              "records": [
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 5
+                  },
+                  "place": 5,
+                  "year": "2024"
+                },
+                {
+                  "code": "aL",
+                  "startMethod": "auto",
+                  "distance": "long",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 9
+                  },
+                  "place": 1,
+                  "year": "2025"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 0
+                  },
+                  "place": 2,
+                  "year": "2024"
+                },
+                {
+                  "code": "L",
+                  "startMethod": "volte",
+                  "distance": "long",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 7
+                  },
+                  "place": 2,
+                  "year": "2024"
+                }
+              ],
+              "winPercentage": "25.00 %",
+              "placePercentage": "58.33 %",
+              "earningsPerStart": "20717 kr",
+              "startPoints": 2399
+            },
+            "lastFiveStarts": {
+              "averageOdds": "10.80"
+            }
+          }
+        },
+        "driver": {
+          "name": "Carl Johan Jepson",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1191,
+                "earnings": "24252540 kr",
+                "placement": {
+                  "1": 192,
+                  "2": 159,
+                  "3": 154
+                },
+                "winPercentage": "16.12 %"
+              },
+              "2025": {
+                "starts": 156,
+                "earnings": "3220100 kr",
+                "placement": {
+                  "1": 35,
+                  "2": 22,
+                  "3": 23
+                },
+                "winPercentage": "22.43 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Johan Untersteiner",
+          "homeTrack": "Halmstad",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1373,
+                "earnings": "29985790 kr",
+                "placement": {
+                  "1": 236,
+                  "2": 218,
+                  "3": 157
+                },
+                "winPercentage": "17.18 %"
+              },
+              "2025": {
+                "starts": 103,
+                "earnings": "2715042 kr",
+                "placement": {
+                  "1": 28,
+                  "2": 16,
+                  "3": 12
+                },
+                "winPercentage": "27.18 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 8,
+        "horse": {
+          "name": "Molte Wibb",
+          "odds": "7.67",
+          "V75": "7.88 %",
+          "GS75": "N/A",
+          "earnings": "2517 kr",
+          "record": "1.13,8",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "VA",
+              "text": "Vanlig",
+              "engText": "Standard",
+              "changed": false
+            },
+            "colour": {
+              "code": "GU",
+              "text": "Gul",
+              "engText": "Yellow",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 11,
+                "earnings": "150700 kr",
+                "placement": {
+                  "1": 2,
+                  "2": 2,
+                  "3": 0
+                },
+                "records": [
+                  {
+                    "code": "aM",
+                    "startMethod": "auto",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 2
+                    },
+                    "place": 4
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 6
+                    },
+                    "place": 2
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 3,
+                "earnings": "101000 kr",
+                "placement": {
+                  "1": 2,
+                  "2": 0,
+                  "3": 0
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 13,
+                      "tenths": 8
+                    },
+                    "place": 1
+                  },
+                  {
+                    "code": "L",
+                    "startMethod": "volte",
+                    "distance": "long",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 16,
+                      "tenths": 7
+                    },
+                    "place": 4
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 14,
+              "earnings": "251700 kr",
+              "placement": {
+                "1": 4,
+                "2": 2,
+                "3": 0
+              },
+              "records": [
+                {
+                  "code": "aK",
+                  "startMethod": "auto",
+                  "distance": "short",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 13,
+                    "tenths": 8
+                  },
+                  "place": 1,
+                  "year": "2025"
+                },
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 2
+                  },
+                  "place": 4,
+                  "year": "2024"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 6
+                  },
+                  "place": 2,
+                  "year": "2024"
+                },
+                {
+                  "code": "L",
+                  "startMethod": "volte",
+                  "distance": "long",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 7
+                  },
+                  "place": 4,
+                  "year": "2025"
+                }
+              ],
+              "winPercentage": "28.57 %",
+              "placePercentage": "42.85 %",
+              "earningsPerStart": "17979 kr",
+              "startPoints": 2678
+            },
+            "lastFiveStarts": {
+              "averageOdds": "9.19"
+            }
+          }
+        },
+        "driver": {
+          "name": "Daniel Wäjersten",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 688,
+                "earnings": "37746427 kr",
+                "placement": {
+                  "1": 156,
+                  "2": 96,
+                  "3": 83
+                },
+                "winPercentage": "22.67 %"
+              },
+              "2025": {
+                "starts": 20,
+                "earnings": "260964 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 2,
+                  "3": 3
+                },
+                "winPercentage": "5.00 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Robert Dunder",
+          "homeTrack": "Bergsåker",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 155,
+                "earnings": "1707500 kr",
+                "placement": {
+                  "1": 23,
+                  "2": 24,
+                  "3": 20
+                },
+                "winPercentage": "14.83 %"
+              },
+              "2025": {
+                "starts": 23,
+                "earnings": "437600 kr",
+                "placement": {
+                  "1": 6,
+                  "2": 3,
+                  "3": 2
+                },
+                "winPercentage": "26.08 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 9,
+        "horse": {
+          "name": "Bekir H.T.V.",
+          "odds": "4.32",
+          "V75": "19.72 %",
+          "GS75": "N/A",
+          "earnings": "2116 kr",
+          "record": "1.13,7",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "VA",
+              "text": "Vanlig",
+              "engText": "Standard",
+              "changed": false
+            },
+            "colour": {
+              "code": "GU",
+              "text": "Gul",
+              "engText": "Yellow",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 9,
+                "earnings": "146058 kr",
+                "placement": {
+                  "1": 2,
+                  "2": 2,
+                  "3": 2
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 5
+                    },
+                    "place": 0
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 16,
+                      "tenths": 5
+                    },
+                    "place": 1
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 1,
+                "earnings": "62500 kr",
+                "placement": {
+                  "1": 0,
+                  "2": 1,
+                  "3": 0
+                },
+                "records": [
+                  {
+                    "code": "aM",
+                    "startMethod": "auto",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 13,
+                      "tenths": 7
+                    },
+                    "place": 2
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 10,
+              "earnings": "211637 kr",
+              "placement": {
+                "1": 2,
+                "2": 3,
+                "3": 2
+              },
+              "records": [
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 13,
+                    "tenths": 7
+                  },
+                  "place": 2,
+                  "year": "2025"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 5
+                  },
+                  "place": 1,
+                  "year": "2024"
+                }
+              ],
+              "winPercentage": "20.00 %",
+              "placePercentage": "70.00 %",
+              "earningsPerStart": "21164 kr",
+              "startPoints": 2092
+            },
+            "lastFiveStarts": {
+              "averageOdds": "7.33"
+            }
+          }
+        },
+        "driver": {
+          "name": "Ken Ecce",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 450,
+                "earnings": "6099107 kr",
+                "placement": {
+                  "1": 53,
+                  "2": 53,
+                  "3": 58
+                },
+                "winPercentage": "11.77 %"
+              },
+              "2025": {
+                "starts": 45,
+                "earnings": "675990 kr",
+                "placement": {
+                  "1": 5,
+                  "2": 6,
+                  "3": 7
+                },
+                "winPercentage": "11.11 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Hans Henning Kristoffersen",
+          "homeTrack": "Unknown",
+          "statistics": {}
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 10,
+        "horse": {
+          "name": "Bravo Victorio",
+          "odds": "74.23",
+          "V75": "0.57 %",
+          "GS75": "N/A",
+          "earnings": "2123 kr",
+          "record": "1.13,9",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "AM",
+              "text": "Amerikansk",
+              "engText": "American",
+              "changed": true
+            },
+            "colour": {
+              "code": "BL",
+              "text": "Blå",
+              "engText": "Blue",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 11,
+                "earnings": "109300 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 2,
+                  "3": 2
+                },
+                "records": [
+                  {
+                    "code": "aM",
+                    "startMethod": "auto",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 13,
+                      "tenths": 9
+                    },
+                    "place": 3
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 4
+                    },
+                    "place": 0
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 2,
+                "earnings": "56500 kr",
+                "placement": {
+                  "1": 0,
+                  "2": 0,
+                  "3": 2
+                },
+                "records": [
+                  {
+                    "code": "aM",
+                    "startMethod": "auto",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 6
+                    },
+                    "place": 3
+                  },
+                  {
+                    "code": "L",
+                    "startMethod": "volte",
+                    "distance": "long",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 16,
+                      "tenths": 7
+                    },
+                    "place": 3
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 19,
+              "earnings": "212300 kr",
+              "placement": {
+                "1": 2,
+                "2": 2,
+                "3": 5
+              },
+              "records": [
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 13,
+                    "tenths": 9
+                  },
+                  "place": 3,
+                  "year": "2024"
+                },
+                {
+                  "code": "aL",
+                  "startMethod": "auto",
+                  "distance": "long",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 6
+                  },
+                  "place": 2,
+                  "year": "2024"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 4
+                  },
+                  "place": 0,
+                  "year": "2024"
+                },
+                {
+                  "code": "L",
+                  "startMethod": "volte",
+                  "distance": "long",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 7
+                  },
+                  "place": 3,
+                  "year": "2025"
+                }
+              ],
+              "winPercentage": "10.52 %",
+              "placePercentage": "47.36 %",
+              "earningsPerStart": "11174 kr",
+              "startPoints": 1180
+            },
+            "lastFiveStarts": {
+              "averageOdds": "18.38"
+            }
+          }
+        },
+        "driver": {
+          "name": "Fredrik B Larsson",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 155,
+                "earnings": "1601000 kr",
+                "placement": {
+                  "1": 9,
+                  "2": 15,
+                  "3": 23
+                },
+                "winPercentage": "5.80 %"
+              },
+              "2025": {
+                "starts": 11,
+                "earnings": "67400 kr",
+                "placement": {
+                  "1": 0,
+                  "2": 0,
+                  "3": 1
+                },
+                "winPercentage": "0.00 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Fredrik B Larsson",
+          "homeTrack": "Solvalla",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 242,
+                "earnings": "2678700 kr",
+                "placement": {
+                  "1": 15,
+                  "2": 23,
+                  "3": 32
+                },
+                "winPercentage": "6.19 %"
+              },
+              "2025": {
+                "starts": 28,
+                "earnings": "262100 kr",
+                "placement": {
+                  "1": 0,
+                  "2": 2,
+                  "3": 3
+                },
+                "winPercentage": "0.00 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 11,
+        "horse": {
+          "name": "Cheyenne Face",
+          "odds": "105.70",
+          "V75": "0.44 %",
+          "GS75": "N/A",
+          "earnings": "2414 kr",
+          "record": "1.14,0",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "VA",
+              "text": "Vanlig",
+              "engText": "Standard",
+              "changed": false
+            },
+            "colour": {
+              "code": "GU",
+              "text": "Gul",
+              "engText": "Yellow",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 20,
+                "earnings": "190861 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 5,
+                  "3": 3
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 14,
+                      "tenths": 0
+                    },
+                    "place": 3
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 2,
+                "earnings": "22500 kr",
+                "placement": {
+                  "1": 0,
+                  "2": 1,
+                  "3": 0
+                },
+                "records": [
+                  {
+                    "code": "aL",
+                    "startMethod": "auto",
+                    "distance": "long",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 16,
+                      "tenths": 1
+                    },
+                    "place": 8
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 32,
+              "earnings": "241361 kr",
+              "placement": {
+                "1": 1,
+                "2": 6,
+                "3": 4
+              },
+              "records": [
+                {
+                  "code": "aK",
+                  "startMethod": "auto",
+                  "distance": "short",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 0
+                  },
+                  "place": 3,
+                  "year": "2024"
+                },
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 14,
+                    "tenths": 3
+                  },
+                  "place": 2,
+                  "year": "2024"
+                },
+                {
+                  "code": "aL",
+                  "startMethod": "auto",
+                  "distance": "long",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 7
+                  },
+                  "place": 0,
+                  "year": "2024"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 19,
+                    "tenths": 0
+                  },
+                  "place": 3,
+                  "year": "2023"
+                }
+              ],
+              "winPercentage": "3.12 %",
+              "placePercentage": "34.37 %",
+              "earningsPerStart": "7543 kr",
+              "startPoints": 1215
+            },
+            "lastFiveStarts": {
+              "averageOdds": "35.44"
+            }
+          }
+        },
+        "driver": {
+          "name": "Jonas Bergdahl",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 221,
+                "earnings": "1106516 kr",
+                "placement": {
+                  "1": 8,
+                  "2": 15,
+                  "3": 13
+                },
+                "winPercentage": "3.61 %"
+              },
+              "2025": {
+                "starts": 26,
+                "earnings": "346800 kr",
+                "placement": {
+                  "1": 4,
+                  "2": 4,
+                  "3": 0
+                },
+                "winPercentage": "15.38 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Jonas Bergdahl",
+          "homeTrack": "Lindesberg",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 241,
+                "earnings": "1259937 kr",
+                "placement": {
+                  "1": 9,
+                  "2": 20,
+                  "3": 15
+                },
+                "winPercentage": "3.73 %"
+              },
+              "2025": {
+                "starts": 26,
+                "earnings": "346800 kr",
+                "placement": {
+                  "1": 4,
+                  "2": 4,
+                  "3": 0
+                },
+                "winPercentage": "15.38 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      },
+      {
+        "startNumber": 12,
+        "horse": {
+          "name": "Four White E.G.",
+          "odds": "17.35",
+          "V75": "6.80 %",
+          "GS75": "N/A",
+          "earnings": "2630 kr",
+          "record": "1.13,4",
+          "shoes": {
+            "reported": true,
+            "front": {
+              "hasShoe": true,
+              "changed": false
+            },
+            "back": {
+              "hasShoe": true,
+              "changed": false
+            }
+          },
+          "sulky": {
+            "reported": true,
+            "type": {
+              "code": "VA",
+              "text": "Vanlig",
+              "engText": "Standard",
+              "changed": false
+            },
+            "colour": {
+              "code": "GU",
+              "text": "Gul",
+              "engText": "Yellow",
+              "changed": false
+            }
+          },
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 9,
+                "earnings": "136500 kr",
+                "placement": {
+                  "1": 2,
+                  "2": 2,
+                  "3": 2
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 13,
+                      "tenths": 6
+                    },
+                    "place": 1
+                  },
+                  {
+                    "code": "M",
+                    "startMethod": "volte",
+                    "distance": "medium",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 15,
+                      "tenths": 5
+                    },
+                    "place": 1
+                  }
+                ]
+              },
+              "2025": {
+                "starts": 2,
+                "earnings": "126500 kr",
+                "placement": {
+                  "1": 1,
+                  "2": 0,
+                  "3": 0
+                },
+                "records": [
+                  {
+                    "code": "aK",
+                    "startMethod": "auto",
+                    "distance": "short",
+                    "time": {
+                      "minutes": 1,
+                      "seconds": 13,
+                      "tenths": 4
+                    },
+                    "place": 1
+                  }
+                ]
+              }
+            },
+            "life": {
+              "starts": 11,
+              "earnings": "263000 kr",
+              "placement": {
+                "1": 3,
+                "2": 2,
+                "3": 2
+              },
+              "records": [
+                {
+                  "code": "aK",
+                  "startMethod": "auto",
+                  "distance": "short",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 13,
+                    "tenths": 4
+                  },
+                  "place": 1,
+                  "year": "2025"
+                },
+                {
+                  "code": "aM",
+                  "startMethod": "auto",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 1
+                  },
+                  "place": 6,
+                  "year": "2024"
+                },
+                {
+                  "code": "aL",
+                  "startMethod": "auto",
+                  "distance": "long",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 16,
+                    "tenths": 0
+                  },
+                  "place": 5,
+                  "year": "2024"
+                },
+                {
+                  "code": "M",
+                  "startMethod": "volte",
+                  "distance": "medium",
+                  "time": {
+                    "minutes": 1,
+                    "seconds": 15,
+                    "tenths": 5
+                  },
+                  "place": 1,
+                  "year": "2024"
+                }
+              ],
+              "winPercentage": "27.27 %",
+              "placePercentage": "63.63 %",
+              "earningsPerStart": "23909 kr",
+              "startPoints": 2625
+            },
+            "lastFiveStarts": {
+              "averageOdds": "6.79"
+            }
+          }
+        },
+        "driver": {
+          "name": "Mats E Djuse",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 1948,
+                "earnings": "41201976 kr",
+                "placement": {
+                  "1": 353,
+                  "2": 243,
+                  "3": 206
+                },
+                "winPercentage": "18.12 %"
+              },
+              "2025": {
+                "starts": 179,
+                "earnings": "3190750 kr",
+                "placement": {
+                  "1": 33,
+                  "2": 27,
+                  "3": 22
+                },
+                "winPercentage": "18.43 %"
+              }
+            }
+          }
+        },
+        "trainer": {
+          "name": "Mattias Djuse",
+          "homeTrack": "Solvalla",
+          "statistics": {
+            "years": {
+              "2024": {
+                "starts": 886,
+                "earnings": "21948730 kr",
+                "placement": {
+                  "1": 153,
+                  "2": 138,
+                  "3": 101
+                },
+                "winPercentage": "17.26 %"
+              },
+              "2025": {
+                "starts": 69,
+                "earnings": "1812700 kr",
+                "placement": {
+                  "1": 12,
+                  "2": 13,
+                  "3": 10
+                },
+                "winPercentage": "17.39 %"
+              }
+            }
+          }
+        },
+        "scratch": false
+      }
+    ]
+  }
+]

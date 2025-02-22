@@ -1,0 +1,2677 @@
+{
+    "raceId": "2025-02-22_9_1",
+    "startNumber": 1,
+    "sport": "monté",
+    "horse": {
+        "id": 767458,
+        "name": "Raya Maya",
+        "age": 7,
+        "sex": "mare",
+        "trainer": {
+            "id": 608305,
+            "firstName": "Jörgen S",
+            "lastName": "Eriksson",
+            "shortName": "Eri JS",
+            "location": "Eskilstuna",
+            "birth": 1987,
+            "homeTrack": {
+                "id": 14,
+                "name": "Eskilstuna"
+            },
+            "license": "A-tränare: träna, köra",
+            "silks": "Svart/vröd, diagonalt delad, ärmb; sv",
+            "statistics": {
+                "years": {
+                    "2024": {
+                        "starts": 304,
+                        "earnings": 297343000,
+                        "placement": {
+                            "3": 23,
+                            "2": 39,
+                            "1": 26
+                        },
+                        "winPercentage": 855
+                    },
+                    "2025": {
+                        "starts": 37,
+                        "earnings": 33660000,
+                        "placement": {
+                            "3": 6,
+                            "2": 3,
+                            "1": 3
+                        },
+                        "winPercentage": 810
+                    }
+                }
+            }
+        },
+        "money": 496700,
+        "homeTrack": {
+            "id": 14,
+            "name": "Eskilstuna"
+        },
+        "owner": {
+            "id": 783655,
+            "name": "MH Trotech AB & Närcon AB"
+        },
+        "breeder": {
+            "id": 783655,
+            "name": "MH Trotech AB & Närcon AB"
+        },
+        "statistics": {
+            "years": {
+                "2024": {
+                    "starts": 11,
+                    "earnings": 6340000,
+                    "placement": {
+                        "3": 0,
+                        "2": 2,
+                        "1": 1
+                    },
+                    "records": [
+                        {
+                            "code": "aK",
+                            "startMethod": "auto",
+                            "distance": "short",
+                            "time": {
+                                "minutes": 1,
+                                "seconds": 12,
+                                "tenths": 9
+                            },
+                            "place": 2
+                        },
+                        {
+                            "code": "M",
+                            "startMethod": "volte",
+                            "distance": "medium",
+                            "time": {
+                                "minutes": 1,
+                                "seconds": 15,
+                                "tenths": 1
+                            },
+                            "place": 5
+                        }
+                    ]
+                },
+                "2025": {
+                    "starts": 1,
+                    "earnings": 250000,
+                    "placement": {
+                        "3": 0,
+                        "2": 0,
+                        "1": 0
+                    },
+                    "records": [
+                        {
+                            "code": "aK",
+                            "startMethod": "auto",
+                            "distance": "short",
+                            "time": {
+                                "minutes": 1,
+                                "seconds": 14,
+                                "tenths": 4
+                            },
+                            "place": 0
+                        }
+                    ]
+                }
+            },
+            "life": {
+                "starts": 46,
+                "earnings": 49670000,
+                "placement": {
+                    "3": 3,
+                    "2": 4,
+                    "1": 6
+                },
+                "records": [
+                    {
+                        "code": "aK",
+                        "startMethod": "auto",
+                        "distance": "short",
+                        "time": {
+                            "minutes": 1,
+                            "seconds": 12,
+                            "tenths": 9
+                        },
+                        "place": 2,
+                        "year": "2024"
+                    },
+                    {
+                        "code": "aM",
+                        "startMethod": "auto",
+                        "distance": "medium",
+                        "time": {
+                            "minutes": 1,
+                            "seconds": 12,
+                            "tenths": 9
+                        },
+                        "place": 4,
+                        "year": "2023"
+                    },
+                    {
+                        "code": "aL",
+                        "startMethod": "auto",
+                        "distance": "long",
+                        "time": {
+                            "minutes": 1,
+                            "seconds": 15,
+                            "tenths": 7
+                        },
+                        "place": 6,
+                        "year": "2023"
+                    },
+                    {
+                        "code": "M",
+                        "startMethod": "volte",
+                        "distance": "medium",
+                        "time": {
+                            "minutes": 1,
+                            "seconds": 14,
+                            "tenths": 5
+                        },
+                        "place": 3,
+                        "year": "2022"
+                    }
+                ],
+                "winPercentage": 1304,
+                "placePercentage": 2826,
+                "earningsPerStart": 1079782,
+                "startPoints": 805
+            }
+        },
+        "pedigree": {
+            "father": {
+                "id": 636691,
+                "name": "Raja Mirchi"
+            },
+            "mother": {
+                "id": 729874,
+                "name": "Rally Estelle"
+            },
+            "grandfather": {
+                "id": 484805,
+                "name": "Scarlet Knight",
+                "nationality": "US"
+            }
+        },
+        "results": {
+            "records": [
+                {
+                    "date": "2025-02-12",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 14,
+                        "tenths": 4
+                    },
+                    "odds": 8936,
+                    "place": "0",
+                    "mediaId": "2058631749385",
+                    "race": {
+                        "id": "2025-02-12_5_10",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 10,
+                        "startMethod": "auto",
+                        "firstPrize": 8000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 1640,
+                        "postPosition": 1,
+                        "driver": {
+                            "id": 608305,
+                            "firstName": "Jörgen S",
+                            "lastName": "Eriksson",
+                            "shortName": "Eri JS"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-11-20",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 4
+                    },
+                    "odds": 5073,
+                    "place": "0",
+                    "mediaId": "1963841093195",
+                    "race": {
+                        "id": "2024-11-20_5_6",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 6,
+                        "startMethod": "auto",
+                        "firstPrize": 6000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 9,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-10-22",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 3
+                    },
+                    "odds": 2827,
+                    "place": "0",
+                    "mediaId": "1933381189484",
+                    "race": {
+                        "id": "2024-10-22_8_8",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 8,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 8,
+                        "name": "Axevalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 5,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-10-14",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 8
+                    },
+                    "odds": 441,
+                    "place": "1",
+                    "mediaId": "1923696709416",
+                    "race": {
+                        "id": "2024-10-14_16_6",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 6,
+                        "startMethod": "auto",
+                        "firstPrize": 1000000
+                    },
+                    "track": {
+                        "id": 16,
+                        "name": "Gävle",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 11,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-10-01",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 12,
+                        "tenths": 9
+                    },
+                    "odds": 662,
+                    "place": "2",
+                    "mediaId": "1910547525074",
+                    "race": {
+                        "id": "2024-10-01_14_7",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 7,
+                        "startMethod": "auto",
+                        "firstPrize": 1000000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 1640,
+                        "postPosition": 7,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-08-20",
+                    "link": true,
+                    "scratched": true,
+                    "mediaId": "1871201349176",
+                    "race": {
+                        "id": "2024-08-20_14_8",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 8,
+                        "startMethod": "auto",
+                        "firstPrize": 1000000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 1640,
+                        "postPosition": 7,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {}
+                    }
+                },
+                {
+                    "date": "2024-07-24",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 0
+                    },
+                    "odds": 530,
+                    "place": "7",
+                    "mediaId": "1844612677267",
+                    "race": {
+                        "id": "2024-07-24_32_3",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 3,
+                        "startMethod": "auto",
+                        "firstPrize": 1000000
+                    },
+                    "track": {
+                        "id": 32,
+                        "name": "Örebro",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2100,
+                        "postPosition": 7,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-07-09",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 13,
+                        "tenths": 4
+                    },
+                    "odds": 5049,
+                    "place": "7",
+                    "mediaId": "1830261829247",
+                    "race": {
+                        "id": "2024-07-09_14_1",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 1,
+                        "startMethod": "auto",
+                        "firstPrize": 2500000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 1640,
+                        "postPosition": 6,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-07-01",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 14,
+                        "tenths": 7
+                    },
+                    "odds": 1666,
+                    "place": "8",
+                    "galloped": true,
+                    "mediaId": "1823106117235",
+                    "race": {
+                        "id": "2024-07-01_24_8",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 8,
+                        "startMethod": "auto",
+                        "firstPrize": 5000000
+                    },
+                    "track": {
+                        "id": 24,
+                        "name": "Rättvik",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 6,
+                        "driver": {
+                            "id": 148044,
+                            "firstName": "Fredrik",
+                            "lastName": "Tengstad",
+                            "shortName": "Ten Fr"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-05-14",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 1
+                    },
+                    "odds": 1283,
+                    "place": "5",
+                    "galloped": true,
+                    "mediaId": "1777382469327",
+                    "race": {
+                        "id": "2024-05-14_14_3",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 3,
+                        "startMethod": "volte",
+                        "firstPrize": 2500000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2160,
+                        "postPosition": 9,
+                        "driver": {
+                            "id": 190648,
+                            "firstName": "Isac",
+                            "lastName": "Lindberg",
+                            "shortName": "Lin Is"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-04-25",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 3
+                    },
+                    "odds": 729,
+                    "place": "0",
+                    "mediaId": "1757676101089",
+                    "race": {
+                        "id": "2024-04-25_16_6",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 6,
+                        "startMethod": "auto",
+                        "firstPrize": 3500000
+                    },
+                    "track": {
+                        "id": 16,
+                        "name": "Gävle",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 2,
+                        "driver": {
+                            "id": 67192,
+                            "firstName": "Örjan",
+                            "lastName": "Kihlström",
+                            "shortName": "Kih Ör"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-04-14",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 14,
+                        "tenths": 0
+                    },
+                    "odds": 1053,
+                    "place": "6",
+                    "mediaId": "1746571333431",
+                    "race": {
+                        "id": "2024-04-14_17_10",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 10,
+                        "startMethod": "auto",
+                        "firstPrize": 3500000
+                    },
+                    "track": {
+                        "id": 17,
+                        "name": "Hagmyren",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 5,
+                        "driver": {
+                            "id": 568723,
+                            "firstName": "Oskar",
+                            "lastName": "Kylin Blom",
+                            "shortName": "Kyl Os"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2024-03-29",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 13,
+                        "tenths": 1
+                    },
+                    "odds": 2239,
+                    "place": "2",
+                    "mediaId": "1730629701201",
+                    "race": {
+                        "id": "2024-03-29_15_3",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 3,
+                        "startMethod": "auto",
+                        "firstPrize": 5000000
+                    },
+                    "track": {
+                        "id": 15,
+                        "name": "Färjestad",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 5,
+                        "driver": {
+                            "id": 67192,
+                            "firstName": "Örjan",
+                            "lastName": "Kihlström",
+                            "shortName": "Kih Ör"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-11-13",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 5
+                    },
+                    "odds": 2499,
+                    "place": "0",
+                    "mediaId": "1584986693266",
+                    "race": {
+                        "id": "2023-11-13_15_7",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 7,
+                        "startMethod": "auto",
+                        "firstPrize": 3000000
+                    },
+                    "track": {
+                        "id": 15,
+                        "name": "Färjestad",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 9,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-10-24",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 17,
+                        "tenths": 4
+                    },
+                    "odds": 1944,
+                    "place": "0",
+                    "mediaId": "1559459397095",
+                    "race": {
+                        "id": "2023-10-24_14_9",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 9,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 2,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-10-16",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 0
+                    },
+                    "odds": 1151,
+                    "place": "4",
+                    "galloped": true,
+                    "mediaId": "1550054469436",
+                    "race": {
+                        "id": "2023-10-16_15_6",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 6,
+                        "startMethod": "volte",
+                        "firstPrize": 2500000
+                    },
+                    "track": {
+                        "id": 15,
+                        "name": "Färjestad",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2160,
+                        "postPosition": 2,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-09-26",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 7
+                    },
+                    "odds": 3301,
+                    "place": "6",
+                    "mediaId": "1528122949341",
+                    "race": {
+                        "id": "2023-09-26_24_4",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 4,
+                        "startMethod": "auto",
+                        "firstPrize": 2500000
+                    },
+                    "track": {
+                        "id": 24,
+                        "name": "Rättvik",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2640,
+                        "postPosition": 3,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-09-07",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 3
+                    },
+                    "odds": 294,
+                    "place": "1",
+                    "mediaId": "1507200069030",
+                    "race": {
+                        "id": "2023-09-07_32_4",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 4,
+                        "startMethod": "auto",
+                        "firstPrize": 1000000
+                    },
+                    "track": {
+                        "id": 32,
+                        "name": "Örebro",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2100,
+                        "postPosition": 12,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-06-27",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 0
+                    },
+                    "odds": 2475,
+                    "place": "0",
+                    "mediaId": "1429416005216",
+                    "race": {
+                        "id": "2023-06-27_5_11",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 11,
+                        "startMethod": "volte",
+                        "firstPrize": 6000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2160,
+                        "postPosition": 4,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-06-19",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 13,
+                        "tenths": 0
+                    },
+                    "odds": 3250,
+                    "place": "0",
+                    "mediaId": "1419401285327",
+                    "race": {
+                        "id": "2023-06-19_23_1",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 1,
+                        "startMethod": "auto",
+                        "firstPrize": 3000000
+                    },
+                    "track": {
+                        "id": 23,
+                        "name": "Romme",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 1640,
+                        "postPosition": 4,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-05-20",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 4
+                    },
+                    "odds": 3037,
+                    "place": "0",
+                    "galloped": true,
+                    "mediaId": "1387703365479",
+                    "race": {
+                        "id": "2023-05-20_16_11",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 11,
+                        "startMethod": "volte",
+                        "firstPrize": 11000000
+                    },
+                    "track": {
+                        "id": 16,
+                        "name": "Gävle",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 8,
+                        "driver": {
+                            "id": 91416,
+                            "firstName": "Per",
+                            "lastName": "Lennartsson",
+                            "shortName": "Len Pe"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-04-25",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 1
+                    },
+                    "odds": 514,
+                    "place": "3",
+                    "mediaId": "1358416965398",
+                    "race": {
+                        "id": "2023-04-25_8_9",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 9,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 8,
+                        "name": "Axevalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 3,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-04-07",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 12,
+                        "tenths": 9
+                    },
+                    "odds": 1281,
+                    "place": "4",
+                    "mediaId": "1341139525144",
+                    "race": {
+                        "id": "2023-04-07_15_6",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 6,
+                        "startMethod": "auto",
+                        "firstPrize": 10000000
+                    },
+                    "track": {
+                        "id": 15,
+                        "name": "Färjestad",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 11,
+                        "driver": {
+                            "id": 451713,
+                            "firstName": "Richard L",
+                            "lastName": "Jansson",
+                            "shortName": "Jan RL"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "AM",
+                                    "text": "Amerikansk"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-03-06",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 18,
+                        "tenths": 0
+                    },
+                    "odds": 228,
+                    "place": "1",
+                    "mediaId": "1309190725083",
+                    "race": {
+                        "id": "2023-03-06_15_6",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 6,
+                        "startMethod": "auto",
+                        "firstPrize": 3000000
+                    },
+                    "track": {
+                        "id": 15,
+                        "name": "Färjestad",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2640,
+                        "postPosition": 8,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-02-22",
+                    "link": true,
+                    "kmTime": {
+                        "code": "it"
+                    },
+                    "odds": 722,
+                    "place": "5",
+                    "mediaId": "1297173573109",
+                    "race": {
+                        "id": "2023-02-22_5_10",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 10,
+                        "startMethod": "auto",
+                        "firstPrize": 8000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 1,
+                        "driver": {
+                            "id": 91416,
+                            "firstName": "Per",
+                            "lastName": "Lennartsson",
+                            "shortName": "Len Pe"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-02-11",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 2
+                    },
+                    "odds": 4140,
+                    "place": "2",
+                    "mediaId": "1286088773418",
+                    "race": {
+                        "id": "2023-02-11_6_10",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 10,
+                        "startMethod": "volte",
+                        "firstPrize": 15000000
+                    },
+                    "track": {
+                        "id": 6,
+                        "name": "Åby",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 2,
+                        "driver": {
+                            "id": 91416,
+                            "firstName": "Per",
+                            "lastName": "Lennartsson",
+                            "shortName": "Len Pe"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-01-19",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 2
+                    },
+                    "odds": 1736,
+                    "place": "2",
+                    "mediaId": "1263476293310",
+                    "race": {
+                        "id": "2023-01-19_32_8",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 8,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 32,
+                        "name": "Örebro",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2100,
+                        "postPosition": 7,
+                        "driver": {
+                            "id": 103747,
+                            "firstName": "Magnus",
+                            "lastName": "Jakobsson",
+                            "shortName": "Jak Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2023-01-04",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 9
+                    },
+                    "odds": 1567,
+                    "place": "1",
+                    "mediaId": "1249977925123",
+                    "race": {
+                        "id": "2023-01-04_5_4",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 4,
+                        "startMethod": "auto",
+                        "firstPrize": 6000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 5,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-12-09",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 3
+                    },
+                    "odds": 4483,
+                    "place": "0",
+                    "mediaId": "1227539525060",
+                    "race": {
+                        "id": "2022-12-09_5_5",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 5,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 7,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-11-22",
+                    "link": true,
+                    "scratched": true,
+                    "mediaId": "1212835397461",
+                    "race": {
+                        "id": "2022-11-22_15_11",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 11,
+                        "startMethod": "auto",
+                        "firstPrize": 2500000
+                    },
+                    "track": {
+                        "id": 15,
+                        "name": "Färjestad",
+                        "condition": "dead",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 3,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {}
+                    }
+                },
+                {
+                    "date": "2022-09-12",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 8
+                    },
+                    "odds": 547,
+                    "place": "6",
+                    "mediaId": "1151302725024",
+                    "race": {
+                        "id": "2022-09-12_22_5",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 5,
+                        "startMethod": "auto",
+                        "firstPrize": 3000000
+                    },
+                    "track": {
+                        "id": 22,
+                        "name": "Mantorp",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 11,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-09-02",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 0
+                    },
+                    "odds": 2988,
+                    "place": "8",
+                    "mediaId": "1142268485431",
+                    "race": {
+                        "id": "2022-09-02_5_5",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 5,
+                        "startMethod": "auto",
+                        "firstPrize": 5000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 6,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-08-15",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 14,
+                        "tenths": 5
+                    },
+                    "odds": 277,
+                    "place": "3",
+                    "mediaId": "1127327301338",
+                    "race": {
+                        "id": "2022-08-15_23_10",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 10,
+                        "startMethod": "volte",
+                        "firstPrize": 5000000
+                    },
+                    "track": {
+                        "id": 23,
+                        "name": "Romme",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2160,
+                        "postPosition": 4,
+                        "driver": {
+                            "id": 740606,
+                            "firstName": "Magnus A",
+                            "lastName": "Djuse",
+                            "shortName": "Dju MA"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-07-29",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 6
+                    },
+                    "odds": 559,
+                    "place": "6",
+                    "mediaId": "1110773317231",
+                    "race": {
+                        "id": "2022-07-29_14_4",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 4,
+                        "startMethod": "volte",
+                        "firstPrize": 3000000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2160,
+                        "postPosition": 3,
+                        "driver": {
+                            "id": 740606,
+                            "firstName": "Magnus A",
+                            "lastName": "Djuse",
+                            "shortName": "Dju MA"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-06-17",
+                    "link": true,
+                    "scratched": true,
+                    "mediaId": "1076226629271",
+                    "race": {
+                        "id": "2022-06-17_5_6",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 6,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 2,
+                        "driver": {
+                            "id": 67192,
+                            "firstName": "Örjan",
+                            "lastName": "Kihlström",
+                            "shortName": "Kih Ör"
+                        },
+                        "horse": {}
+                    }
+                },
+                {
+                    "date": "2022-06-05",
+                    "link": true,
+                    "scratched": true,
+                    "mediaId": "1063995461220",
+                    "race": {
+                        "id": "2022-06-05_8_8",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 8,
+                        "startMethod": "auto",
+                        "firstPrize": 5000000
+                    },
+                    "track": {
+                        "id": 8,
+                        "name": "Axevalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 4,
+                        "driver": {
+                            "id": 740606,
+                            "firstName": "Magnus A",
+                            "lastName": "Djuse",
+                            "shortName": "Dju MA"
+                        },
+                        "horse": {}
+                    }
+                },
+                {
+                    "date": "2022-05-18",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 1
+                    },
+                    "odds": 188,
+                    "place": "1",
+                    "galloped": true,
+                    "mediaId": "1046738501430",
+                    "race": {
+                        "id": "2022-05-18_5_8",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 8,
+                        "startMethod": "auto",
+                        "firstPrize": 5000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 4,
+                        "driver": {
+                            "id": 740606,
+                            "firstName": "Magnus A",
+                            "lastName": "Djuse",
+                            "shortName": "Dju MA"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": false,
+                                "back": false
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-04-22",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 15,
+                        "tenths": 9
+                    },
+                    "odds": 821,
+                    "place": "4",
+                    "mediaId": "1023510085208",
+                    "race": {
+                        "id": "2022-04-22_24_4",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 4,
+                        "startMethod": "auto",
+                        "firstPrize": 2500000
+                    },
+                    "track": {
+                        "id": 24,
+                        "name": "Rättvik",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 4,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-04-07",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 6
+                    },
+                    "odds": 1038,
+                    "place": "1",
+                    "galloped": true,
+                    "mediaId": "1010268229310",
+                    "race": {
+                        "id": "2022-04-07_16_3",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 3,
+                        "startMethod": "auto",
+                        "firstPrize": 2500000
+                    },
+                    "track": {
+                        "id": 16,
+                        "name": "Gävle",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 10,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-03-29",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 7
+                    },
+                    "odds": 233,
+                    "place": "3",
+                    "mediaId": "1002614853142",
+                    "race": {
+                        "id": "2022-03-29_14_10",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 10,
+                        "startMethod": "auto",
+                        "firstPrize": 1000000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 2,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-03-16",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 0
+                    },
+                    "odds": 9537,
+                    "place": "0",
+                    "mediaId": "990777413322",
+                    "race": {
+                        "id": "2022-03-16_5_2",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 2,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 10,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-02-23",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 7
+                    },
+                    "odds": 5426,
+                    "place": "6",
+                    "mediaId": "969484869226",
+                    "race": {
+                        "id": "2022-02-23_5_3",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 3,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 12,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2022-01-28",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 17,
+                        "tenths": 7
+                    },
+                    "odds": 4120,
+                    "place": "5",
+                    "mediaId": "944575045108",
+                    "race": {
+                        "id": "2022-01-28_5_4",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 4,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 1,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2021-12-28",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 18,
+                        "tenths": 6
+                    },
+                    "odds": 6375,
+                    "place": "0",
+                    "mediaId": "918383685246",
+                    "race": {
+                        "id": "2021-12-28_23_7",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 7,
+                        "startMethod": "volte",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 23,
+                        "name": "Romme",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 10,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2021-12-21",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 4
+                    },
+                    "odds": 3370,
+                    "place": "5",
+                    "mediaId": "912845893129",
+                    "race": {
+                        "id": "2021-12-21_14_4",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 4,
+                        "startMethod": "auto",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 6,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2021-12-13",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 17,
+                        "tenths": 4
+                    },
+                    "odds": 3793,
+                    "place": "4",
+                    "mediaId": "905580101246",
+                    "race": {
+                        "id": "2021-12-13_14_4",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 4,
+                        "startMethod": "volte",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 9,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2021-11-26",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 18,
+                        "tenths": 1
+                    },
+                    "odds": 4299,
+                    "place": "4",
+                    "galloped": true,
+                    "mediaId": "889051717085",
+                    "race": {
+                        "id": "2021-11-26_5_1",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 1,
+                        "startMethod": "volte",
+                        "firstPrize": 6000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 5,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2021-06-01",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 17,
+                        "tenths": 1
+                    },
+                    "odds": 3926,
+                    "place": "7",
+                    "galloped": true,
+                    "mediaId": "758953541310",
+                    "race": {
+                        "id": "2021-06-01_14_4",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 4,
+                        "startMethod": "volte",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 8,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2021-05-14",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 16,
+                        "tenths": 9
+                    },
+                    "odds": 941,
+                    "place": "0",
+                    "mediaId": "749257797490",
+                    "race": {
+                        "id": "2021-05-14_5_8",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 8,
+                        "startMethod": "volte",
+                        "firstPrize": 6000000
+                    },
+                    "track": {
+                        "id": 5,
+                        "name": "Solvalla",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 7,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2021-04-27",
+                    "link": true,
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 17,
+                        "tenths": 1
+                    },
+                    "odds": 4199,
+                    "place": "6",
+                    "galloped": true,
+                    "mediaId": "740302405079",
+                    "race": {
+                        "id": "2021-04-27_24_5",
+                        "sport": "trot",
+                        "type": "regular",
+                        "number": 5,
+                        "startMethod": "volte",
+                        "firstPrize": 4000000
+                    },
+                    "track": {
+                        "id": 24,
+                        "name": "Rättvik",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 10,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {
+                            "shoes": {
+                                "front": true,
+                                "back": true
+                            },
+                            "sulky": {
+                                "type": {
+                                    "code": "VA",
+                                    "text": "Vanlig"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "date": "2021-04-17",
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 18,
+                        "tenths": 4
+                    },
+                    "oddsCode": "gdk",
+                    "race": {
+                        "id": "2021-04-17_14_13",
+                        "sport": "trot",
+                        "type": "qualifier",
+                        "number": 13,
+                        "startMethod": "volte",
+                        "firstPrize": 0
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 4,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {}
+                    }
+                },
+                {
+                    "date": "2021-03-02",
+                    "scratched": true,
+                    "race": {
+                        "id": "2021-03-02_14_13",
+                        "sport": "trot",
+                        "type": "qualifier",
+                        "number": 13,
+                        "startMethod": "volte",
+                        "firstPrize": 0
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2140,
+                        "postPosition": 6,
+                        "driver": {
+                            "id": 114453,
+                            "firstName": "Markus",
+                            "lastName": "Hamberg",
+                            "shortName": "Ham Ma"
+                        },
+                        "horse": {}
+                    }
+                },
+                {
+                    "date": "2020-08-29",
+                    "kmTime": {
+                        "minutes": 1,
+                        "seconds": 29,
+                        "tenths": 4
+                    },
+                    "race": {
+                        "id": "2020-08-29_14_14",
+                        "sport": "trot",
+                        "type": "premium",
+                        "number": 14,
+                        "startMethod": "volte",
+                        "firstPrize": 0
+                    },
+                    "track": {
+                        "id": 14,
+                        "name": "Eskilstuna",
+                        "condition": "light",
+                        "countryCode": "SE"
+                    },
+                    "start": {
+                        "distance": 2160,
+                        "postPosition": 1,
+                        "driver": {
+                            "id": 15421,
+                            "firstName": "Lars D",
+                            "lastName": "Carlsson",
+                            "shortName": "Car LD"
+                        },
+                        "horse": {}
+                    }
+                }
+            ],
+            "hasMoreRecords": false
+        }
+    },
+    "driver": {
+        "id": 737130,
+        "firstName": "Lovisa",
+        "lastName": "Wahlström",
+        "shortName": "Wah Lo",
+        "location": "Eskilstuna",
+        "birth": 2002,
+        "homeTrack": {
+            "id": 14,
+            "name": "Eskilstuna"
+        },
+        "license": "Körlicens kategori 1: köra, rida",
+        "silks": "Silver, svart stolpar,grå axelp. och ärm;",
+        "statistics": {
+            "years": {
+                "2024": {
+                    "starts": 49,
+                    "earnings": 34050000,
+                    "placement": {
+                        "3": 4,
+                        "2": 5,
+                        "1": 4
+                    },
+                    "winPercentage": 816
+                },
+                "2025": {
+                    "starts": 10,
+                    "earnings": 2590000,
+                    "placement": {
+                        "3": 0,
+                        "2": 0,
+                        "1": 0
+                    },
+                    "winPercentage": 0
+                }
+            }
+        }
+    }
+}

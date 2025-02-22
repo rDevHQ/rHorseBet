@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Horse Racing Data</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s;
+        }
+
+        ul li:hover {
+            background-color: #e0f7fa;
+        }
+
+        button {
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            border: 1px solid #007bff;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        pre {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Horse Racing Data</h1>
+    <div>
+        <button id="prev-day">Previous Day</button>
+        <button id="next-day">Next Day</button>
+        <p id="current-date"></p>
+    </div>
+
+    <div>
+        <h2>Available Tracks</h2>
+        <ul id="tracks"></ul>
+    </div>
+
+    <div>
+        <h2>Games for Selected Track</h2>
+        <ul id="games"></ul>
+    </div>
+
+    <div>
+        <h2>Races for Selected Game</h2>
+        <ul id="races"></ul>
+    </div>
+
+    <div>
+        <h2>Details</h2>
+        <button id="download-json">Download JSON</button>
+        <pre id="details"></pre>
+    </div>
+
+    <script type="module">
+        import { transformRaces } from './transform.js'; // Importera funktionen
+
+
+        const apiCalendarUrl = 'https://www.atg.se/services/racinginfo/v1/api/calendar/day/';
+        const gameApiBaseUrl = 'https://www.atg.se/services/racinginfo/v1/api/games/';
+        let currentDate = new Date();
+        let filterRaces = false;
+
+        function formatDate(date) {
+            return date.toISOString().split('T')[0];
+        }
+
+        async function loadTracks(date) {
+            const formattedDate = formatDate(date);
+            document.getElementById('current-date').textContent = `Selected Date: ${formattedDate}`;
+            const response = await fetch(apiCalendarUrl + formattedDate);
+
+            if (!response.ok) {
+                document.getElementById('tracks').innerHTML = '<li>Error loading tracks</li>';
+                return;
+            }
+
+            const data = await response.json();
+            const tracksList = document.getElementById('tracks');
+            tracksList.innerHTML = '';
+
+            data.tracks.forEach(track => {
+                const li = document.createElement('li');
+                li.textContent = track.name;
+                li.addEventListener('click', () => displayGamesForTrack(track, data.games));
+                tracksList.appendChild(li);
+            });
+        }
+
+        function displayGamesForTrack(track, gamesData) {
+            const gamesList = document.getElementById('games');
+            gamesList.innerHTML = '';
+
+            const excludedTypes = ['plats', 'trio', 'komb', 'tvilling', 'vp', 'raket'];
+            const gamesForTrack = [];
+
+            Object.keys(gamesData).forEach(gameType => {
+                gamesData[gameType].forEach(game => {
+                    if (game.status === 'bettable' && game.tracks.includes(track.id) && !excludedTypes.includes(gameType.toLowerCase())) {
+                        gamesForTrack.push({ type: gameType, ...game });
+                    }
+                });
+            });
+
+            gamesForTrack.forEach(game => {
+                const li = document.createElement('li');
+                li.textContent = `${game.type} - Start Time: ${new Date(game.startTime).toLocaleString('sv-SE')}`;
+                li.addEventListener('click', () => fetchGameDetails(game.id));
+                gamesList.appendChild(li);
+            });
+        }
+
+        // Funktion för att hämta och visa lopp för ett specifikt spel
+        async function fetchGameDetails(gameId) {
+            const apiUrl = gameApiBaseUrl + gameId;
+            try {
+                const response = await fetch(apiUrl);
+
+                if (!response.ok) {
+                    document.getElementById('details').textContent = 'Error loading game details';
+                    return;
+                }
+
+                const data = await response.json();
+
+                // Transformera loppen direkt
+                const transformedRaces = transformRaces(data.races);
+
+                // Visa transformerade lopp i listan
+                displayRaces(transformedRaces);
+
+                // Visa transformerad JSON i "Details"
+                const detailsContainer = document.getElementById('details');
+                detailsContainer.textContent = JSON.stringify(transformedRaces, null, 2);
+
+                // Aktivera nedladdningsknappen
+                const downloadButton = document.getElementById('download-json');
+                downloadButton.style.display = 'block';
+                downloadButton.onclick = () => downloadJSON(transformedRaces, `${gameId}.json`);
+
+            } catch (error) {
+                console.error('Error fetching game details:', error);
+                document.getElementById('details').textContent = 'Error loading game details';
+            }
+        }
+
+        // Funktion för att visa lopp
+        function displayRaces(races) {
+            const racesList = document.getElementById("races");
+            racesList.innerHTML = ""; // Rensa tidigare innehåll
+
+            // Lägg till varje lopp som en knapp
+            races.forEach(race => {
+                const li = document.createElement("li");
+                li.classList.add("list-group-item"); // Bootstrap-stilar
+                const button = document.createElement("button");
+                button.textContent = `Race ${race.number} - ${race.name || "undefined"} (Start Time: ${new Date(race.startTime).toLocaleString("sv-SE")})`;
+                button.classList.add("btn", "btn-outline-secondary", "w-100", "mb-1");
+                button.addEventListener("click", () => displayRaceDetails(race)); // Klick för att visa loppdetaljer
+                li.appendChild(button);
+                racesList.appendChild(li);
+            });
+        }
+
+        // Funktion för att visa detaljer för ett valt lopp
+        function displayRaceDetails(race) {
+            const detailsContainer = document.getElementById('details');
+            detailsContainer.textContent = JSON.stringify(race, null, 2); // Visa endast loppets detaljer
+
+            // Aktivera nedladdningsknappen för det specifika loppet
+            const downloadButton = document.getElementById('download-json');
+            downloadButton.style.display = 'block';
+            downloadButton.onclick = () => downloadJSON(race, `${race.id}.json`); // Använd loppets id som filnamn
+        }
+
+
+        // Funktion för att ladda ner JSON
+        function downloadJSON(data, filename) {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('prev-day').addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() - 1);
+            loadTracks(currentDate);
+        });
+
+        document.getElementById('next-day').addEventListener('click', () => {
+            currentDate.setDate(currentDate.getDate() + 1);
+            loadTracks(currentDate);
+        });
+
+        loadTracks(currentDate);
+    </script>
+</body>
+
+</html>

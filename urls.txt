@@ -1,0 +1,7 @@
+Lopp:
+
+https://www.atg.se/services/racinginfo/v1/api/races/2025-02-22_9_1
+
+Start:
+
+https://www.atg.se/services/racinginfo/v1/api/races/2025-02-22_9_1/start/1
