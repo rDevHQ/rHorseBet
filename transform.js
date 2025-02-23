@@ -22,6 +22,7 @@ export function transformRaces(races, startsData) {
                     date: record.date,
                     track: record.track?.name || "Unknown",
                     distance: record.start?.distance || "Unknown",
+                    postPosition: record.start?.postPosition || "N/A",
                     position: record.place || "N/A",
                     firstPrize: record.race.firstPrize || "N/A",
                     time: record.kmTime
