@@ -90,10 +90,10 @@ export function transformRaces(races, startsData) {
                         ? (start.pools.V65.betDistribution / 100).toFixed(2)
                         : "N/A",
                     V5: start.pools?.V5?.betDistribution
-                        ? (start.pools.V5.betDistribution / 100).toFixed(2) + "%"
+                        ? (start.pools.V5.betDistribution / 100).toFixed(2)
                         : "N/A",
                     V4: start.pools?.V4?.betDistribution
-                        ? (start.pools.V4.betDistribution / 100).toFixed(2) + "%"
+                        ? (start.pools.V4.betDistribution / 100).toFixed(2)
                         : "N/A",
                     earnings: start.horse.money
                         ? `${start.horse.money}`
