@@ -2,6 +2,32 @@ Lopp:
 
 https://www.atg.se/services/racinginfo/v1/api/races/2025-02-22_9_1
 
+Extended:
+https://www.atg.se/services/racinginfo/v1/api/races/2025-03-02_22_3/extended
+
+
 Start:
 
 https://www.atg.se/services/racinginfo/v1/api/races/2025-02-22_9_1/start/1
+https://www.atg.se/services/racinginfo/v1/api/races/2025-03-02_22_3/start/1
+
+All starts:
+https://www.atg.se/services/racinginfo/v1/api/races/2025-03-02_22_3/start/
+
+"game"
+https://www.atg.se/services/racinginfo/v1/api/games/GS75_2025-03-02_22_3
+
+calendar:
+
+https://www.atg.se/services/racinginfo/v1/api/calendar/day/2025-03-02
+
+silks:
+https://www.atg.se/services/racinginfo/v1/api/silks/2025-03-02_22_3
+
+tips comments:
+https://www.atg.se/services/racinginfo/v1/api/races/2025-03-02_22_3/tips-comments
+
+comments:
+
+https://www.atg.se/services/racinginfo/v1/api/races/2025-03-02_22_3/comments
+
