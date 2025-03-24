@@ -9,17 +9,23 @@ export const FORM_POINTS = {
 };
 
 export const TIME_POINTS = {
-    BEST_TIME_BONUS: 1,   // Hästens bästa tid snabbare än alla andra hästars bästa tid (+3 poäng)
-    RECENT_RACE_BONUS: 1, // Hästens senaste start snabbare än alla andra hästars viktade snitt (+3 poäng)
+    BEST_TIME_BONUS: 3,   // Förhöjd – belöna bästa rekord mer
+    RECENT_RACE_BONUS: 5, // Förhöjd – belöna formtopp
+
     THRESHOLDS: [
-        { minDiff: -1.5, points: 4 },  // Minst 1.5 sek/km snabbare än snittet → 10 poäng
-        { minDiff: -1.0, points: 3 },   // Minst 1.0 sek/km snabbare än snittet → 7 poäng
-        { minDiff: -0.5, points: 2 },   // Minst 0.5 sek/km snabbare än snittet → 5 poäng
-        { minDiff: -0.2, points: 1 },   // Minst 0.2 sek/km snabbare än snittet → 2 poäng
-        { minDiff: 0.2, points: 0 },    // Mellan -0.2 och +0.2 sek/km → 0 poäng (medelsnitt)
-        { minDiff: 0.5, points: -2 },   // Minst 0.5 sek/km långsammare än snittet → -2 poäng
-        { minDiff: 1.0, points: -3 },   // Minst 1.0 sek/km långsammare än snittet → -3 poäng
-        { minDiff: 1.5, points: -4 }   // Minst 1.5 sek/km långsammare än snittet → -5 poäng
+        { minDiff: -1.8, points: 6 },  // Exceptionellt snabb
+        { minDiff: -1.5, points: 5 },
+        { minDiff: -1.2, points: 4 },
+        { minDiff: -0.9, points: 3 },
+        { minDiff: -0.6, points: 2 },
+        { minDiff: -0.3, points: 1 },
+        { minDiff:  0.3, points: -1 },
+        { minDiff:  0.6, points: -2 },
+        { minDiff:  0.9, points: -3 },
+        { minDiff:  1.2, points: -4 },
+        { minDiff:  1.5, points: -5 },
+        { minDiff:  1.8, points: -6 }
+        // Allt mellan -0.3 till +0.3 får 0 poäng automatiskt (tolkas som "neutral zon")
     ]
 };
 
