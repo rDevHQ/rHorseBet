@@ -131,19 +131,25 @@ export function displayStartList(race) {
     });
 
     // eventlistener för kopieringsknappen
-    document.getElementById("copy-startlist-btn").addEventListener("click", () => copyStartListToClipboard(raceTitle, horses));
+    document.getElementById("copy-startlist-btn").addEventListener("click", () => copyStartListToClipboard(race, horses));
 
 }
 
-function copyStartListToClipboard(raceTitle, horses) {
-    let tableData = `${raceTitle}\n`; // Lägg till rubriken
+function copyStartListToClipboard(race, horses) {
+    const date = race.date ?? "okänt datum";
+    const track = race.trackName ?? "okänd bana";
+    const raceNumber = race.number ?? "N/A";
+    const distance = race.distance ?? "N/A";
+    const startMethod = race.startMethod ?? "N/A";
+
+   // let tableData = `${raceTitle}\n`; // Lägg till rubriken
 
     // Lägg till tab-separerade rubriker
-    tableData += "Rank\tStartnr\tHästnamn\tSpelprocent\tFolket\tStartspår\tForm\tTid\tH2H\tKusk\tTränare\tUtrustning\tKlass\tTotalt\n";
+    let tableData = "Datum\tBana\tLopp\tDistans\tStartmetod\tRank\tStartnr\tHästnamn\tSpelprocent\tFolket\tStartspår\tForm\tTid\tH2H\tKusk\tTränare\tUtrustning\tKlass\tTotalt\n";
 
     // Lägg till varje hästs data
     horses.forEach((horse, index) => {
-        tableData += `${index + 1}\t${horse.startNumber}\t${horse.horseName}\t${formatSpelprocent(horse.bettingPercentage)}\t${horse.bettingPercentagePoints}\t${horse.startPositionPoints}\t${horse.formPoints}\t${horse.timePoints}\t${horse.headToHeadPoints}\t${horse.driverPoints}\t${horse.trainerPoints}\t${horse.equipmentPoints}\t${horse.classPoints}\t${horse.totalPoints}\n`;
+        tableData += `${date}\t${track}\t${raceNumber}\t${distance}\t${startMethod}\t${index + 1}\t${horse.startNumber}\t${horse.horseName}\t${formatSpelprocent(horse.bettingPercentage)}\t${horse.bettingPercentagePoints}\t${horse.startPositionPoints}\t${horse.formPoints}\t${horse.timePoints}\t${horse.headToHeadPoints}\t${horse.driverPoints}\t${horse.trainerPoints}\t${horse.equipmentPoints}\t${horse.classPoints}\t${horse.totalPoints}\n`;
     });
 
     // Kopiera till clipboard

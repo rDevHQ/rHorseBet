@@ -4,7 +4,7 @@ export function transformRaces(races, startsData) {
 
     return races.map(race => ({
         id: race.id,
-        //   name: race.name,
+        date: race.date,
         number: race.number,
         distance: race.distance,
         startMethod: race.startMethod,

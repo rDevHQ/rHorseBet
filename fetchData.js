@@ -82,7 +82,6 @@ async function fetchGameDetails(gameId) {
         const transformedRaces = transformRaces(races, startsData);
         displayRaces(transformedRaces);
 
-        // JSON-nedladdning fungerar igen
         const detailsContainer = document.getElementById('details');
         detailsContainer.textContent = JSON.stringify(transformedRaces, null, 2);
 
