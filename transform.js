@@ -12,7 +12,7 @@ export function transformRaces(races, startsData) {
         name: race.name,
         trackName: race.track.name,
         horses: race.starts.map(start => {
-            const horseId = start.horse.id;
+            const horseId = start.horse.id || `${race.id}_${start.number}`;
             const horseRecords = (startsData[horseId]?.horse?.results?.records || []);
 
             console.log(`🐴 [${horseId}] horseRecords före sortering:`, JSON.stringify(horseRecords, null, 2));

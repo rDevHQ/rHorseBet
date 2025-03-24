@@ -102,7 +102,7 @@ async function fetchStartData(races) {
 
     for (const race of races) {
         for (const start of race.starts) {
-            const horseId = start.horse.id;
+            const horseId = start.horse.id || `${race.id}_${start.number}`;
             const raceId = race.id;
             const startNumber = start.number;
             const startApiUrl = `https://www.atg.se/services/racinginfo/v1/api/races/${raceId}/start/${startNumber}`;
