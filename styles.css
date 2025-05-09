@@ -162,3 +162,21 @@ h2 {
     background-color: #218838;
     transform: scale(1.05);
 }
+
+.status-bettable {
+    background-color: #cce5ff;  /* blå */
+}
+.status-started {
+    background-color: #fff3cd;  /* gul */
+}
+.status-closed,
+.status-results,
+.status-finished,
+.status-settled {
+    background-color: #d4edda;  /* grön */
+    opacity: 0.7;               /* diskretare */
+}
+.status-cancelled {
+    background-color: #f8d7da;  /* röd */
+    text-decoration: line-through;
+}

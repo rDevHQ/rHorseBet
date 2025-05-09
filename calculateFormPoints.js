@@ -1,60 +1,69 @@
-export function calculateFormPoints(horseName, lastFiveStarts, last3MonthsSummary) {
+import { FORM_POINTS_CONFIG } from "./pointsConfig.js";
+import { MAX_CATEGORY_POINTS } from './pointsConfig.js';
 
-    // Viktfaktorer för de senaste starterna
-    const weightFactors = [1.6, 1.3, 1.1, 1.0, 0.9];
+/**
+ * Relativ formpoängsberäkning:
+ * 1. Råpoäng räknas ut för varje häst (form + bonus)
+ * 2. Normaliseras mellan 0 och MAX_CATEGORY_POINTS.form beroende på hur bra hästen är jämfört med övriga
+ */
+export function calculateFormPoints(horseName, lastFiveStarts, last3MonthsSummary, allHorses) {
+    const {
+        PLACEMENT_POINTS,
+        WEIGHT_FACTORS,
+        THREE_MONTHS_BONUS
+    } = FORM_POINTS_CONFIG;
 
-    // Poäng per placering
-    const placementPoints = {
-        1: 3,  // 1:a plats
-        2: 2,  // 2:a plats
-        3: 1   // 3:e plats
-    };
+    const maxPoints = MAX_CATEGORY_POINTS.form;
 
-    // Kontrollera att `lastFiveStarts` är en giltig array
-    if (!Array.isArray(lastFiveStarts) || lastFiveStarts.length === 0) {
-        console.log(`⚠️ [${horseName}] Inga senaste starter tillgängliga. Formpoäng = 0`);
-        return 0;
-    }
+    function calculateRawFormPoints(horse) {
+        const starts = horse.lastFiveStarts ?? [];
+        const summary = horse.last3MonthsSummary ?? {};
 
-    // Beräkna viktade poäng från de senaste 5 starterna
-    let formPoints = lastFiveStarts.reduce((total, start, index) => {
-        if (!start || !start.position || start.position === "N/A") {
-            console.log(`⚠️ [${horseName}] Ignorerar start ${index + 1}, ogiltig position: ${start?.position}`);
-            return total;
-        }
+        let points = starts.reduce((total, start, index) => {
+            if (!start || !start.position || start.position === "N/A") return total;
+            const place = parseInt(start.position, 10);
+            if (isNaN(place)) return total;
+            const basePoints = PLACEMENT_POINTS[place] || 0;
+            const weight = WEIGHT_FACTORS[index] || 1.0;
+            return total + basePoints * weight;
+        }, 0);
 
-        let place = parseInt(start.position, 10); // Säkerställ att vi har ett heltal
-        if (isNaN(place)) {
-            console.log(`⚠️ [${horseName}] Placering ej numerisk i start ${index + 1}: ${start.position}`);
-            return total;
-        }
-
-        let basePoints = placementPoints[place] || 0; // Hämta poäng, annars 0
-        let weight = weightFactors[index] || 1.0; // Hämta viktfaktor, annars 1.0
-        let weightedPoints = basePoints * weight;
-        return total + weightedPoints;
-    }, 0);
-
-    // Lägg till extra poäng från last3MonthsSummary
-    if (last3MonthsSummary && typeof last3MonthsSummary === 'object') {
-        let wins = parseInt(last3MonthsSummary.wins ?? 0, 10);
-        let seconds = parseInt(last3MonthsSummary.seconds ?? 0, 10);
-        let thirds = parseInt(last3MonthsSummary.thirds ?? 0, 10);
-
+        let wins = parseInt(summary.wins ?? 0, 10);
+        let seconds = parseInt(summary.seconds ?? 0, 10);
+        let thirds = parseInt(summary.thirds ?? 0, 10);
         if (isNaN(wins)) wins = 0;
         if (isNaN(seconds)) seconds = 0;
         if (isNaN(thirds)) thirds = 0;
 
-        let extraPoints = (wins * 3) + (seconds * 2) + (thirds * 1);
+        const bonusPoints =
+            (wins * THREE_MONTHS_BONUS.WIN) +
+            (seconds * THREE_MONTHS_BONUS.SECOND) +
+            (thirds * THREE_MONTHS_BONUS.THIRD);
 
-        formPoints += extraPoints;
-
-    } else {
-        console.log(`⚠️ [${horseName}] Ogiltig eller saknad last3MonthsSummary.`);
+        return points + bonusPoints;
     }
 
-    // ✅ Avrunda till närmaste heltal
-    const finalScore = Math.round(formPoints);
+    const allRawPoints = allHorses.map(h =>
+        calculateRawFormPoints(h)
+    );
 
+    const rawScore = calculateRawFormPoints({
+        horse: { name: horseName },
+        lastFiveStarts,
+        last3MonthsSummary
+    });
+
+    const min = Math.min(...allRawPoints);
+    const max = Math.max(...allRawPoints);
+
+    if (max === min) {
+        console.log(`⚖️ [${horseName}] Alla hästar har lika form – tilldelar ${Math.round(maxPoints / 2)} poäng.`);
+        return Math.round(maxPoints / 2);
+    }
+
+    const normalized = ((rawScore - min) / (max - min)) * maxPoints;
+    const finalScore = Math.round(normalized);
+
+    console.log(`📈 [${horseName}] Form: råpoäng ${rawScore.toFixed(2)}, normaliserad till ${finalScore}/${maxPoints}`);
     return finalScore;
 }

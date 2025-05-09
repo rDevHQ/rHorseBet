@@ -1,41 +1,49 @@
+import { MAX_CATEGORY_POINTS } from './pointsConfig.js';
+
 export function calculateClassPoints(horse, allHorses) {
     if (!horse || !horse.lastFiveStarts || !horse.last3MonthsSummary) return 0;
 
     const horseName = horse.horse?.name ?? "Unknown Horse";
-    let horseAvgPrize = parseFloat(horse.last3MonthsSummary?.firstPrizeAverage ?? "0");
+    const maxPoints = MAX_CATEGORY_POINTS.klass;
 
-    if (isNaN(horseAvgPrize) || horseAvgPrize <= 0) horseAvgPrize = 0;
+    function getAvgPrize(h) {
+        return parseFloat(h.last3MonthsSummary?.firstPrizeAverage ?? "0") || 0;
+    }
 
-    const fieldPrizes = allHorses.map(h => parseFloat(h.last3MonthsSummary?.firstPrizeAverage ?? "0")).filter(value => value > 0);
-    const fieldAvg = fieldPrizes.length > 0 ? fieldPrizes.reduce((sum, value) => sum + value, 0) / fieldPrizes.length : 1;
+    function getRecentPrize(h) {
+        let total = 0;
+        let weight = 0;
 
-    let weightedPrizeMoney = 0;
-    let totalWeight = 0;
+        h.lastFiveStarts?.forEach((start, index) => {
+            if (!start || start.position === "N/A") return;
+            const w = 7 - index;
+            const p = parseInt(start.firstPrize) || 0;
+            total += p * w;
+            weight += w;
+        });
 
-    horse.lastFiveStarts.forEach((start, index) => {
-        if (!start || start.position === "N/A") return;
+        return weight > 0 ? total / weight : 0;
+    }
 
-        const weight = 7 - index; // More recent races weigh more
-        totalWeight += weight;
+    // Steg 1: Råklasspoäng per häst (summa av 3-månaders och viktad snitt)
+    const allScores = allHorses.map(h => ({
+        name: h.horse?.name,
+        raw: getAvgPrize(h) + getRecentPrize(h)
+    }));
 
-        let firstPrize = parseInt(start.firstPrize) || 0;
-        weightedPrizeMoney += firstPrize * weight;
+    const thisHorseRaw = getAvgPrize(horse) + getRecentPrize(horse);
+    const values = allScores.map(s => s.raw);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
 
-    });
+    if (min === max) {
+        console.log(`⚖️ ${horseName}: Alla hästar har samma klasspoäng – ger ${Math.round(maxPoints / 2)}`);
+        return Math.round(maxPoints / 2);
+    }
 
-    const horseRecentPrize = totalWeight > 0 ? weightedPrizeMoney / totalWeight : 0;
+    const normalized = ((thisHorseRaw - min) / (max - min)) * maxPoints;
+    const final = Math.round(normalized);
 
-    const fieldRecentPrizes = allHorses.flatMap(h => h.lastFiveStarts.map(s => parseInt(s.firstPrize) || 0)).filter(p => p > 0);
-    const fieldRecentAvg = fieldRecentPrizes.length > 0 ? fieldRecentPrizes.reduce((sum, val) => sum + val, 0) / fieldRecentPrizes.length : 1;
-
-    let classPoints = 0;
-    if (horseAvgPrize > fieldAvg * 1.25) classPoints += 5;
-    else if (horseAvgPrize >= fieldAvg * 0.8) classPoints += 3;
-    else classPoints += 1;
-
-    if (horseRecentPrize > fieldRecentAvg * 1.25) classPoints += 5;
-    else if (horseRecentPrize >= fieldRecentAvg * 0.8) classPoints += 3;
-    else classPoints += 1;
-
-    return classPoints;
+    console.log(`📊 ${horseName}: Råklass ${thisHorseRaw.toFixed(1)} – normaliserad till ${final}/${maxPoints}`);
+    return final;
 }

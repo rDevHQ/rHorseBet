@@ -48,7 +48,7 @@ function displayGamesForTrack(track, gamesData) {
 
     Object.keys(gamesData).forEach(gameType => {
         gamesData[gameType].forEach(game => {
-            if (game.status === 'bettable' && game.tracks.includes(track.id) && !excludedTypes.includes(gameType.toLowerCase())) {
+            if (game.tracks.includes(track.id) && !excludedTypes.includes(gameType.toLowerCase())) {
                 gamesForTrack.push({ type: gameType, ...game });
             }
         });
@@ -57,8 +57,18 @@ function displayGamesForTrack(track, gamesData) {
     gamesForTrack.forEach(game => {
         const div = document.createElement('div');
         div.classList.add('card');
-        const gameTime = new Date(game.startTime).toLocaleTimeString('sv-SE', { hour: '2-digit', minute: '2-digit' });
-        div.textContent = `${game.type} - ${gameTime}`;
+
+        // Lägg till klass baserat på status: status-bettable, status-started, etc.
+        div.classList.add(`status-${game.status}`);
+
+        // Format: "V75 - 14:45 (bettable)"
+        const gameTime = new Date(game.startTime).toLocaleTimeString('sv-SE', {
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+
+        div.textContent = `${game.type.toUpperCase()} - ${gameTime} (${game.status})`;
+
         div.addEventListener('click', () => fetchGameDetails(game.id));
         gamesList.appendChild(div);
     });
@@ -70,7 +80,7 @@ async function fetchGameDetails(gameId) {
 
     setSelectedGame(gameId);  // Uppdatera spelform när spelet väljs
     console.log(`✅ Uppdaterade selectedGame till: ${selectedGame}`);
-    
+
     const apiUrl = gameApiBaseUrl + gameId;
     try {
         const response = await fetch(apiUrl);

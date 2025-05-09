@@ -1,4 +1,4 @@
-import { TIME_POINTS } from "./pointsConfig.js";
+import { TIME_POINTS, MAX_CATEGORY_POINTS } from "./pointsConfig.js";
 
 // Funktion för att omvandla kilometertid från "1.14,6" till sekunder
 function parseKmTimeToSeconds(kmTime) {
@@ -86,8 +86,8 @@ export function calculateTimePerformance(lastFiveStarts, raceDistance, allHorses
 
     // Hitta rätt poäng baserat på trösklar
     let timePoints = [...TIME_POINTS.THRESHOLDS]
-    .sort((a, b) => a.minDiff - b.minDiff) // Sortera från lägst till högst
-    .find(threshold => timeDifference <= threshold.minDiff)?.points ?? 0;
+        .sort((a, b) => a.minDiff - b.minDiff)
+        .find(threshold => timeDifference <= threshold.minDiff)?.points ?? 0;
 
     // Bonuspoäng
     let bonusPoints = 0;
@@ -110,5 +110,8 @@ export function calculateTimePerformance(lastFiveStarts, raceDistance, allHorses
         bonusPoints += TIME_POINTS.RECENT_RACE_BONUS;
     }
 
-    return timePoints + bonusPoints;
+    // Begränsa till maxpoäng för kategori 'tid'
+    const totalTimePoints = Math.min(timePoints + bonusPoints, MAX_CATEGORY_POINTS.tid);
+
+    return totalTimePoints;
 }

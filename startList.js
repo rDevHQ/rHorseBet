@@ -52,37 +52,41 @@ export function displayStartList(race) {
 
     race.horses.forEach((start, index) => {
         console.log(`🐴 Häst: ${start.horse.name}, lastFiveStarts:`, start.lastFiveStarts);
-    
+
         // Kopiera lastFiveStarts för att säkerställa att varje häst har sin egen version
         const lastFiveStartsCopy = start.lastFiveStarts ? [...start.lastFiveStarts] : [];
-    
-        const startPositionPoints = calculateStartPositionPoints(race.startMethod, start.startNumber);
+
+        const startPositionPoints = calculateStartPositionPoints(start, race.horses, race.startMethod);
         const formPoints = calculateFormPoints(
             start.horse?.name ?? "Okänd häst",
-            lastFiveStartsCopy,  // Använd kopian istället
-            start.last3MonthsSummary ?? {}
+            lastFiveStartsCopy,
+            start.last3MonthsSummary ?? {},
+            race.horses
         );
         const timePoints = calculateTimePerformance(
             lastFiveStartsCopy,  // Använd kopian istället
-            race.distance, 
-            race.horses, 
+            race.distance,
+            race.horses,
             start.horse?.name ?? "Okänd häst"
         );
         const headToHeadPoints = calculateHeadToHeadPoints(
             lastFiveStartsCopy,  // Använd kopian istället
-            race.horses, 
+            race.horses,
             start.horse?.name ?? "Okänd häst"
         );
         const driverPoints = calculateDriverPoints(start.driver, allDrivers) || 1;
         const trainerPoints = calculateTrainerPoints(start.trainer, allTrainers) || 1;
-        const equipmentPoints = calculateEquipmentPoints(start.horse);
+        
+        console.log("✅ Kontroll av startdata:", start.horse?.name, start.horse.shoes, start.horse.sulky);
+        const equipmentPoints = calculateEquipmentPoints(start.horse, race.horses);
+
         const classPoints = calculateClassPoints(start, race.horses);
-    
+
         const bettingPercentage = getBettingPercentage(start.horse, gameType);
         const bettingPercentagePoints = calculateBettingPercentagePoints(bettingPercentage, allBettingPercentages);
-    
+
         const totalPoints = bettingPercentagePoints + startPositionPoints + formPoints + timePoints + headToHeadPoints + driverPoints + trainerPoints + equipmentPoints + classPoints;
-    
+
         horses.push({
             startNumber: start.startNumber,
             horseName: start.horse.name,
@@ -142,7 +146,7 @@ function copyStartListToClipboard(race, horses) {
     const distance = race.distance ?? "N/A";
     const startMethod = race.startMethod ?? "N/A";
 
-   // let tableData = `${raceTitle}\n`; // Lägg till rubriken
+    // let tableData = `${raceTitle}\n`; // Lägg till rubriken
 
     // Lägg till tab-separerade rubriker
     let tableData = "Datum\tBana\tLopp\tDistans\tStartmetod\tRank\tStartnr\tHästnamn\tSpelprocent\tFolket\tStartspår\tForm\tTid\tH2H\tKusk\tTränare\tUtrustning\tKlass\tTotalt\n";
