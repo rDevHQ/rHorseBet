@@ -17,7 +17,7 @@ export function calculateBettingPercentagePoints(bettingPercentage, allBettingPe
     const maxBet = Math.max(...bettingPercentages);
 
     if (maxBet === minBet) {
-        console.warn("⚠️ MaxBet och MinBet är lika – alla hästar får 0 poäng.");
+        // console.warn("⚠️ MaxBet och MinBet är lika – alla hästar får 0 poäng.");
         return 0;
     }
 
@@ -25,7 +25,7 @@ export function calculateBettingPercentagePoints(bettingPercentage, allBettingPe
     const bettingPoints = normalized * maxPoints;
 
     if (bettingPercentage === maxBet) {
-        console.log(`✅ Häst med maxBet (${maxBet}%) får exakt ${maxPoints} poäng.`);
+        // console.log(`✅ Häst med maxBet (${maxBet}%) får exakt ${maxPoints} poäng.`);
         return maxPoints;
     }
 

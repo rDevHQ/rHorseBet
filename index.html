@@ -21,16 +21,19 @@
         <h2>Available Tracks</h2>
         <div class="grid" id="tracks"></div>
 
-        <h2>Games for Selected Track</h2>
+        <h2>Bet types for Selected Track</h2>
         <div class="grid" id="games"></div>
 
-        <h2>Races for Selected Game</h2>
+        <h2>Races for Selected Track and Bet type</h2>
         <div class="grid" id="races"></div>
 
         <div id="start-list-container"></div>
 
-        <button id="download-json">Download JSON</button>
-        <pre id="details"></pre>
+        <div id="actions" style="display: flex; gap: 1em; margin-top: 1em;">
+            <button id="copy-startlist-btn">📋 Kopiera till Clipboard</button>
+            <button id="download-json">Download JSON</button>
+        </div>
+        <pre id="details" style="display: none;"></pre>
     </div>
 
     <script type="module" src="fetchData.js"></script>

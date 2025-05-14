@@ -77,6 +77,16 @@ h2 {
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
 }
 
+.selected-card {
+    border: 3px solid #0056b3;
+    background-color: #e0ecff;
+}
+
+.selected-race {
+    border: 3px solid #0056b3;
+    background-color: #e0ecff;
+}
+
 /* Tabellstilar */
 #start-list {
     width: 100%;

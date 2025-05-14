@@ -6,67 +6,52 @@ import { EQUIPMENT_POINTS, MAX_CATEGORY_POINTS } from "./pointsConfig.js";
  */
 export function calculateEquipmentPoints(horse, allHorses) {
    
-    let baseScore = 0;
-    const horseName = horse.name ?? "Okänd häst";
-
-    console.log(`🧪 [${horseName}] shoes:`, horse.shoes);
-    console.log(`🧪 [${horseName}] sulky:`, horse.sulky);
-
-    // Identifiera ändringar
-    const isFrontBarefoot = horse.shoes?.front?.changed === true && horse.shoes?.front?.hasShoe === false;
-    const isBackBarefoot = horse.shoes?.back?.changed === true && horse.shoes?.back?.hasShoe === false;
-    const isSwitchToShoes = (
-        (horse.shoes?.front?.changed === true && horse.shoes?.front?.hasShoe === true) ||
-        (horse.shoes?.back?.changed === true && horse.shoes?.back?.hasShoe === true)
-    );
-    const isYankee = horse.sulky?.type?.changed === true &&
-        horse.sulky?.type?.text?.toLowerCase().includes("amerikansk");
-
-    if (isFrontBarefoot) baseScore += EQUIPMENT_POINTS.FIRST_TIME_BAREFOOT;
-    if (isBackBarefoot) baseScore += EQUIPMENT_POINTS.FIRST_TIME_BAREFOOT;
-    if (isSwitchToShoes) baseScore += EQUIPMENT_POINTS.SHOES_INSTEAD_OF_BAREFOOT;
-    if (isYankee) baseScore += EQUIPMENT_POINTS.SWITCH_TO_YANKER;
-
-    const changes = [];
-    if (isFrontBarefoot) changes.push("Barfota fram");
-    if (isBackBarefoot) changes.push("Barfota bak");
-    if (isSwitchToShoes) changes.push("Till skor");
-    if (isYankee) changes.push("Jänkarvagn");
-
-    if (baseScore === 0) {
-        console.log(`⚠️ [${horseName}] Inga utrustningsändringar. Poäng: 0`);
-        return 0;
+    function getBaseEquipmentScore(horse) {
+        let score = 0;
+        if (horse.shoes?.front?.changed === true && horse.shoes?.front?.hasShoe === false) {
+            score += EQUIPMENT_POINTS.FIRST_TIME_BAREFOOT;
+        }
+        if (horse.shoes?.back?.changed === true && horse.shoes?.back?.hasShoe === false) {
+            score += EQUIPMENT_POINTS.FIRST_TIME_BAREFOOT;
+        }
+        if (
+            (horse.shoes?.front?.changed === true && horse.shoes?.front?.hasShoe === true) ||
+            (horse.shoes?.back?.changed === true && horse.shoes?.back?.hasShoe === true)
+        ) {
+            score += EQUIPMENT_POINTS.SHOES_INSTEAD_OF_BAREFOOT;
+        }
+        if (horse.sulky?.type?.changed === true &&
+            horse.sulky?.type?.text?.toLowerCase().includes("amerikansk")) {
+            score += EQUIPMENT_POINTS.SWITCH_TO_YANKER;
+        }
+        return score;
     }
 
-    // Identifiera hur många andra har gjort liknande ändringar
-    let similarChangeCount = 0;
+    const baseScore = getBaseEquipmentScore(horse);
+    if (baseScore === 0) {
+        return { points: 0, description: "Inga utrustningsändringar" };
+    }
 
-    allHorses.forEach(other => {
-        const otherHorse = other.horse ?? other;
-        const otherName = otherHorse.name;
-        if (otherName === horseName) return;
-    
-        const otherFrontBarefoot = otherHorse.shoes?.front?.changed === true && otherHorse.shoes?.front?.hasShoe === false;
-        const otherBackBarefoot = otherHorse.shoes?.back?.changed === true && otherHorse.shoes?.back?.hasShoe === false;
-        const otherYankee = otherHorse.sulky?.type?.changed === true &&
-            otherHorse.sulky?.type?.text?.toLowerCase().includes("amerikansk");
-    
-        const sharesChange =
-            (isFrontBarefoot && otherFrontBarefoot) ||
-            (isBackBarefoot && otherBackBarefoot) ||
-            (isYankee && otherYankee);
-    
-        if (sharesChange) {
-            similarChangeCount++;
-        }
-    });
+    const allBaseScores = allHorses.map(h => getBaseEquipmentScore(h.horse ?? h));
+    const min = Math.min(...allBaseScores);
+    const max = Math.max(...allBaseScores);
 
-    const adjustmentFactor = 1 - Math.min(similarChangeCount / allHorses.length, 0.8);
-    const adjustedScore = Math.round(baseScore * adjustmentFactor);
-    const finalScore = Math.max(0, Math.min(adjustedScore, MAX_CATEGORY_POINTS.utrustning));
+    let finalScore;
+    if (max === min) {
+        finalScore = Math.round(MAX_CATEGORY_POINTS.utrustning / 2);
+    } else {
+        finalScore = Math.round(((baseScore - min) / (max - min)) * MAX_CATEGORY_POINTS.utrustning);
+    }
 
-    console.log(`🔧 [${horseName}] Ändringar: ${changes.join(", ") || "Inga"}`);
-    console.log(`📊 [${horseName}] Grundpoäng: ${baseScore}, Delar ändring med ${similarChangeCount} andra → Justerad poäng: ${finalScore}`);
+    const changes = [];
+    if (horse.shoes?.front?.changed === true && horse.shoes?.front?.hasShoe === false) changes.push("Barfota fram");
+    if (horse.shoes?.back?.changed === true && horse.shoes?.back?.hasShoe === false) changes.push("Barfota bak");
+    if (
+        (horse.shoes?.front?.changed === true && horse.shoes?.front?.hasShoe === true) ||
+        (horse.shoes?.back?.changed === true && horse.shoes?.back?.hasShoe === true)
+    ) changes.push("Till skor");
+    if (horse.sulky?.type?.changed === true &&
+        horse.sulky?.type?.text?.toLowerCase().includes("amerikansk")) changes.push("Jänkarvagn");
 
-    return finalScore;
+    return { points: finalScore, description: changes.join(", ") || "Inga utrustningsändringar" };
 }

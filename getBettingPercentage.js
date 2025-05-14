@@ -6,5 +6,5 @@ export function getBettingPercentage(horse, selectedGame) {
         return horse[gameKey];
     }
 
-    return "N/A %";
+    return "N/A";
 }

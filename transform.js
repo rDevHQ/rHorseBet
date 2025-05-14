@@ -2,7 +2,22 @@ export function transformRaces(races, startsData) {
     const THREE_MONTHS_MS = 3 * 30 * 24 * 60 * 60 * 1000; // Approximation of 3 months
     const now = new Date();
 
-    return races.map(race => ({
+    return races.map(race => {
+        // placeMap: vinnare och plats-poolen per race
+        const placeMap = new Map();
+        // Från plats-poolen
+        ["first", "second", "third"].forEach((label, idx) => {
+            (race.pools?.plats?.result?.winners?.[label] ?? []).forEach(w => {
+                // Endast om inte redan satt som vinnare
+                if (!placeMap.has(w.number)) {
+                    placeMap.set(w.number, idx + 1);
+                }
+            });
+        });
+
+        // console.log(`📌 place: ${Array.from(placeMap.entries()).map(([number, place]) => `${number}: ${place}`).join(', ')}`);
+
+        return ({
         id: race.id,
         date: race.date,
         number: race.number,
@@ -13,9 +28,8 @@ export function transformRaces(races, startsData) {
         trackName: race.track.name,
         horses: race.starts.map(start => {
             const horseId = start.horse.id || `${race.id}_${start.number}`;
+            const place = placeMap.get(start.number) ?? null;
             const horseRecords = (startsData[horseId]?.horse?.results?.records || []);
-
-            console.log(`🐴 [${horseId}] horseRecords före sortering:`, JSON.stringify(horseRecords, null, 2));
 
             // Last Five Starts
             const lastFiveStarts = horseRecords
@@ -36,8 +50,6 @@ export function transformRaces(races, startsData) {
                     odds: record.odds ? (record.odds / 100).toFixed(2) : "N/A"
                 }));
 
-            console.log(`🐴 [${horseId}] lastFiveStarts efter sortering:`, JSON.stringify(lastFiveStarts, null, 2));
-            
             // Last 3 Months Summary
             const last3MonthsRecords = horseRecords.filter(record => {
                 const recordDate = new Date(record.date);
@@ -71,29 +83,36 @@ export function transformRaces(races, startsData) {
                 startNumber: start.number,
                 horse: {
                     name: start.horse.name,
+                    place: place,
                     odds: start.pools?.vinnare?.odds
                         ? (start.pools.vinnare.odds / 100).toFixed(2)
                         : "N/A",
-                    V75: start.pools?.V75?.betDistribution
+                    V75: typeof start.pools?.V75?.betDistribution === "number"
                         ? (start.pools.V75.betDistribution / 100).toFixed(2)
                         : "N/A",
-                    GS75: start.pools?.GS75?.betDistribution
+                    V85: typeof start.pools?.V85?.betDistribution === "number"
+                        ? (start.pools.V85.betDistribution / 100).toFixed(2)
+                        : "N/A",
+                    GS75: typeof start.pools?.GS75?.betDistribution === "number"
                         ? (start.pools.GS75.betDistribution / 100).toFixed(2)
                         : "N/A",
-                    V86: start.pools?.V86?.betDistribution
+                    V86: typeof start.pools?.V86?.betDistribution === "number"
                         ? (start.pools.V86.betDistribution / 100).toFixed(2)
                         : "N/A",
-                    V64: start.pools?.V64?.betDistribution
+                    V64: typeof start.pools?.V64?.betDistribution === "number"
                         ? (start.pools.V64.betDistribution / 100).toFixed(2)
                         : "N/A",
-                    V65: start.pools?.V65?.betDistribution
+                    V65: typeof start.pools?.V65?.betDistribution === "number"
                         ? (start.pools.V65.betDistribution / 100).toFixed(2)
                         : "N/A",
-                    V5: start.pools?.V5?.betDistribution
+                    V5: typeof start.pools?.V5?.betDistribution === "number"
                         ? (start.pools.V5.betDistribution / 100).toFixed(2)
                         : "N/A",
-                    V4: start.pools?.V4?.betDistribution
+                    V4: typeof start.pools?.V4?.betDistribution === "number"
                         ? (start.pools.V4.betDistribution / 100).toFixed(2)
+                        : "N/A",
+                    V3: typeof start.pools?.V3?.betDistribution === "number"
+                        ? (start.pools.V3.betDistribution / 100).toFixed(2)
                         : "N/A",
                     earnings: start.horse.money
                         ? `${start.horse.money}`
@@ -174,8 +193,9 @@ export function transformRaces(races, startsData) {
                     firstPrizeAverage: `${averageFirstPrize}`,
                     placement: last3MonthsSummary.placement
                 },
-                scratch: start.scratch || false
+                scratched: start.scratched || false
             };
         })
-    }));
+        });
+    });
 };

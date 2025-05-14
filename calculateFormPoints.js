@@ -57,13 +57,13 @@ export function calculateFormPoints(horseName, lastFiveStarts, last3MonthsSummar
     const max = Math.max(...allRawPoints);
 
     if (max === min) {
-        console.log(`⚖️ [${horseName}] Alla hästar har lika form – tilldelar ${Math.round(maxPoints / 2)} poäng.`);
+        // console.log(`⚖️ [${horseName}] Alla hästar har lika form – tilldelar ${Math.round(maxPoints / 2)} poäng.`);
         return Math.round(maxPoints / 2);
     }
 
     const normalized = ((rawScore - min) / (max - min)) * maxPoints;
     const finalScore = Math.round(normalized);
 
-    console.log(`📈 [${horseName}] Form: råpoäng ${rawScore.toFixed(2)}, normaliserad till ${finalScore}/${maxPoints}`);
+    // console.log(`📈 [${horseName}] Form: råpoäng ${rawScore.toFixed(2)}, normaliserad till ${finalScore}/${maxPoints}`);
     return finalScore;
 }

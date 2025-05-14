@@ -1,5 +1,6 @@
 import { transformRaces } from './transform.js';
 import { displayRaces } from './display.js';
+import { displayRaceDetails } from './display.js';
 
 const apiCalendarUrl = 'https://www.atg.se/services/racinginfo/v1/api/calendar/day/';
 const gameApiBaseUrl = 'https://www.atg.se/services/racinginfo/v1/api/games/';
@@ -21,6 +22,8 @@ async function loadTracks(date) {
     document.getElementById('current-date').textContent = `${formattedDate}`;
     const response = await fetch(apiCalendarUrl + formattedDate);
 
+    console.log("🔍 tracks raw data:", response);
+
     const tracksList = document.getElementById('tracks');
     tracksList.innerHTML = '';
 
@@ -30,11 +33,33 @@ async function loadTracks(date) {
     }
 
     const data = await response.json();
+
+    data.tracks.sort((a, b) => {
+        const getStart = trackId =>
+            Math.min(...Object.values(data.games).flat().filter(g => g.tracks.includes(trackId)).map(g => new Date(g.startTime).getTime()));
+        return getStart(a.id) - getStart(b.id);
+    });
+
     data.tracks.forEach(track => {
+        // Find earliest start time for this track
+        const trackGames = Object.values(data.games).flat().filter(g => g.tracks.includes(track.id));
+        const earliestStart = trackGames.length > 0
+            ? new Date(Math.min(...trackGames.map(g => new Date(g.startTime)))).toLocaleTimeString('sv-SE', {
+                hour: '2-digit',
+                minute: '2-digit',
+            })
+            : "–";
+
         const div = document.createElement('div');
         div.classList.add('card');
-        div.textContent = track.name;
-        div.addEventListener('click', () => displayGamesForTrack(track, data.games));
+        div.innerHTML = `<strong>${track.name}</strong><div style="font-size: 0.9em; color: #555;">${earliestStart}</div>`;
+
+        div.addEventListener('click', () => {
+            document.querySelectorAll('#tracks .card').forEach(btn => btn.classList.remove('selected-card'));
+            div.classList.add('selected-card');
+            displayGamesForTrack(track, data.games);
+        });
+
         tracksList.appendChild(div);
     });
 }
@@ -54,32 +79,75 @@ function displayGamesForTrack(track, gamesData) {
         });
     });
 
-    gamesForTrack.forEach(game => {
-        const div = document.createElement('div');
-        div.classList.add('card');
+    // console.log("🔍 gamesForTrack raw data:", gamesForTrack);
 
-        // Lägg till klass baserat på status: status-bettable, status-started, etc.
-        div.classList.add(`status-${game.status}`);
+    (async () => {
+        const vinnareGames = [];
+        const otherGames = [];
 
-        // Format: "V75 - 14:45 (bettable)"
-        const gameTime = new Date(game.startTime).toLocaleTimeString('sv-SE', {
-            hour: '2-digit',
-            minute: '2-digit',
+        for (const game of gamesForTrack) {
+            if (game.type.toUpperCase() === "VINNARE") {
+                const raceNumber = await getRaceNumberFromGame(game.id);
+                vinnareGames.push({ ...game, raceNumber });
+            } else {
+                otherGames.push(game);
+            }
+        }
+
+        vinnareGames.sort((a, b) => (a.raceNumber ?? 0) - (b.raceNumber ?? 0));
+        otherGames.sort((a, b) => new Date(a.startTime) - new Date(b.startTime));
+        const sortedGames = [...vinnareGames, ...otherGames];
+
+        sortedGames.forEach(game => {
+            const div = document.createElement('div');
+            div.classList.add('card');
+            div.classList.add(`status-${game.status}`);
+
+            const gameTime = new Date(game.startTime).toLocaleTimeString('sv-SE', {
+                hour: '2-digit',
+                minute: '2-digit',
+            });
+
+            const isVinnare = game.type.toUpperCase() === "VINNARE";
+            const gameTypeLabel = isVinnare
+                ? `Vinnare Race ${game.raceNumber ?? "?"}`
+                : game.type.toUpperCase();
+
+            const label = `<strong>${gameTypeLabel}</strong><div>${gameTime}</div><div class="status-line">(${game.status})</div>`;
+
+            div.innerHTML = label;
+            div.style.marginBottom = "1em";
+            div.addEventListener('click', () => {
+                document.querySelectorAll('#games .card').forEach(btn => btn.classList.remove('selected-card'));
+                div.classList.add('selected-card');
+                fetchGameDetails(game.id);
+            });
+            gamesList.appendChild(div);
         });
+    })();
+}
 
-        div.textContent = `${game.type.toUpperCase()} - ${gameTime} (${game.status})`;
-
-        div.addEventListener('click', () => fetchGameDetails(game.id));
-        gamesList.appendChild(div);
-    });
+async function getRaceNumberFromGame(gameId) {
+    const apiUrl = gameApiBaseUrl + gameId;
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Error loading game info');
+        const data = await response.json();
+        const raceNumber = data?.races?.[0]?.number ?? null;
+        console.log(`🔎 Hämtade loppnummer för ${gameId}:`, raceNumber);
+        return raceNumber;
+    } catch (error) {
+        console.error('❌ Fel vid hämtning av loppnummer:', error);
+        return null;
+    }
 }
 
 async function fetchGameDetails(gameId) {
+    const currentGameId = gameId; // persist for download scope
+
     selectedGame = gameId; // Spara det valda spelet
-    console.log(`📌 Valde spel: ${selectedGame}`);
 
     setSelectedGame(gameId);  // Uppdatera spelform när spelet väljs
-    console.log(`✅ Uppdaterade selectedGame till: ${selectedGame}`);
 
     const apiUrl = gameApiBaseUrl + gameId;
     try {
@@ -90,14 +158,30 @@ async function fetchGameDetails(gameId) {
         const startsData = await fetchStartData(races); // Hämtar detaljerad startdata
 
         const transformedRaces = transformRaces(races, startsData);
-        displayRaces(transformedRaces);
 
-        const detailsContainer = document.getElementById('details');
-        detailsContainer.textContent = JSON.stringify(transformedRaces, null, 2);
+        // Specialhantering för VINNARE
+        if (races.length === 1 && selectedGame.toUpperCase() === "VINNARE") {
+            displayRaces(transformedRaces);
+            displayRaceDetails(transformedRaces[0]);
+            document.getElementById('races').style.display = 'none';
+        
+            // ✅ Flytta detta hit
+            const downloadButton = document.getElementById('download-json');
+            downloadButton.style.display = 'block';
+            downloadButton.onclick = () => downloadJSON(transformedRaces, `${currentGameId}.json`);
+        
+            return;
+        }
+
+        displayRaces(transformedRaces);
+        // Visa race-knapplistan i vanliga fall
+        document.getElementById('races').style.display = 'flex';
+
+        document.getElementById('details').style.display = 'none';
 
         const downloadButton = document.getElementById('download-json');
         downloadButton.style.display = 'block';
-        downloadButton.onclick = () => downloadJSON(transformedRaces, `${gameId}.json`);
+        downloadButton.onclick = () => downloadJSON(transformedRaces, `${currentGameId}.json`);
     } catch (error) {
         console.error('Error fetching game details:', error);
         document.getElementById('details').textContent = 'Error loading game details';

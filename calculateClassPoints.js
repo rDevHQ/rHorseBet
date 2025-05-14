@@ -37,13 +37,13 @@ export function calculateClassPoints(horse, allHorses) {
     const max = Math.max(...values);
 
     if (min === max) {
-        console.log(`⚖️ ${horseName}: Alla hästar har samma klasspoäng – ger ${Math.round(maxPoints / 2)}`);
+        // console.log(`⚖️ ${horseName}: Alla hästar har samma klasspoäng – ger ${Math.round(maxPoints / 2)}`);
         return Math.round(maxPoints / 2);
     }
 
     const normalized = ((thisHorseRaw - min) / (max - min)) * maxPoints;
     const final = Math.round(normalized);
 
-    console.log(`📊 ${horseName}: Råklass ${thisHorseRaw.toFixed(1)} – normaliserad till ${final}/${maxPoints}`);
+    // console.log(`📊 ${horseName}: Råklass ${thisHorseRaw.toFixed(1)} – normaliserad till ${final}/${maxPoints}`);
     return final;
 }
