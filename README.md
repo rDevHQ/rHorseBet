@@ -6,7 +6,7 @@ Detta projekt beräknar totalpoäng för varje häst i ett travlopp baserat på 
 
 Totalpoängen för en häst är summan av följande poängkategorier:
 
-- Folket (bettingprocent)
+- Folket (bettingodds eller estimerad publikandel)
 - Startspår
 - Form
 - Tid
@@ -16,20 +16,31 @@ Totalpoängen för en häst är summan av följande poängkategorier:
 - Utrustning
 - Klass
 
-Varje kategori har en definierad `MAX_CATEGORY_POINTS` som anger hur mycket den maximalt kan påverka totalpoängen.
+## 📏 Maxpoäng per kategori (100 totalt)
+
+| Kategori    | Maxpoäng | Andel (%) |
+|-------------|-----------|-----------|
+| Folket      | 16        | 16.0%     |
+| Tid         | 13        | 13.0%     |
+| Utrustning  | 13        | 13.0%     |
+| Tränare     | 11        | 11.0%     |
+| H2H         | 11        | 11.0%     |
+| Kusk        | 10        | 10.0%     |
+| Form        | 10        | 10.0%     |
+| Klass       | 9         | 9.0%      |
+| Startspår   | 7         | 7.0%      |
+| **Summa**   | **100**   | **100%**  |
 
 ---
 
 ## 📊 Kategorier och beräkningar
 
 ### 🔹 Folket
-**Baserat på bettingprocent.**
+**Baserat på odds eller vxy-%.**
 
-- Den mest spelade hästen får **maxpoäng**
-- Den minst spelade får **0**
-- Övriga skalas proportionellt däremellan
-
-> **Normalisering:** `(dinBet - minBet) / (maxBet - minBet) * MAX_POINTS.folket`
+- Lägre odds ger högre poäng
+- Poängen fördelas logaritmiskt så att extremfavoriter får tydligt högre poäng än övriga
+- Skalningen är relativ inom fältet
 
 ---
 
