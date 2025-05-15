@@ -21,13 +21,13 @@ export function calculateBettingPercentagePoints(bettingPercentage, allBettingPe
         return 0;
     }
 
-    const normalized = (bettingPercentage - minBet) / (maxBet - minBet);
-    const bettingPoints = normalized * maxPoints;
+    const logPercentages = allBettingPercentages.map(p => Math.log(p || 0.01)); // avoid log(0)
+    const logMin = Math.min(...logPercentages);
+    const logMax = Math.max(...logPercentages);
+    const logCurrent = Math.log(bettingPercentage || 0.01);
 
-    if (bettingPercentage === maxBet) {
-        // console.log(`✅ Häst med maxBet (${maxBet}%) får exakt ${maxPoints} poäng.`);
-        return maxPoints;
-    }
+    const normalized = (logCurrent - logMin) / (logMax - logMin);
+    const bettingPoints = normalized * maxPoints;
 
     return Math.round(bettingPoints);
 }

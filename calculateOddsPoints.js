@@ -21,14 +21,13 @@ export function calculateOddsPoints(odds, allOdds) {
         return 0;
     }
 
-    // Invertera: lägre odds = mer poäng
-    const normalized = (maxOdds - odds) / (maxOdds - minOdds);
-    const oddsPoints = normalized * maxPoints;
+    const logOdds = allOdds.map(o => Math.log(o));
+    const logMin = Math.min(...logOdds);
+    const logMax = Math.max(...logOdds);
+    const logCurrent = Math.log(odds);
 
-    if (odds === minOdds) {
-        // console.log(`✅ Häst med lägst odds (${minOdds}) får exakt ${maxPoints} poäng.`);
-        return maxPoints;
-    }
+    const normalized = (logMax - logCurrent) / (logMax - logMin);
+    const oddsPoints = normalized * maxPoints;
 
     return Math.round(oddsPoints);
 }
