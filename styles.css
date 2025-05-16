@@ -112,18 +112,21 @@ h2 {
     white-space: nowrap; /* Förhindrar radbrytningar */
 }
 
-/* Hästnamn */
-#start-list th:nth-child(3), 
-#start-list td:nth-child(3),
-#start-list th:nth-child(4), 
-#start-list td:nth-child(4) {
-    text-align: left;
-    min-width: 160px; /* Gör utrymme för spelprocent */
+/* Hästnamn = kolumn 5 */
+#start-list th:nth-child(5), 
+#start-list td:nth-child(5) {
+    text-align: left !important;
+    min-width: 160px;
 }
 
-/* spelprocent */
-#start-list th:nth-child(4), 
-#start-list td:nth-child(4) {
+/* Odds = kolumn 6 */
+#start-list td:nth-child(6) {
+    text-align: right;
+}
+
+/* Spelprocent = kolumn 7 */
+#start-list th:nth-child(7), 
+#start-list td:nth-child(7) {
     text-align: center;
     min-width: 50px;
 }

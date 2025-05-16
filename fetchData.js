@@ -26,6 +26,13 @@ async function loadTracks(date) {
 
     const tracksList = document.getElementById('tracks');
     tracksList.innerHTML = '';
+    document.getElementById('start-list-container').style.display = 'none';
+    // Clear details and races sections when loading new tracks
+    document.getElementById('details').innerHTML = '';
+    document.getElementById('details').style.display = 'none';
+    document.getElementById('races').innerHTML = '';
+    document.getElementById('races').style.display = 'none';
+    document.getElementById('games').innerHTML = '';
 
     if (!response.ok) {
         tracksList.innerHTML = '<div class="card">Error loading tracks</div>';
@@ -57,6 +64,11 @@ async function loadTracks(date) {
         div.addEventListener('click', () => {
             document.querySelectorAll('#tracks .card').forEach(btn => btn.classList.remove('selected-card'));
             div.classList.add('selected-card');
+            document.getElementById('races').innerHTML = '';
+            document.getElementById('details').innerHTML = '';
+            // Additional clear as requested
+            document.getElementById('races').innerHTML = '';
+            document.getElementById('details').innerHTML = '';
             displayGamesForTrack(track, data.games);
         });
 
@@ -65,8 +77,18 @@ async function loadTracks(date) {
 }
 
 function displayGamesForTrack(track, gamesData) {
+    // Clear previous game/race/detail views when switching tracks
+    document.getElementById('games').innerHTML = '';
+    document.getElementById('races').innerHTML = '';
+    document.getElementById('details').innerHTML = '';
+    document.getElementById('races').style.display = 'none';
+    document.getElementById('details').style.display = 'none';
+    // Additional clear as requested
+    document.getElementById('details').innerHTML = '';
+    document.getElementById('start-list-container').style.display = 'none';
+
     const gamesList = document.getElementById('games');
-    gamesList.innerHTML = '';
+    // gamesList.innerHTML = ''; // Already cleared above
 
     const excludedTypes = ['plats', 'trio', 'komb', 'tvilling', 'vp', 'raket'];
     const gamesForTrack = [];
@@ -169,7 +191,7 @@ async function fetchGameDetails(gameId) {
             const downloadButton = document.getElementById('download-json');
             downloadButton.style.display = 'block';
             downloadButton.onclick = () => downloadJSON(transformedRaces, `${currentGameId}.json`);
-        
+            document.getElementById('start-list-container').style.display = 'block';
             return;
         }
 
@@ -182,6 +204,7 @@ async function fetchGameDetails(gameId) {
         const downloadButton = document.getElementById('download-json');
         downloadButton.style.display = 'block';
         downloadButton.onclick = () => downloadJSON(transformedRaces, `${currentGameId}.json`);
+        document.getElementById('start-list-container').style.display = 'block';
     } catch (error) {
         console.error('Error fetching game details:', error);
         document.getElementById('details').textContent = 'Error loading game details';

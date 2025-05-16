@@ -10,8 +10,7 @@ import { calculateClassPoints } from "./calculateClassPoints.js";
 import { calculateHeadToHeadPoints } from "./calculateHeadToHeadPoints.js";
 import { selectedGame } from './fetchData.js';
 import { getBettingPercentage } from './getBettingPercentage.js';
-
-let previousDownloadUrl = null;
+import { ML_CATEGORY_WEIGHTS } from "./pointsMLConfig.js";
 
 export function displayStartList(race) {
     const container = document.getElementById("start-list-container");
@@ -29,21 +28,27 @@ export function displayStartList(race) {
     <table id="start-list">
         <thead>
             <tr>
-                <th>Rank</th>
-                <th>Startnr</th>
+                <th data-sortable="true">Rank</th>
+                <th data-sortable="true">ML Rank</th>
+                <th data-sortable="true">Folk Rank</th>
+                <th ata-sortable="true">Startnr</th>
                 <th>Hästnamn</th>
-                <th>Odds</th>
-                <th>Spelprocent</th>
-                <th>Folket</th>
-                <th>Startspårs</th>
-                <th>Form</th>
-                <th>Tid</th>
-                <th>H2H</th>
-                <th>Kusk</th>
-                <th>Tränare</th>
-                <th>Utrustning</th>
-                <th>Klass</th>
-                <th>Totalt</th>
+                <th data-sortable="true">Odds</th>
+                <th data-sortable="true">Spelprocent</th>
+                <th data-sortable="true">Folket</th>
+                <th data-sortable="true">Startspårs</th>
+                <th data-sortable="true">Form</th>
+                <th data-sortable="true">Tid</th>
+                <th data-sortable="true">H2H</th>
+                <th data-sortable="true">Kusk</th>
+                <th data-sortable="true">Tränare</th>
+                <th data-sortable="true">Utrustning</th>
+                <th data-sortable="true">Klass</th>
+                <th data-sortable="true">Totalt</th>
+                <th data-sortable="true">Totalt %</th>
+                <th data-sortable="true">ML %</th>
+                <th data-sortable="true">Edge %</th>
+                <th data-sortable="true">ML Edge %</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -106,6 +111,24 @@ export function displayStartList(race) {
 
         const totalPoints = bettingPercentagePoints + startPositionPoints + formPoints + timePoints + headToHeadPoints + driverPoints + trainerPoints + equipment.points + classPoints;
 
+        const mlTotalPoints =
+            ML_CATEGORY_WEIGHTS.FolkScore * bettingPercentagePoints +
+            ML_CATEGORY_WEIGHTS.Trainer * trainerPoints +
+            ML_CATEGORY_WEIGHTS.HeadToHead * headToHeadPoints +
+            ML_CATEGORY_WEIGHTS.Equipment * equipment.points +
+            ML_CATEGORY_WEIGHTS.Driver * driverPoints +
+            ML_CATEGORY_WEIGHTS.Class * classPoints +
+            ML_CATEGORY_WEIGHTS.Form * formPoints +
+            ML_CATEGORY_WEIGHTS.Time * timePoints +
+            ML_CATEGORY_WEIGHTS.StartPositionScore * startPositionPoints;
+
+        const modelProbability = mlTotalPoints / 100;
+        const marketProbability = (bettingPercentage ?? 0) / 100;
+        const mlValueEdge = Math.round((modelProbability - marketProbability) * 100);
+
+        const myProbability = totalPoints / 100;
+        const myValueEdge = Math.round((myProbability - marketProbability) * 100);
+
         horses.push({
             startNumber: start.startNumber,
             horseName: start.horse.name,
@@ -122,10 +145,30 @@ export function displayStartList(race) {
             equipmentDescription: equipment.description,
             classPoints,
             totalPoints,
+            mlValueEdge,
+            myValueEdge,
+            mlTotalPoints,
             scratched: start.scratched ?? false,
             place: start.place ?? start?.horse?.place ?? null
         });
     });
+
+    const totalMyPoints = horses.reduce((sum, h) => sum + h.totalPoints, 0);
+    const totalMLPoints = horses.reduce((sum, h) => sum + h.mlTotalPoints, 0);
+
+    horses.forEach(h => {
+        h.myExpectedPercentage = Math.round((h.totalPoints / totalMyPoints) * 100);
+        h.mlExpectedPercentage = Math.round((h.mlTotalPoints / totalMLPoints) * 100);
+        h.myEdgeVsMarket = h.myExpectedPercentage - Math.round(h.bettingPercentage ?? 0);
+        h.mlEdgeVsMarket = h.mlExpectedPercentage - Math.round(h.bettingPercentage ?? 0);
+    });
+
+    horses.sort((a, b) => b.mlTotalPoints - a.mlTotalPoints);
+    horses.forEach((h, i) => h.mlRank = i + 1);
+
+    // Folk Rank: Sort by bettingPercentage descending
+    horses.sort((a, b) => b.bettingPercentage - a.bettingPercentage);
+    horses.forEach((h, i) => h.folkRank = i + 1);
 
     horses.sort((a, b) => {
         if (a.scratched && !b.scratched) return 1;
@@ -150,8 +193,13 @@ export function displayStartList(race) {
             row.style.backgroundColor = "#e2e4f6"; // Blue-ish for 3rd
         }
 
+        // Get thead row for column headers
+        const theadRow = document.querySelector("#start-list thead tr");
+
         [
             index + 1,
+            horse.mlRank,
+            horse.folkRank,
             horse.startNumber,
             horse.horseName,
             horse.odds,
@@ -165,14 +213,28 @@ export function displayStartList(race) {
             horse.trainerPoints,
             horse.equipmentPoints,
             horse.classPoints,
-            horse.totalPoints
+            horse.totalPoints,
+            horse.myExpectedPercentage,
+            horse.mlExpectedPercentage,
+            horse.myEdgeVsMarket,
+            horse.mlEdgeVsMarket
         ].forEach((value, i) => {
             const cell = row.insertCell();
             cell.textContent = value;
+            cell.style.textAlign = "center";
 
             // Styla spelprocent-kolumnen
-            if (i === 3) cell.classList.add("spelprocent");
-            if (i === 12) cell.title = horse.equipmentDescription;
+            if (i === 5) cell.classList.add("spelprocent");
+            if (i === 14) cell.title = horse.equipmentDescription;
+
+            // Highlight edge columns in green/red
+            if (["Edge %", "ML Edge %"].includes(theadRow?.cells[i]?.textContent)) {
+                const val = parseInt(value, 10);
+                if (val > 4) cell.style.color = "green";
+                else if (val < -4) cell.style.color = "red";
+            }
+            // Ensure all cells are center aligned (redundant with above, but for completeness)
+            cell.style.textAlign = "center";
         });
     });
 
@@ -182,6 +244,8 @@ export function displayStartList(race) {
     const downloadButton = document.getElementById('download-ml-csv');
     downloadButton.style.display = 'block';
     downloadButton.onclick = () => downloadCsvForML(race, horses);
+
+    makeTableSortable();
 }
 
 function copyStartListToClipboard(race, horses) {
@@ -209,7 +273,7 @@ function copyStartListToClipboard(race, horses) {
 function downloadCsvForML(race, horses) {
     let csv = "Startnummer;Horse;Placement;Won;Form;Odds;BettingPercentage;Driver;Trainer;Equipment;Class;HeadToHead;Time;StartPositionScore;FolkScore\n";
     const sortedHorses = horses.slice().sort((a, b) => a.startNumber - b.startNumber);
-    
+
     sortedHorses.forEach(horse => {
         const placement = typeof horse.place === 'number' ? horse.place : 0;
         const won = placement === 1 ? 1 : 0;
@@ -245,4 +309,70 @@ function downloadCsvForML(race, horses) {
 
 function formatSpelprocent(value) {
     return value.toString().replace(".", ",");
+}
+
+function makeTableSortable() {
+    const STORAGE_KEY = "startListSort";
+    const table = document.querySelector("#start-list");
+    const tbody = table.querySelector("tbody");
+    const headers = table.querySelectorAll("th[data-sortable='true']");
+
+    function clearSortIndicators() {
+        headers.forEach(h => {
+            h.textContent = h.textContent.replace(/ ▲| ▼/g, "");
+            h.classList.remove("sorted-asc", "sorted-desc");
+        });
+    }
+
+    function sortTable(columnIndex, ascending) {
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+
+        rows.sort((a, b) => {
+            let aVal = a.cells[columnIndex].textContent.replace(",", ".");
+            let bVal = b.cells[columnIndex].textContent.replace(",", ".");
+            let aNum = parseFloat(aVal);
+            let bNum = parseFloat(bVal);
+
+            if (!isNaN(aNum) && !isNaN(bNum)) {
+                return ascending ? aNum - bNum : bNum - aNum;
+            } else {
+                // String comparison fallback
+                aVal = aVal.toLowerCase();
+                bVal = bVal.toLowerCase();
+                if (aVal < bVal) return ascending ? -1 : 1;
+                if (aVal > bVal) return ascending ? 1 : -1;
+                return 0;
+            }
+        });
+
+        clearSortIndicators();
+        const header = headers[columnIndex];
+        header.classList.add(ascending ? "sorted-asc" : "sorted-desc");
+        header.textContent = header.textContent.replace(/ ▲| ▼/g, "") + (ascending ? " ▲" : " ▼");
+
+        rows.forEach(row => tbody.appendChild(row));
+    }
+
+    headers.forEach((header, columnIndex) => {
+        header.style.cursor = "pointer";
+        header.addEventListener("click", () => {
+            const ascending = !header.classList.contains("sorted-asc");
+            sortTable(columnIndex, ascending);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify({ columnIndex, ascending }));
+        });
+    });
+
+    // Apply saved sort if exists
+    const savedSort = localStorage.getItem(STORAGE_KEY);
+    if (savedSort) {
+        try {
+            const { columnIndex, ascending } = JSON.parse(savedSort);
+            if (columnIndex >= 0 && columnIndex < headers.length) {
+                // Programmatically trigger sort
+                sortTable(columnIndex, ascending);
+            }
+        } catch {
+            // ignore JSON parse errors
+        }
+    }
 }
