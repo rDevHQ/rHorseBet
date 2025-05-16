@@ -11,6 +11,8 @@ import { calculateHeadToHeadPoints } from "./calculateHeadToHeadPoints.js";
 import { selectedGame } from './fetchData.js';
 import { getBettingPercentage } from './getBettingPercentage.js';
 
+let previousDownloadUrl = null;
+
 export function displayStartList(race) {
     const container = document.getElementById("start-list-container");
     const gameType = selectedGame ?? "Vinnarodds"; // Standard om inget spel valts
@@ -21,8 +23,9 @@ export function displayStartList(race) {
     const formattedStartMethod = race.startMethod === "volte" ? "Voltstart" : race.startMethod;
     const raceTitle = `${race.trackName} Lopp ${race.number} - ${race.distance}m ${formattedStartMethod}`;
     const raceName = race.name ? `<span class="race-name"> - ${race.name}</span>` : "";
+    const raceId = race.id;
 
-    container.innerHTML = `<h2>${raceTitle}${raceName}</h2>
+    container.innerHTML = `<h2>${raceTitle}${raceName} (${raceId})</h2>
     <table id="start-list">
         <thead>
             <tr>
@@ -81,14 +84,14 @@ export function displayStartList(race) {
         );
         const driverPoints = calculateDriverPoints(start.driver, allDrivers) || 1;
         const trainerPoints = calculateTrainerPoints(start.trainer, allTrainers) || 1;
-        
+
         // console.log("✅ Kontroll av startdata:", start.horse?.name, start.horse.shoes, start.horse.sulky);
         const equipment = calculateEquipmentPoints(start.horse, validHorses);
 
         const classPoints = calculateClassPoints(start, validHorses);
 
         const odds = start.horse?.odds ?? "N/A";
-        
+
         const bettingPercentage = getBettingPercentage(start.horse, gameType);
         let bettingPercentagePoints;
         if (bettingPercentage === "N/A" || bettingPercentage == null) {
@@ -176,6 +179,9 @@ export function displayStartList(race) {
     // eventlistener för kopieringsknappen
     document.getElementById("copy-startlist-btn").addEventListener("click", () => copyStartListToClipboard(race, horses));
 
+    const downloadButton = document.getElementById('download-ml-csv');
+    downloadButton.style.display = 'block';
+    downloadButton.onclick = () => downloadCsvForML(race, horses);
 }
 
 function copyStartListToClipboard(race, horses) {
@@ -198,6 +204,43 @@ function copyStartListToClipboard(race, horses) {
     // Kopiera till clipboard
     navigator.clipboard.writeText(tableData)
         .catch(err => console.error("❌ Misslyckades att kopiera startlistan:", err));
+}
+
+function downloadCsvForML(race, horses) {
+    let csv = "Startnummer;Horse;Placement;Won;Form;Odds;BettingPercentage;Driver;Trainer;Equipment;Class;HeadToHead;Time;StartPositionScore;FolkScore\n";
+    const sortedHorses = horses.slice().sort((a, b) => a.startNumber - b.startNumber);
+    
+    sortedHorses.forEach(horse => {
+        const placement = typeof horse.place === 'number' ? horse.place : 0;
+        const won = placement === 1 ? 1 : 0;
+        const row = [
+            horse.startNumber,
+            horse.horseName,
+            placement,
+            won,
+            horse.formPoints,
+            horse.odds ?? 0,
+            horse.bettingPercentage ?? '',
+            horse.driverPoints,
+            horse.trainerPoints,
+            horse.equipmentPoints,
+            horse.classPoints,
+            horse.headToHeadPoints,
+            horse.timePoints,
+            horse.startPositionPoints,
+            horse.bettingPercentagePoints
+        ];
+        csv += row.join(";") + "\n";
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ML_${race.id}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+
 }
 
 function formatSpelprocent(value) {
