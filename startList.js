@@ -31,12 +31,12 @@ export function displayStartList(race) {
                 <th data-sortable="true">Rank</th>
                 <th data-sortable="true">ML Rank</th>
                 <th data-sortable="true">Folk Rank</th>
-                <th ata-sortable="true">Startnr</th>
-                <th>Hästnamn</th>
+                <th data-sortable="true">Startnr</th>
+                <th data-sortable="true">Hästnamn</th>
                 <th data-sortable="true">Odds</th>
                 <th data-sortable="true">Spelprocent</th>
                 <th data-sortable="true">Folket</th>
-                <th data-sortable="true">Startspårs</th>
+                <th data-sortable="true">Startspår</th>
                 <th data-sortable="true">Form</th>
                 <th data-sortable="true">Tid</th>
                 <th data-sortable="true">H2H</th>
@@ -328,34 +328,38 @@ function makeTableSortable() {
         const rows = Array.from(tbody.querySelectorAll("tr"));
 
         rows.sort((a, b) => {
-            let aVal = a.cells[columnIndex].textContent.replace(",", ".");
-            let bVal = b.cells[columnIndex].textContent.replace(",", ".");
-            let aNum = parseFloat(aVal);
-            let bNum = parseFloat(bVal);
+            const parseValue = (cell) => {
+                const text = cell.textContent.trim().replace(",", ".");
+                const num = parseFloat(text);
+                return isNaN(num) ? Number.NEGATIVE_INFINITY : num;
+            };
 
-            if (!isNaN(aNum) && !isNaN(bNum)) {
-                return ascending ? aNum - bNum : bNum - aNum;
-            } else {
-                // String comparison fallback
-                aVal = aVal.toLowerCase();
-                bVal = bVal.toLowerCase();
-                if (aVal < bVal) return ascending ? -1 : 1;
-                if (aVal > bVal) return ascending ? 1 : -1;
-                return 0;
-            }
+            const aIsScratched = a.style.textDecoration === "line-through";
+            const bIsScratched = b.style.textDecoration === "line-through";
+
+            if (aIsScratched && !bIsScratched) return 1;
+            if (!aIsScratched && bIsScratched) return -1;
+
+            const aCell = a.cells[columnIndex];
+            const bCell = b.cells[columnIndex];
+            const aVal = parseValue(aCell);
+            const bVal = parseValue(bCell);
+
+            return ascending ? aVal - bVal : bVal - aVal;
         });
 
         clearSortIndicators();
         const header = headers[columnIndex];
         header.classList.add(ascending ? "sorted-asc" : "sorted-desc");
         header.textContent = header.textContent.replace(/ ▲| ▼/g, "") + (ascending ? " ▲" : " ▼");
-
         rows.forEach(row => tbody.appendChild(row));
     }
 
-    headers.forEach((header, columnIndex) => {
+    headers.forEach((header) => {
         header.style.cursor = "pointer";
         header.addEventListener("click", () => {
+            const allThs = Array.from(header.parentElement.children);
+            const columnIndex = allThs.indexOf(header);
             const ascending = !header.classList.contains("sorted-asc");
             sortTable(columnIndex, ascending);
             localStorage.setItem(STORAGE_KEY, JSON.stringify({ columnIndex, ascending }));
