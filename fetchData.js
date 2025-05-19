@@ -224,6 +224,8 @@ async function fetchStartData(races) {
             const startNumber = start.number;
             const startApiUrl = `https://www.atg.se/services/racinginfo/v1/api/races/${raceId}/start/${startNumber}`;
 
+            console.log(`🔗 Hämta startdata från: ${startApiUrl}`);
+
             try {
                 const startResponse = await fetch(startApiUrl);
                 if (startResponse.ok) {

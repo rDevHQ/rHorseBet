@@ -1,5 +1,5 @@
 export function transformRaces(races, startsData) {
-    const THREE_MONTHS_MS = 3 * 30 * 24 * 60 * 60 * 1000; // Approximation of 3 months
+    const LAST_MONTH = 30 * 24 * 60 * 60 * 1000; // Approximation of 1 month
     const now = new Date();
 
     return races.map(race => {
@@ -31,10 +31,10 @@ export function transformRaces(races, startsData) {
             const place = placeMap.get(start.number) ?? null;
             const horseRecords = (startsData[horseId]?.horse?.results?.records || []);
 
-            // Last Five Starts
-            const lastFiveStarts = horseRecords
+            // Last Ten Starts
+            const lastTenStarts = horseRecords
                 .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(0, 5)
+                .slice(0, 10)
                 .map(record => ({
                     date: record.date,
                     track: record.track?.name || "Unknown",
@@ -53,10 +53,10 @@ export function transformRaces(races, startsData) {
             // Last 3 Months Summary
             const last3MonthsRecords = horseRecords.filter(record => {
                 const recordDate = new Date(record.date);
-                return now - recordDate <= THREE_MONTHS_MS;
+                return now - recordDate <= LAST_MONTH;
             });
 
-            const last3MonthsSummary = last3MonthsRecords.reduce((summary, record) => {
+            const lastMonthSummary = last3MonthsRecords.reduce((summary, record) => {
                 summary.starts += 1;
 
                 // Ensure firstPrize is a valid number before adding
@@ -75,8 +75,8 @@ export function transformRaces(races, startsData) {
             });
 
             // Calculate average first prize, handling division by zero
-            const averageFirstPrize = last3MonthsSummary.starts > 0
-                ? ((last3MonthsSummary.totalFirstPrize / 100) / last3MonthsSummary.starts).toFixed(0)
+            const averageFirstPrize = lastMonthSummary.starts > 0
+                ? ((lastMonthSummary.totalFirstPrize / 100) / lastMonthSummary.starts).toFixed(0)
                 : "0";
 
             return {
@@ -187,11 +187,13 @@ export function transformRaces(races, startsData) {
                             : {}
                     }
                     : { name: "Unknown", homeTrack: "Unknown", statistics: {} },
-                lastFiveStarts: lastFiveStarts,
-                last3MonthsSummary: {
-                    starts: last3MonthsSummary.starts,
+                lastTenStarts: lastTenStarts,
+                lastMonthSummary: {
+                    starts: lastMonthSummary.starts,
                     firstPrizeAverage: `${averageFirstPrize}`,
-                    placement: last3MonthsSummary.placement
+                    wins: lastMonthSummary.placement["1"],
+                    seconds: lastMonthSummary.placement["2"],
+                    thirds: lastMonthSummary.placement["3"]
                 },
                 scratched: start.scratched || false
             };

@@ -12,15 +12,15 @@ export const MAX_CATEGORY_POINTS = {
 
 export const FORM_POINTS_CONFIG = {
     PLACEMENT_POINTS: {
-        1: 5,
-        2: 3,
-        3: 1
+        1: 2,
+        2: 1,
+        3: 0.5
     },
-    WEIGHT_FACTORS: [2.0, 1.6, 1.3, 1.0, 0.7],
-    THREE_MONTHS_BONUS: {
-        WIN: 5,
-        SECOND: 3,
-        THIRD: 1
+    WEIGHT_FACTORS: [2.0, 1.6, 1.3, 1.0, 0.8, 0.6, 0.5, 0.4, 0.3, 0.2],
+    LAST_MONTH_BONUS: {
+        WIN: 2,
+        SECOND: 1,
+        THIRD: 0.5
     },
 };
 

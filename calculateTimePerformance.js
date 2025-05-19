@@ -28,13 +28,13 @@ function formatKmTime(timeInSeconds) {
 }
 
 // Funktion för att beräkna viktad kilometertid
-function calculateWeightedKmTime(lastFiveStarts, horseName) {
-    if (!lastFiveStarts || lastFiveStarts.length === 0) {
+function calculateWeightedKmTime(lastTenStarts, horseName) {
+    if (!lastTenStarts || lastTenStarts.length === 0) {
         return null;
     }
 
     // Filtrera bort ogiltiga tider innan beräkning
-    const validTimes = lastFiveStarts
+    const validTimes = lastTenStarts
         .map(s => ({ time: s.time, seconds: parseKmTimeToSeconds(s.time) }))
         .filter(s => !isNaN(s.seconds) && s.seconds !== null);
 
@@ -56,9 +56,9 @@ function calculateWeightedKmTime(lastFiveStarts, horseName) {
     return weightedKmTime;
 }
 
-export function calculateTimePerformance(lastFiveStarts, raceDistance, allHorses, horseName) {
+export function calculateTimePerformance(lastTenStarts, raceDistance, allHorses, horseName) {
     // Filtrera endast starter som har samma distans som det aktuella loppet
-    const validStarts = lastFiveStarts.filter(start => start.distance === raceDistance);
+    const validStarts = lastTenStarts.filter(start => start.distance === raceDistance);
 
     if (validStarts.length === 0) {
         return 0;
@@ -70,7 +70,7 @@ export function calculateTimePerformance(lastFiveStarts, raceDistance, allHorses
     const fieldWeightedTimes = allHorses
         .filter(h => h.horse.name !== horseName) // Tar bort den aktuella hästen
         .map(h => {
-            const horseValidStarts = h.lastFiveStarts.filter(s => s.distance === raceDistance);
+            const horseValidStarts = h.lastTenStarts.filter(s => s.distance === raceDistance);
             return calculateWeightedKmTime(horseValidStarts, h.horse?.name ?? "Okänd häst");
         })
         .filter(time => time !== null && !isNaN(time));
@@ -94,7 +94,7 @@ export function calculateTimePerformance(lastFiveStarts, raceDistance, allHorses
     const bestTime = Math.min(...validStarts.map(s => parseKmTimeToSeconds(s.time)).filter(time => !isNaN(time)), 500);
 
     const fieldBestTimes = allHorses.flatMap(h =>
-        h.lastFiveStarts.filter(s => s.distance === raceDistance).map(s => parseKmTimeToSeconds(s.time))
+        h.lastTenStarts.filter(s => s.distance === raceDistance).map(s => parseKmTimeToSeconds(s.time))
     ).filter(time => !isNaN(time));
 
     const fieldBestTime = fieldBestTimes.length > 0 ? Math.min(...fieldBestTimes) : 500;

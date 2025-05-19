@@ -6,61 +6,94 @@ import { MAX_CATEGORY_POINTS } from './pointsConfig.js';
  * - Summerar poäng per möte
  * - Skalar till 0–MAX_CATEGORY_POINTS.h2h beroende på fältets min/max
  */
-export function calculateHeadToHeadPoints(lastFiveStarts, allHorses, horseName, unplacedValue = 7, maxPointsPerComparison = 5) {
+export function calculateHeadToHeadPoints(lastTenStarts, allHorses, horseName, unplacedValue = 7, maxPointsPerComparison = 3) {
     const allScores = [];
 
-    function calculateRawH2HPoints(targetHorse, allHorses) {
+    function calculateRawH2HPoints(targetHorseLastTenStarts, targetHorseName) {
+        const meetings = [];
+        // Log raceIds and positions for the current horse
+        console.log(`🔍 H2H-analys för ${targetHorseName} – antal starter: ${targetHorseLastTenStarts?.length}`);
+        targetHorseLastTenStarts?.forEach(s => {
+            console.log(`   ↪️ ${s.raceId} – pos: ${s.position}`);
+        });
         let totalPoints = 0;
 
-        targetHorse.lastFiveStarts?.forEach(start => {
+        targetHorseLastTenStarts?.forEach(start => {
             if (!start || start.position === "N/A") return;
 
             const raceId = start.raceId;
             const horseRawPosition = parseInt(start.position);
             const horsePosition = horseRawPosition === 0 ? unplacedValue : horseRawPosition;
+            
 
             allHorses.forEach(opponent => {
-                if (!opponent.lastFiveStarts || !Array.isArray(opponent.lastFiveStarts)) return;
-                if (opponent.horse.name === targetHorse.horse.name) return;
+                if (!opponent.lastTenStarts || !Array.isArray(opponent.lastTenStarts)) return;
+                if (opponent.horse.name === targetHorseName) return;
 
-                const opponentRace = opponent.lastFiveStarts.find(s => s.raceId === raceId);
+                const opponentRace = opponent.lastTenStarts.find(s => s.raceId === raceId);
                 if (opponentRace && opponentRace.position !== "N/A") {
                     const opponentRawPosition = parseInt(opponentRace.position);
                     const opponentPosition = opponentRawPosition === 0 ? unplacedValue : opponentRawPosition;
 
                     const diff = horsePosition - opponentPosition;
+                    console.log(`[${targetHorseName}] vs ${opponent.horse.name} i race ${raceId}: ${horsePosition} vs ${opponentPosition}, diff = ${diff}`);
+
+                    meetings.push({
+                      opponent: opponent.horse.name,
+                      raceId,
+                      selfPosition: horsePosition,
+                      opponentPosition,
+                      result: diff < 0 ? 'Vinst' : diff > 0 ? 'Förlust' : 'Oavgjort'
+                    });
 
                     if (diff < 0) {
-                        totalPoints += Math.min(Math.abs(diff), maxPointsPerComparison);
+                        const pts = Math.min(Math.abs(diff), maxPointsPerComparison);
+                        console.log(`✅ Vann möte, +${pts} poäng`);
+                        totalPoints += pts;
                     } else if (diff > 0) {
-                        totalPoints -= Math.min(diff, maxPointsPerComparison);
+                        const pts = Math.min(diff, maxPointsPerComparison);
+                        console.log(`❌ Förlorade möte, -${pts} poäng`);
+                        totalPoints -= pts;
                     }
                 }
             });
         });
 
-        return totalPoints;
+        return { totalPoints, meetings };
     }
 
-    // Steg 1: räkna rå H2H-poäng för alla hästar i fältet
-    allHorses.forEach(h => {
-        const score = calculateRawH2HPoints(h, allHorses);
-        allScores.push({ name: h.horse.name, raw: score });
-    });
+    const { totalPoints: horseRaw, meetings } = calculateRawH2HPoints(lastTenStarts, horseName);
 
-    // Hämta aktuell hästs poäng
-    const horseRaw = allScores.find(s => s.name === horseName)?.raw ?? 0;
+    const rawValues = allHorses
+      .filter(h => h.horse?.name !== horseName)
+      .map(h => calculateRawH2HPoints(h.lastTenStarts, h.horse.name).totalPoints)
+      .concat(horseRaw);
 
-    // Skala till 0–MAX_CATEGORY_POINTS.h2h
-    const rawValues = allScores.map(s => s.raw);
-    const min = Math.min(...rawValues);
-    const max = Math.max(...rawValues);
     const maxPoints = MAX_CATEGORY_POINTS.h2h;
 
-    if (min === max) {
-        return Math.round(maxPoints / 2); // Alla lika
+    const minRaw = Math.min(...rawValues);
+    const maxRaw = Math.max(...rawValues);
+
+    if (maxRaw === minRaw) {
+        // Return both points and meetings for tooltip and analysis
+        return {
+            points: Math.round(maxPoints / 2), // Alla lika
+            meetings
+        };
     }
 
-    const normalized = ((horseRaw - min) / (max - min)) * maxPoints;
-    return Math.round(normalized);
+    let finalPoints;
+    const anyExtreme = rawValues.some(p => Math.abs(p) >= maxPoints);
+
+    if (anyExtreme && maxRaw !== minRaw) {
+        const normalized = ((horseRaw - minRaw) / (maxRaw - minRaw)) * (maxPoints * 2) - maxPoints;
+        finalPoints = Math.round(Math.max(-maxPoints, Math.min(maxPoints, normalized)));
+    } else {
+        finalPoints = Math.round(Math.max(-maxPoints, Math.min(maxPoints, horseRaw)));
+    }
+
+    return {
+        points: finalPoints,
+        meetings
+    };
 }
