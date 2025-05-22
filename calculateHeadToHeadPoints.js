@@ -13,9 +13,7 @@ export function calculateHeadToHeadPoints(lastTenStarts, allHorses, horseName, u
         const meetings = [];
         // Log raceIds and positions for the current horse
         console.log(`🔍 H2H-analys för ${targetHorseName} – antal starter: ${targetHorseLastTenStarts?.length}`);
-        targetHorseLastTenStarts?.forEach(s => {
-            console.log(`   ↪️ ${s.raceId} – pos: ${s.position}`);
-        });
+
         let totalPoints = 0;
 
         targetHorseLastTenStarts?.forEach(start => {

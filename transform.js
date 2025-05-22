@@ -41,7 +41,10 @@ export function transformRaces(races, startsData) {
                     raceNumber: record.race?.number || "N/A",
                     raceId: record.race?.id || "Unknown",
                     distance: record.start?.distance || "Unknown",
+                    startMethod: record.race?.startMethod || "Unknown",
                     postPosition: record.start?.postPosition || "N/A",
+                    disqualified: record.disqualified || false,
+                    galloped: record.galloped || false,
                     position: record.place || "N/A",
                     firstPrize: (record.race.firstPrize / 100) || "N/A",
                     time: record.kmTime
@@ -50,13 +53,13 @@ export function transformRaces(races, startsData) {
                     odds: record.odds ? (record.odds / 100).toFixed(2) : "N/A"
                 }));
 
-            // Last 3 Months Summary
-            const last3MonthsRecords = horseRecords.filter(record => {
+            // Last Month Summary
+            const lastMonthRecords = horseRecords.filter(record => {
                 const recordDate = new Date(record.date);
                 return now - recordDate <= LAST_MONTH;
             });
 
-            const lastMonthSummary = last3MonthsRecords.reduce((summary, record) => {
+            const lastMonthSummary = lastMonthRecords.reduce((summary, record) => {
                 summary.starts += 1;
 
                 // Ensure firstPrize is a valid number before adding

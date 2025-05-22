@@ -32,12 +32,16 @@ export function calculateTrainerPoints(trainer, allTrainers) {
 
     if (allWinRates.length === 0) return Math.round(maxPoints / 2);
 
-    const minRate = Math.min(...allWinRates);
-    const maxRate = Math.max(...allWinRates);
+    // Logaritmisk normalisering
+    const logWinRates = allWinRates.map(r => Math.log(r || 0.01));
+    const logMin = Math.min(...logWinRates);
+    const logMax = Math.max(...logWinRates);
+    const logCurrent = Math.log(weightedWinRate || 0.01);
 
-    if (maxRate === minRate) return Math.round(maxPoints / 2);
+    if (logMax === logMin) return Math.round(maxPoints / 2);
 
-    const scaledPoints = ((weightedWinRate - minRate) / (maxRate - minRate)) * maxPoints;
+    const normalized = (logCurrent - logMin) / (logMax - logMin);
+    const scaledPoints = normalized * maxPoints;
 
     return Math.max(1, Math.round(scaledPoints)); 
 }

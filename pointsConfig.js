@@ -1,12 +1,12 @@
 export const MAX_CATEGORY_POINTS = {
     folket: 16,
-    tid: 13,
+    tid: 8,
     utrustning: 13,
-    tranare: 11,
     h2h: 11,
+    tranare: 10,
     kusk: 10,
     form: 10,
-    klass: 9,
+    klass: 10,
     startspar: 7
 };
 
@@ -26,27 +26,27 @@ export const FORM_POINTS_CONFIG = {
 
 export const TIME_POINTS = {
     BEST_TIME_BONUS: 4,    // Maxbonus om hästen har snabbast rekord
-    RECENT_RACE_BONUS: 7,  // Bonus om hästen har en färsk start (t.ex. inom 30 dagar)
+    RECENT_RACE_BONUS: 2,  // Bonus om hästen har en färsk start (t.ex. inom 30 dagar)
 
     /**
      * Poäng baserat på differens från fältets snittid (i sekunder).
      * Exempel: -1.8 betyder 1.8 sekunder snabbare än snittet → hög poäng.
-     * Max poäng från detta block: 12
+     * Maxpoäng: +8, Minpoäng: -8
      */
     THRESHOLDS: [
-        { minDiff: -1.8, points: 12 },  // Exceptionellt snabb
-        { minDiff: -1.5, points: 11 },
-        { minDiff: -1.2, points: 10 },
-        { minDiff: -0.9, points: 9 },
-        { minDiff: -0.6, points: 8 },
-        { minDiff: -0.3, points: 7 },
-        { minDiff: 0.3, points: 5 },
-        { minDiff: 0.6, points: 4 },
-        { minDiff: 0.9, points: 3 },
-        { minDiff: 1.2, points: 2 },
-        { minDiff: 1.5, points: 1 },
-        { minDiff: 1.8, points: 0 }
-        // Mellan -0.3 och +0.3 ger 6 poäng = neutral nivå
+        { minDiff: -1.8, points: 8 },   // Exceptionellt snabb
+        { minDiff: -1.5, points: 6 },
+        { minDiff: -1.2, points: 4 },
+        { minDiff: -0.9, points: 2 },
+        { minDiff: -0.6, points: 1 },
+        { minDiff: -0.3, points: 0 },
+        { minDiff: 0.3, points: 0 },    // Neutral zon: -0.3 till +0.3 = 0 poäng
+        { minDiff: 0.6, points: -1 },
+        { minDiff: 0.9, points: -2 },
+        { minDiff: 1.2, points: -4 },
+        { minDiff: 1.5, points: -6 },
+        { minDiff: 1.8, points: -8 }
+        // Över 1.8 sek långsammare än snittet ger -8 poäng (via ?? -8 i koden)
     ]
 };
 
@@ -61,9 +61,13 @@ export const TRAINER_POINTS = {
 };
 
 export const EQUIPMENT_POINTS = {
-    FIRST_TIME_BAREFOOT: 10,  // Barfota fram/bak för första gången på länge
-    SWITCH_TO_YANKER: 8,     // Byte till jänkarvagn
-    SHOES_INSTEAD_OF_BAREFOOT: -10 // Går med skor istället för barfota
+    BOTH_SHOES_REMOVED: 8,  // Barfota fram/bak. Hade skor förra starten.
+    FRONT_SHOES_REMOVED: 3,  // Barfota fram. Hade skor förra starten.
+    BACK_SHOES_REMOVED: 3,  // Barfota bak. Hade skor förra starten.
+    SWITCH_TO_YANKER: 5,     // Byte till jänkarvagn
+    BOTH_SHOES_ADDED: -8, // Går med skor istället för barfota som förra starten.
+    FRONT_SHOES_ADDED: -3, // Går med skor fram istället för barfota som förra starten.
+    BACK_SHOES_ADDED: -3 // Går med skor bak istället för barfota som förra starten.
 };
 
 /**

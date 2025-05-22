@@ -79,9 +79,10 @@ export function displayStartList(race) {
             start.lastMonthSummary ?? {},
             validHorses
         );
-        const timePoints = calculateTimePerformance(
+        const { timePoints, timeTooltip } = calculateTimePerformance(
             lastTenStartsCopy,
             race.distance,
+            race.startMethod,
             validHorses,
             start.horse?.name ?? "Okänd häst"
         );
@@ -94,7 +95,7 @@ export function displayStartList(race) {
         const trainerPoints = calculateTrainerPoints(start.trainer, allTrainers) || 1;
 
         // console.log("✅ Kontroll av startdata:", start.horse?.name, start.horse.shoes, start.horse.sulky);
-        const equipment = calculateEquipmentPoints(start.horse, validHorses);
+        const equipment = calculateEquipmentPoints(start.horse);
 
         const classPoints = calculateClassPoints(start, validHorses);
 
@@ -163,6 +164,7 @@ export function displayStartList(race) {
             startPositionPoints,
             formPoints,
             timePoints,
+            timeTooltip,
             headToHeadPoints,
             h2hMeetings: meetings,
             driverPoints,
@@ -307,6 +309,9 @@ export function displayStartList(race) {
                     ? meetings.map(m => `${m.raceId}: ${m.result} (${m.selfPosition} vs ${m.opponentPosition}) mot ${m.opponent}`).join("\n")
                     : "Inga H2H-möten hittades";
                 cell.innerHTML = `<span title="${tooltip}">${value}</span>`;
+            } else if (theadRow?.cells[i]?.textContent === "Tid") {
+                // Visa tooltip för Tid-kolumnen
+                cell.innerHTML = `<span title="${horse.timeTooltip ?? ''}">${value}</span>`;
             } else {
                 cell.textContent = value;
             }

@@ -30,15 +30,18 @@ export function calculateDriverPoints(driver, allDrivers) {
         return (cWin * DRIVER_POINTS.CURRENT_YEAR_WEIGHT) + (lWin * DRIVER_POINTS.LAST_YEAR_WEIGHT);
     });
 
-    const minRate = Math.min(...allWinRates);
-    const maxRate = Math.max(...allWinRates);
+    // Logaritmisk normalisering
+    const logWinRates = allWinRates.map(r => Math.log(r || 0.01)); // undvik log(0)
+    const logMin = Math.min(...logWinRates);
+    const logMax = Math.max(...logWinRates);
+    const logCurrent = Math.log(weightedWinRate || 0.01);
 
-    if (maxRate === minRate) {
+    if (logMax === logMin) {
         return Math.round(maxPoints / 2); // Alla lika → medelpoäng
     }
 
-    // Skala 0 → MAX_POINTS
-    const scaledPoints = ((weightedWinRate - minRate) / (maxRate - minRate)) * maxPoints;
+    const normalized = (logCurrent - logMin) / (logMax - logMin);
+    const scaledPoints = normalized * maxPoints;
 
     return Math.max(1, Math.round(scaledPoints));
 }

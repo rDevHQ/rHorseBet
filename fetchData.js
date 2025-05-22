@@ -101,7 +101,7 @@ function displayGamesForTrack(track, gamesData) {
         });
     });
 
-    // console.log("🔍 gamesForTrack raw data:", gamesForTrack);
+    console.log("🔍 gamesForTrack raw data:", gamesForTrack);
 
     (async () => {
         const vinnareGames = [];
@@ -156,7 +156,6 @@ async function getRaceNumberFromGame(gameId) {
         if (!response.ok) throw new Error('Error loading game info');
         const data = await response.json();
         const raceNumber = data?.races?.[0]?.number ?? null;
-        console.log(`🔎 Hämtade loppnummer för ${gameId}:`, raceNumber);
         return raceNumber;
     } catch (error) {
         console.error('❌ Fel vid hämtning av loppnummer:', error);
@@ -172,6 +171,9 @@ async function fetchGameDetails(gameId) {
     setSelectedGame(gameId);  // Uppdatera spelform när spelet väljs
 
     const apiUrl = gameApiBaseUrl + gameId;
+
+    console.log(`🔗 Hämta json för  ${gameId} från: ${apiUrl}`);
+
     try {
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error('Error loading game details');
