@@ -1,24 +1,15 @@
-import { calculateBettingPercentagePoints } from "./calculateBettingPercentagePoints.js";
-import { calculateOddsPoints } from "./calculateOddsPoints.js";
-import { calculateStartPositionPoints } from "./calculateStartPositionPoints.js";
-import { calculateFormPoints } from "./calculateFormPoints.js";
-import { calculateTimePerformance } from "./calculateTimePerformance.js";
-import { calculateDriverPoints } from "./calculateDriverPoints.js";
-import { calculateTrainerPoints } from "./calculateTrainerPoints.js";
-import { calculateEquipmentPoints } from "./calculateEquipmentPoints.js";
-import { calculateClassPoints } from "./calculateClassPoints.js";
-import { calculateHeadToHeadPoints } from "./calculateHeadToHeadPoints.js";
+import { calculatePointsForRace } from "./calculatePoints.js";
 import { selectedGame } from './fetchData.js';
 import { getBettingPercentage } from './getBettingPercentage.js';
 import { ML_CATEGORY_WEIGHTS } from "./pointsMLConfig.js";
 import { ML_CATEGORY_WEIGHTS as UPSCORE_WEIGHTS } from "./pointsConfigUpsets.js";
 import { ML_CATEGORY_WEIGHTS as SPIK_WEIGHTS } from "./pointsConfigSpik.js";
+import { fetchStartData } from './fetchData.js';
+import { transformRaces } from './transform.js';
 
 export function displayStartList(race) {
     const container = document.getElementById("start-list-container");
-    const gameType = selectedGame ?? "Vinnarodds"; // Standard om inget spel valts
-
-    const validHorses = race.horses.filter(h => !h.scratched);
+    const gameType = selectedGame ?? "Vinnarodds";
 
     // Skapa rubrik
     const formattedStartMethod = race.startMethod === "volte" ? "Voltstart" : race.startMethod;
@@ -49,10 +40,11 @@ export function displayStartList(race) {
                 <th data-sortable="true">Totalt</th>
                 <th data-sortable="true">Totalt %</th>
                 <th data-sortable="true">ML %</th>
+                <th data-sortable="true">ML Spik %</th>
+                <th data-sortable="true">ML Skräll %</th>
                 <th data-sortable="true">Edge %</th>
                 <th data-sortable="true">ML Edge %</th>
-                <th data-sortable="true">ML Spik %</th>
-            </tr>
+                </tr>
         </thead>
         <tbody></tbody>
     </table>
@@ -60,170 +52,19 @@ export function displayStartList(race) {
 
     const tbody = document.querySelector("#start-list tbody");
 
-    let allDrivers = validHorses.map(start => start.driver);
-    let allTrainers = validHorses.map(start => start.trainer);
-    let allBettingPercentages = validHorses.map(start => getBettingPercentage(start.horse, selectedGame));
+    // --- NYTT: Använd ENDAST calculatePointsForRace ---
+    let horses = calculatePointsForRace(race, gameType);
 
-    let horses = [];
-
-    race.horses.forEach((start, index) => {
-        // console.log(`🐴 Häst: ${start.horse.name}, lastFiveStarts:`, start.lastFiveStarts);
-
-        // Kopiera lastTenStarts för att säkerställa att varje häst har sin egen version
-        const lastTenStartsCopy = start.lastTenStarts ? [...start.lastTenStarts] : [];
-
-        const startPositionPoints = calculateStartPositionPoints(start, validHorses, race.startMethod);
-        const formPoints = calculateFormPoints(
-            start.horse?.name ?? "Okänd häst",
-            lastTenStartsCopy,
-            start.lastMonthSummary ?? {},
-            validHorses
-        );
-        const { timePoints, timeTooltip } = calculateTimePerformance(
-            lastTenStartsCopy,
-            race.distance,
-            race.startMethod,
-            validHorses,
-            start.horse?.name ?? "Okänd häst"
-        );
-        const { points: headToHeadPoints, meetings }= calculateHeadToHeadPoints(
-            lastTenStartsCopy,
-            validHorses,
-            start.horse?.name ?? "Okänd häst"
-        );
-        const driverPoints = calculateDriverPoints(start.driver, allDrivers) || 1;
-        const trainerPoints = calculateTrainerPoints(start.trainer, allTrainers) || 1;
-
-        // console.log("✅ Kontroll av startdata:", start.horse?.name, start.horse.shoes, start.horse.sulky);
-        const equipment = calculateEquipmentPoints(start.horse);
-
-        const classPoints = calculateClassPoints(start, validHorses);
-
-        const odds = start.horse?.odds ?? "N/A";
-
-        const bettingPercentage = getBettingPercentage(start.horse, gameType);
-        let bettingPercentagePoints;
-        if (bettingPercentage === "N/A" || bettingPercentage == null) {
-            const allOdds = race.horses.map(s => parseFloat(s.horse.odds)).filter(o => !isNaN(o));
-            const numericOdds = parseFloat(odds);
-            bettingPercentagePoints = !isNaN(numericOdds)
-                ? calculateOddsPoints(numericOdds, allOdds)
-                : 0;
-        } else {
-            bettingPercentagePoints = calculateBettingPercentagePoints(bettingPercentage, allBettingPercentages);
-        }
-
-        const totalPoints = bettingPercentagePoints + startPositionPoints + formPoints + timePoints + headToHeadPoints + driverPoints + trainerPoints + equipment.points + classPoints;
-
-        const mlTotalPoints =
-            ML_CATEGORY_WEIGHTS.FolkScore * bettingPercentagePoints +
-            ML_CATEGORY_WEIGHTS.Trainer * trainerPoints +
-            ML_CATEGORY_WEIGHTS.HeadToHead * headToHeadPoints +
-            ML_CATEGORY_WEIGHTS.Equipment * equipment.points +
-            ML_CATEGORY_WEIGHTS.Driver * driverPoints +
-            ML_CATEGORY_WEIGHTS.Class * classPoints +
-            ML_CATEGORY_WEIGHTS.Form * formPoints +
-            ML_CATEGORY_WEIGHTS.Time * timePoints +
-            ML_CATEGORY_WEIGHTS.StartPositionScore * startPositionPoints;
-
-        const mlUpsetScore =
-            UPSCORE_WEIGHTS.FolkScore * bettingPercentagePoints +
-            UPSCORE_WEIGHTS.Trainer * trainerPoints +
-            UPSCORE_WEIGHTS.HeadToHead * headToHeadPoints +
-            UPSCORE_WEIGHTS.Equipment * equipment.points +
-            UPSCORE_WEIGHTS.Driver * driverPoints +
-            UPSCORE_WEIGHTS.Class * classPoints +
-            UPSCORE_WEIGHTS.Form * formPoints +
-            UPSCORE_WEIGHTS.Time * timePoints +
-            UPSCORE_WEIGHTS.StartPositionScore * startPositionPoints;
-
-        const mlSpikScore =
-            SPIK_WEIGHTS.FolkScore * bettingPercentagePoints +
-            SPIK_WEIGHTS.Trainer * trainerPoints +
-            SPIK_WEIGHTS.HeadToHead * headToHeadPoints +
-            SPIK_WEIGHTS.Equipment * equipment.points +
-            SPIK_WEIGHTS.Driver * driverPoints +
-            SPIK_WEIGHTS.Class * classPoints +
-            SPIK_WEIGHTS.Form * formPoints +
-            SPIK_WEIGHTS.Time * timePoints +
-            SPIK_WEIGHTS.StartPositionScore * startPositionPoints;
-
-        const modelProbability = mlTotalPoints / 100;
-        const marketProbability = (bettingPercentage ?? 0) / 100;
-        const mlValueEdge = Math.round((modelProbability - marketProbability) * 100);
-
-        const myProbability = totalPoints / 100;
-        const myValueEdge = Math.round((myProbability - marketProbability) * 100);
-
-        horses.push({
-            startNumber: start.startNumber,
-            horseName: start.horse.name,
-            odds,
-            bettingPercentage,
-            bettingPercentagePoints,
-            startPositionPoints,
-            formPoints,
-            timePoints,
-            timeTooltip,
-            headToHeadPoints,
-            h2hMeetings: meetings,
-            driverPoints,
-            trainerPoints,
-            equipmentPoints: equipment.points,
-            equipmentDescription: equipment.description,
-            classPoints,
-            totalPoints,
-            mlValueEdge,
-            myValueEdge,
-            mlTotalPoints,
-            mlUpsetScore,
-            mlSpikScore,
-            scratched: start.scratched ?? false,
-            place: start.place ?? start?.horse?.place ?? null,
-            _formRawTotal: formPoints._rawTotal ?? undefined,
-        });
-    });
-
-    const totalMyPoints = horses.reduce((sum, h) => sum + h.totalPoints, 0);
-    const totalMLPoints = horses.reduce((sum, h) => sum + h.mlTotalPoints, 0);
-
-    horses.forEach(h => {
-        h.myExpectedPercentage = Math.round((h.totalPoints / totalMyPoints) * 100);
-        h.mlExpectedPercentage = Math.round((h.mlTotalPoints / totalMLPoints) * 100);
-        h.myEdgeVsMarket = h.myExpectedPercentage - Math.round(h.bettingPercentage ?? 0);
-        h.mlEdgeVsMarket = h.mlExpectedPercentage - Math.round(h.bettingPercentage ?? 0);
-    });
-
-    // ML Upset Percentage calculation
-    const totalUpsetScore = horses.reduce((sum, h) => sum + h.mlUpsetScore, 0);
-    horses.forEach(h => {
-        h.mlUpsetPercentage = Math.round((h.mlUpsetScore / totalUpsetScore) * 100);
-    });
-
-    // ML Spik Percentage calculation
-    const totalSpikScore = horses.reduce((sum, h) => sum + h.mlSpikScore, 0);
-    horses.forEach(h => {
-        h.mlSpikPercentage = Math.round((h.mlSpikScore / totalSpikScore) * 100);
-    });
-    // Find top two ML Spik percentages and their gap
+    // Beräkna topSpik och spikGap för spik-ikoner
     const sortedSpik = horses.slice().sort((a, b) => b.mlSpikPercentage - a.mlSpikPercentage);
     const topSpik = sortedSpik[0]?.mlSpikPercentage ?? 0;
     const secondSpik = sortedSpik[1]?.mlSpikPercentage ?? 0;
     const spikGap = topSpik - secondSpik;
 
-    horses.sort((a, b) => b.mlTotalPoints - a.mlTotalPoints);
-    horses.forEach((h, i) => h.mlRank = i + 1);
+    // --- Efterbearbetning och sortering (om du vill ha ytterligare rank/edge) ---
+    // (Du kan behålla din nuvarande kod här om du vill, men det mesta kan flyttas till calculatePointsForRace)
 
-    // Folk Rank: Sort by bettingPercentage descending
-    horses.sort((a, b) => b.bettingPercentage - a.bettingPercentage);
-    horses.forEach((h, i) => h.folkRank = i + 1);
-
-    horses.sort((a, b) => {
-        if (a.scratched && !b.scratched) return 1;
-        if (!a.scratched && b.scratched) return -1;
-        return b.totalPoints - a.totalPoints;
-    });
-
+    // --- Bygg tabellrader från horses ---
     horses.forEach((horse, index) => {
         const row = tbody.insertRow();
         row.classList.add("horse-row"); // För hover-effekten
@@ -269,9 +110,10 @@ export function displayStartList(race) {
             horse.totalPoints,
             horse.myExpectedPercentage,
             horse.mlExpectedPercentage,
+            horse.mlSpikPercentage,
+            horse.mlUpsetPercentage,
             horse.myEdgeVsMarket,
             horse.mlEdgeVsMarket,
-            horse.mlSpikPercentage
         ].forEach((value, i) => {
             const cell = row.insertCell();
             // "Hästnamn" column
@@ -332,8 +174,119 @@ export function displayStartList(race) {
         });
     });
 
+    function createCsvStringForHorses(horses) {
+        // Header row
+        let csv = "Startnummer;Horse;Placement;Won;Form;Odds;BettingPercentage;Driver;Trainer;Equipment;Class;HeadToHead;Time;StartPositionScore;FolkScore\n";
+
+        horses.forEach((horse) => {
+            const placement = typeof horse.place === 'number' ? horse.place : 0;
+            const won = placement === 1 ? 1 : 0;
+
+            console.log("horse.startNumber:", horse.startNumber);
+            console.log("formatSpelprocent(horse.bettingPercentage):", formatSpelprocent(horse.bettingPercentage));
+            console.log("horse.classPoints:", horse.classPoints);
+
+
+            const row = [
+                horse.startNumber,
+                horse.horseName,
+                placement,
+                won,
+                horse.formPoints,
+                horse.odds,
+                formatSpelprocent(horse.bettingPercentage),
+                horse.driverPoints,
+                horse.trainerPoints,
+                horse.equipmentPoints,
+                horse.classPoints,
+                horse.headToHeadPoints,
+                horse.timePoints,
+                horse.startPositionPoints,
+                horse.bettingPercentagePoints
+            ];
+            csv += row.join(";") + "\n";
+        });
+
+        return csv;
+    }
+
     // eventlistener för kopieringsknappen
     document.getElementById("copy-startlist-btn").addEventListener("click", () => copyStartListToClipboard(race, horses));
+
+    // Lägg till en knapp i HTML: <button id="fetch-multi-csv-btn">Ladda ner flera startlistor (CSV)</button>
+
+
+    // Multi-race CSV download
+    document.getElementById("fetch-multi-csv-btn").addEventListener("click", downloadMultipleStartLists);
+
+    /**
+     * Prompt user for date range and game types,
+     * then fetch, transform, and zip CSV files for each race.
+     */
+    async function downloadMultipleStartLists() {
+        try {
+            const defaultDate = new Date().toISOString().slice(0,10);
+            const startDate = prompt("Från vilket datum? (YYYY-MM-DD):", defaultDate) || defaultDate;
+            const endDate = prompt("Till vilket datum? (YYYY-MM-DD):", startDate) || startDate;
+            const defaultGames = "V75,V86";
+            const gameTypes = (prompt("Spelformer (kommaseparerat, t.ex. V75,V86):", defaultGames) || defaultGames)
+                .split(",")
+                .map(s => s.trim().toUpperCase());
+
+            const zip = new JSZip();
+            let fileCount = 0;
+            const dates = getDateRange(startDate, endDate);
+
+            for (const dateStr of dates) {
+                const calendarUrl = `https://www.atg.se/services/racinginfo/v1/api/calendar/day/${dateStr}`;
+                const calendar = await fetch(calendarUrl).then(r => r.json());
+                for (const gt of gameTypes) {
+                    const games = calendar.games[gt] || [];
+                    for (const game of games) {
+                        const gameUrl = `https://www.atg.se/services/racinginfo/v1/api/games/${game.id}`;
+                        const gameData = await fetch(gameUrl).then(r => r.json());
+                        const startsData = await fetchStartData(gameData.races);
+                        const transformed = transformRaces(gameData.races, startsData);
+                        for (const race of transformed) {
+                            const horses = calculatePointsForRace(race, gt);
+                            const csv = createCsvStringForHorses(horses);
+                            zip.file(`ML_${race.id}.csv`, csv);
+                            fileCount++;
+                        }
+                    }
+                }
+            }
+
+            if (fileCount === 0) {
+                alert("Inga startlistor hittades för valt intervall och spelform(er).");
+                return;
+            }
+
+            const blob = await zip.generateAsync({ type: "blob" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `startlistor_${startDate}_till_${endDate}.zip`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+        } catch (err) {
+            console.error("Fel vid nedladdning:", err);
+            alert("Ett fel uppstod vid nedladdning av startlistor.");
+        }
+    }
+
+    /**
+     * Return an array of YYYY-MM-DD strings from start to end inclusive.
+     */
+    function getDateRange(start, end) {
+        const dates = [];
+        let curr = new Date(start);
+        const last = new Date(end);
+        while (curr <= last) {
+            dates.push(curr.toISOString().slice(0,10));
+            curr.setDate(curr.getDate() + 1);
+        }
+        return dates;
+    }
 
     const downloadButton = document.getElementById('download-ml-csv');
     downloadButton.style.display = 'block';
@@ -365,32 +318,7 @@ function copyStartListToClipboard(race, horses) {
 }
 
 function downloadCsvForML(race, horses) {
-    let csv = "Startnummer;Horse;Placement;Won;Form;Odds;BettingPercentage;Driver;Trainer;Equipment;Class;HeadToHead;Time;StartPositionScore;FolkScore\n";
-    const sortedHorses = horses.slice().sort((a, b) => a.startNumber - b.startNumber);
-
-    sortedHorses.forEach(horse => {
-        const placement = typeof horse.place === 'number' ? horse.place : 0;
-        const won = placement === 1 ? 1 : 0;
-        const row = [
-            horse.startNumber,
-            horse.horseName,
-            placement,
-            won,
-            horse.formPoints,
-            horse.odds ?? 0,
-            horse.bettingPercentage ?? '',
-            horse.driverPoints,
-            horse.trainerPoints,
-            horse.equipmentPoints,
-            horse.classPoints,
-            horse.headToHeadPoints,
-            horse.timePoints,
-            horse.startPositionPoints,
-            horse.bettingPercentagePoints
-        ];
-        csv += row.join(";") + "\n";
-    });
-
+    const csv = createCsvStringForHorses(horses);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -398,7 +326,6 @@ function downloadCsvForML(race, horses) {
     a.download = `ML_${race.id}.csv`;
     a.click();
     URL.revokeObjectURL(url);
-
 }
 
 function formatSpelprocent(value) {

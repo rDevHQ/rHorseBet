@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Horse Racing Data</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 
 <body>
@@ -33,6 +34,8 @@
             <button id="copy-startlist-btn">📋 Kopiera till Clipboard</button>
             <button id="download-json">Download JSON</button>
             <button id="download-ml-csv">Download CSV for ML</button>
+            <button id="fetch-multi-csv-btn">Ladda ner flera startlistor (CSV)</button>
+            
         </div>
         <pre id="details" style="display: none;"></pre>
     </div>
@@ -40,6 +43,7 @@
     <script type="module" src="fetchData.js"></script>
     <script type="module" src="display.js"></script>
     <script type="module" src="startList.js"></script>
+   
 </body>
 
 </html>

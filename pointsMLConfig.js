@@ -1,13 +1,11 @@
 export const ML_CATEGORY_WEIGHTS = {
-  FolkScore: 0.088688,
-  Trainer: 0.075572,
-  BettingPercentage: 0.041493,
-  HeadToHead: 0.028790,
-  Equipment: 0.015463,
-  Driver: 0.006923,
-  Class: 0.002723,
-  Form: -0.004327,
-  Time: -0.011178,
-  Odds: -0.022504,
-  StartPositionScore: -0.038799
+  HeadToHead: 0.133761,
+  Trainer: 0.029467,
+  Form: 0.023387,
+  FolkScore: 0.022247,
+  Time: 0.020664,
+  Class: 0.010965,
+  StartPositionScore: 0.01078,
+  Driver: 0.009657,
+  Equipment: 0.006892,
 };

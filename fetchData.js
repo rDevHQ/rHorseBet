@@ -216,7 +216,7 @@ async function fetchGameDetails(gameId) {
 /**
  * Hämtar extra startdata för varje häst i loppet
  */
-async function fetchStartData(races) {
+export async function fetchStartData(races) {
     const startsData = {};
 
     for (const race of races) {

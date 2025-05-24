@@ -11,7 +11,7 @@ export function calculateDriverPoints(driver, allDrivers) {
 
     const parseWinPercentage = (winPercentage) => {
         if (!winPercentage) return 0;
-        return parseFloat(winPercentage.replace("%", "").trim()); // Ta bort % och konvertera till tal
+        return parseFloat(String(winPercentage).replace("%", "").trim());
     };
 
     // Hästens viktade vinstprocent
