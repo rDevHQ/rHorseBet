@@ -1,4 +1,7 @@
-import { TIME_POINTS, MAX_CATEGORY_POINTS } from "./pointsConfig.js";
+const TIME_POINTS = {
+    BEST_TIME_BONUS: 4,    // Maxbonus om hästen har snabbast rekord
+    RECENT_RACE_BONUS: 2,  // Bonus om hästen har en färsk start (t.ex. inom 30 dagar)
+};
 
 // Funktion för att omvandla kilometertid från "1.14,6" till sekunder
 function parseKmTimeToSeconds(kmTime) {
@@ -122,18 +125,10 @@ export function calculateTimePerformance(lastTenStarts, raceDistance, raceStartM
         };
     }
 
-    // Logaritmisk normalisering (lägre tid = bättre)
-    const allTimes = [weightedAvgKmTime, ...fieldWeightedTimes];
-    const logTimes = allTimes.map(t => Math.log(t || 0.01));
-    const logMin = Math.min(...logTimes); // snabbast
-    const logMax = Math.max(...logTimes); // långsammast
-    const logCurrent = Math.log(weightedAvgKmTime || 0.01);
-
-    let normalized = 1 - ((logCurrent - logMin) / (logMax - logMin)); // snabbast får 1, långsammast får 0
-    normalized = Math.max(0, Math.min(1, normalized)); // clamp
-
-    const maxPoints = MAX_CATEGORY_POINTS.tid;
-    let timePoints = Math.round(normalized * maxPoints);
+    // Samla alla giltiga tider (inklusive aktuell häst)
+    const allTimes = [...fieldWeightedTimes, weightedAvgKmTime];
+    const minTime = Math.min(...allTimes);
+    const maxTime = Math.max(...allTimes);
 
     // 7. Bonuspoäng om hästen har bästa rekord eller bästa senaste prestation
     let bonusPoints = 0;
@@ -177,32 +172,30 @@ export function calculateTimePerformance(lastTenStarts, raceDistance, raceStartM
         bonusPoints += TIME_POINTS.RECENT_RACE_BONUS;
     }
 
-    // Summera poäng och bonus, men begränsa inte med MAX_CATEGORY_POINTS.tid eftersom bonusen är utanför
-    let totalTimePoints = timePoints + bonusPoints;
+    // Lägg till bonus till viktad tid för normalisering (vi skiftar tiden så att lägre blir bättre)
+    const adjustedTime = weightedAvgKmTime - bonusPoints * 0.1; // exempelvis minska tid proportionellt till bonus, justera 0.1 efter behov
 
-    // Om denna häst har giltig tid men får 0 poäng, och det finns minst en häst utan giltig tid, ge minst 1 poäng
-    const horsesWithoutValidTime = allHorses.filter(h =>
-        !h.lastTenStarts.some(s => s.distance === raceDistance && String(s.startMethod).toLowerCase().trim() === String(raceStartMethod).toLowerCase().trim())
-    );
+    // Normalisera linjärt: snabbast får 100, långsammast 1
+    let normalized = maxTime === minTime ? 0.5 : (maxTime - adjustedTime) / (maxTime - minTime);
 
-    if (timePoints === 0 && weightedAvgKmTime !== null && horsesWithoutValidTime.length > 0) {
-        totalTimePoints = 1 + bonusPoints;
-    }
+    normalized = Math.max(0, Math.min(1, normalized));
+
+    let timePoints = Math.round(normalized * 99 + 1);
 
     // Bygg tooltip-sträng
     const tooltip = `
 Viktad km-tid: ${formatKmTime(weightedAvgKmTime)} (${weightedAvgKmTime ?? "N/A"} sek)
 Antal giltiga starter: ${validStarts.length}
 Fältets snitt: ${formatKmTime(fieldAvgTime)} (${fieldAvgTime ?? "N/A"} sek)
-Poäng (logaritmisk): ${timePoints}
+Poäng (linjär): ${timePoints}
 Bästa tid: ${formatKmTime(bestTime)} (${bestTime ?? "N/A"} sek)
 Bästa tid i fältet (exkl ${horseName}): ${formatKmTime(fieldBestTime)} (${bestFieldHorse ?? "N/A"})
 Bonuspoäng: ${bonusPoints}
-Total tidspoäng: ${totalTimePoints}
+Total tidspoäng: ${timePoints}
 `.trim();
 
     return {
-        timePoints: totalTimePoints,
+        timePoints: timePoints,
         timeTooltip: tooltip
     };
 }

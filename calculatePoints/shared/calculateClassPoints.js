@@ -1,11 +1,9 @@
-import { MAX_CATEGORY_POINTS } from './pointsConfig.js';
-
 export function calculateClassPoints(horse, allHorses) {
     if (!horse || !horse.lastTenStarts || !horse.lastMonthSummary) return 0;
 
-    const maxPoints = MAX_CATEGORY_POINTS.klass;
+    const maxPoints = 100;
 
-    function getLastMonthyAvgPrize(h) {
+    function getLastMonthylAvgPrize(h) {
         return parseFloat(h.lastMonthSummary?.firstPrizeAverage ?? "0") || 0;
     }
 
@@ -25,10 +23,13 @@ export function calculateClassPoints(horse, allHorses) {
     }
 
     // Råklasspoäng per häst (summa av senaste månaden och viktad snitt)
-    const allScores = allHorses.map(h => getLastMonthyAvgPrize(h) + getWeightedLastTenPrize(h));
-    const thisHorseRaw = getLastMonthyAvgPrize(horse) + getWeightedLastTenPrize(horse);
+    const allScores = allHorses.map(h => getLastMonthylAvgPrize(h) + getWeightedLastTenPrize(h));
+    const thisHorseRaw = getLastMonthylAvgPrize(horse) + getWeightedLastTenPrize(horse);
 
-    // Logaritmisk normalisering
+    // Normalisering till skala 1-100:
+    // Råpoängen kan variera kraftigt i storlek, så vi använder logaritmisk normalisering
+    // för att få en bättre spridning och balans i poängen över hästarna.
+    // Om alla råpoäng är lika (logMax === logMin) så tilldelas poängen 50 som neutralvärde.
     const logScores = allScores.map(s => Math.log(s || 0.01)); // undvik log(0)
     const logMin = Math.min(...logScores);
     const logMax = Math.max(...logScores);

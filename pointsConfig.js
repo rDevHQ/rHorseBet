@@ -1,13 +1,13 @@
 export const MAX_CATEGORY_POINTS = {
-    folket: 16,
-    tid: 8,
-    utrustning: 13,
-    h2h: 11,
+    folket: 10,
+    tid: 10,
+    utrustning: 10,
+    h2h: 10,
     tranare: 10,
     kusk: 10,
     form: 10,
     klass: 10,
-    startspar: 7
+    startspar: 10
 };
 
 export const FORM_POINTS_CONFIG = {
