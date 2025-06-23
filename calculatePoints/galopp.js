@@ -36,11 +36,11 @@ export function calculatePointsForGalopp(race, gameType) {
      const bettingPercentage = getBettingPercentage(h.horse, gameType);
      const odds = parseFloat(h.horse?.odds);
 
-     //   const bettingPoints = calculateBettingPercentagePoints(
-     //       bettingPercentage,
-     //       allBettingPercentages,
-     //       odds
-     //   );
+        const bettingPoints = calculateBettingPercentagePoints(
+            bettingPercentage,
+            allBettingPercentages,
+            odds
+        );
 
         validHorses.forEach(h => {
             const bettingPercentage = getBettingPercentage(h.horse, gameType);
@@ -77,7 +77,7 @@ export function calculatePointsForGalopp(race, gameType) {
             driverName: h.driver?.name ?? "Okänd kusk",
             odds: h.horse.odds,
             bettingPercentage,
-            bettingPercentagePoints: h.bettingPercentagePoints,
+            bettingPercentagePoints: bettingPoints,
             headToHeadPoints,
             h2hMeetings: meetings,
             driverPoints,
