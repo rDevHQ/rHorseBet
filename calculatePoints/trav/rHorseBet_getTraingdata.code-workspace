@@ -1,0 +1,13 @@
+{
+    "folders": [
+        {
+            "path": "../.."
+        },
+        {
+            "path": "../../../rHorseBetML"
+        }
+    ],
+    "settings": {
+        "liveServer.settings.multiRootWorkspaceName": "rHorseBet_getTraingdata"
+    }
+}

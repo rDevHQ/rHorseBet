@@ -1,0 +1,37 @@
+📋 horse snapshot: {
+  "name": "Bengan",
+  "place": null,
+  "odds": "6.34",
+  "V75": "13.67",
+  "V85": "N/A",
+  "GS75": "N/A",
+  "V86": "N/A",
+  "V64": "N/A",
+  "V65": "N/A",
+  "V5": "N/A",
+  "V4": "N/A",
+  "V3": "N/A",
+  "earnings": "3858263",
+  "record": "1.10,4",
+  "age": 6,
+  "sex": "stallion",
+  "weight": "N/A",
+  "blinders": "N/A",
+  "blindersLastStart": "N/A",
+  "shoes": {
+    "front": {
+      "hasShoe": false,
+      "changed": false
+    },
+    "back": {
+      "hasShoe": false,
+      "changed": false
+    }
+  },
+  "sulky": {
+    "type": {
+      "text": "Vanlig",
+      "changed": false
+    }
+  }
+}

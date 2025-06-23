@@ -1,13 +1,21 @@
-import { DRIVER_POINTS } from "./pointsConfig.js";
-import { MAX_CATEGORY_POINTS } from './pointsConfig.js';
+const DRIVER_POINTS = {
+    CURRENT_YEAR_WEIGHT: 1.5,  // Vikt för innevarande år
+    LAST_YEAR_WEIGHT: 0.5,     // Vikt för föregående år
+};
 
+const MAX_POINTS = 100;
+
+/**
+ * Beräknar poäng för kusk baserat på viktad vinstprocent senaste två år.
+ * Normaliserar resultatet logaritmiskt till en 1-100 skala.
+ * Om alla är lika ges medelpoäng 50.
+ */
 export function calculateDriverPoints(driver, allDrivers) {
     if (!driver || !driver.statistics || !driver.statistics.years) return 1; // Minsta poäng om data saknas
 
     const currentYear = new Date().getFullYear();
     const lastYear = (currentYear - 1).toString();
     const thisYear = currentYear.toString();
-    const maxPoints = MAX_CATEGORY_POINTS.kusk;
 
     const parseWinPercentage = (winPercentage) => {
         if (!winPercentage) return 0;
@@ -30,18 +38,21 @@ export function calculateDriverPoints(driver, allDrivers) {
         return (cWin * DRIVER_POINTS.CURRENT_YEAR_WEIGHT) + (lWin * DRIVER_POINTS.LAST_YEAR_WEIGHT);
     });
 
-    // Logaritmisk normalisering
+    // Normalisering till 1-100:
+    // Logaritmisk normalisering används för att hantera stor variation i vinstprocent och
+    // ge bättre spridning i poängen.
+    // Om alla kuskar har samma vinstprocent ges 50 poäng som neutralvärde.
     const logWinRates = allWinRates.map(r => Math.log(r || 0.01)); // undvik log(0)
     const logMin = Math.min(...logWinRates);
     const logMax = Math.max(...logWinRates);
     const logCurrent = Math.log(weightedWinRate || 0.01);
 
     if (logMax === logMin) {
-        return Math.round(maxPoints / 2); // Alla lika → medelpoäng
+        return Math.round(MAX_POINTS / 2); // Alla lika → medelpoäng
     }
 
     const normalized = (logCurrent - logMin) / (logMax - logMin);
-    const scaledPoints = normalized * maxPoints;
+    const scaledPoints = normalized * MAX_POINTS;
 
     return Math.max(1, Math.round(scaledPoints));
 }

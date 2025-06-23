@@ -1,4 +1,6 @@
-import { MAX_CATEGORY_POINTS } from "./pointsConfig.js";
+const MAX_CATEGORY_POINTS = {
+    folket: 100
+};
 
 /**
  * Beräknar poäng baserat på odds i förhållande till fältet.
@@ -7,7 +9,7 @@ import { MAX_CATEGORY_POINTS } from "./pointsConfig.js";
  *
  * @param {number} odds - Hästens egna odds
  * @param {number[]} allOdds - Array med samtliga hästars odds
- * @returns {number} Poäng mellan 0–MAX_CATEGORY_POINTS.folket
+ * @returns {number} Poäng mellan 0–100
  */
 export function calculateOddsPoints(odds, allOdds) {
     const maxPoints = MAX_CATEGORY_POINTS.folket;
@@ -17,7 +19,6 @@ export function calculateOddsPoints(odds, allOdds) {
     const maxOdds = Math.max(...oddsList);
 
     if (minOdds === maxOdds) {
-        // console.warn("⚠️ Alla odds är lika – alla hästar får 0 poäng.");
         return 0;
     }
 
