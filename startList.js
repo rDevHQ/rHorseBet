@@ -16,7 +16,7 @@ export function displayStartList(race) {
     const raceId = race.id;
 
     let columnHeaders = [
-        "Placering", "Folk Rank", "Poäng", "Rank", "Startnr", "Hästnamn", "Kusk/Jockey", "Odds", "Spelprocent", "Folket", "Form", "H2H", "Kusk/Jockey", "Tränare", "Utrustning"];
+        "Res", "Rank", "Poäng", "Folkrank", "Startnr", "Hästnamn", "Kusk/Jockey", "Odds", "%", "Folket", "Form", "H2H", "Kusk/Jockey", "Tränare", "Utrustning"];
     if (isGallop) {
         columnHeaders.splice(16, 0, "Plustal");
         columnHeaders.splice(17, 0, "kr/start i år");
@@ -40,10 +40,10 @@ export function displayStartList(race) {
     if (isGallop) {
         legend.innerHTML = `
         <div style="display: flex; gap: 18px; margin: 4px 0 0 0; font-size: 0.92em;">
-            <span class="1-percentile-score">Vinner ca 65 % av loppen (&gt; 65)</span>
-            <span class="2-percentile-score">Vinner ca 25 % av loppen (49–65)</span>
-            <span class="3-percentile-score">Vinner ca 7,5 % av loppen (31–49)</span>
-            <span class="4-percentile-score">Vinner ca 2,5 % av loppen (&lt; 31)</span>
+            <span class="1-percentile-score">Vinner ca 65 % av loppen (&gt; 68)</span>
+            <span class="2-percentile-score">Vinner ca 25 % av loppen (50–68)</span>
+            <span class="3-percentile-score">Vinner ca 7,5 % av loppen (32–50)</span>
+            <span class="4-percentile-score">Vinner ca 2,5 % av loppen (&lt; 32)</span>
         </div>
     `;
     } else {
@@ -83,11 +83,11 @@ export function displayStartList(race) {
         // Highlight row by ML score
         const scoreVal = Number(horse.mlPoints.toFixed(0));
         if (isGallop) {
-            if (scoreVal >= 65) {
+            if (scoreVal >= 68) {
                 row.classList.add("1-percentile-score");
-            } else if (scoreVal >= 49) {
+            } else if (scoreVal >= 50) {
                 row.classList.add("2-percentile-score");
-            } else if (scoreVal >= 31) {
+            } else if (scoreVal >= 32) {
                 row.classList.add("3-percentile-score");
             } else {
                 row.classList.add("4-percentile-score");
@@ -123,9 +123,10 @@ export function displayStartList(race) {
         // Dynamically build row values depending on isGallop
         const rowValues = [
             horse.place,
-            horse.folkRank,
-            horse.mlPoints.toFixed(0),
             horse.mlRank,
+            horse.mlPoints.toFixed(0),
+            horse.folkRank,
+            //     horse.mlUpsetScore.toFixed(0),
             horse.startNumber,
             horse.horseName,
             horse.driverName,
@@ -242,9 +243,9 @@ export function displayStartList(race) {
 
                 let ml_score_threshold_3_spik, ml_score_threshold_2_spik, ml_score_threshold_1_spik;
                 if (isGallop) {
-                    ml_score_threshold_3_spik = 76;
-                    ml_score_threshold_2_spik = 72;
-                    ml_score_threshold_1_spik = 67;
+                    ml_score_threshold_3_spik = 77.70;
+                    ml_score_threshold_2_spik = 73.27;
+                    ml_score_threshold_1_spik = 68.54;
                 }
                 else {
                     ml_score_threshold_3_spik = 82.41;
@@ -260,15 +261,13 @@ export function displayStartList(race) {
 
                     // 2) SPIK – när vi är extremt säkra
                 } else if (horse.mlRank === 1 && score >= ml_score_threshold_3_spik && gap12 >= 10) {
-                    inner += ` <span title="Spik! (Score ${score}, Gap1–2: ${gap12})  – historisk träffsäkerhet 98 %">🎯🎯🎯</span>`;
-
+                    inner += ` <span title="Spik! (Score ${score}, Gap1–2: ${gap12})">🎯🎯🎯</span>`;
                     // 3) SANNOLIK SPIK – hög säkerhet
                 } else if (horse.mlRank === 1 && score >= ml_score_threshold_2_spik && gap12 >= 7) {
-                    inner += ` <span title="Sannolik spik (Score ${score}, Gap1–2: ${gap12}) – historisk träffsäkerhet 95 %">🎯🎯</span>`;
-
+                    inner += ` <span title="Sannolik spik (Score ${score}, Gap1–2: ${gap12})">🎯🎯</span>`;
                     // 4) SPIKFÖRSLAG – medelhög säkerhet
                 } else if (horse.mlRank === 1 && score >= ml_score_threshold_1_spik && gap12 >= 5) {
-                    inner += ` <span title="Spikförslag (Score ${score}, Gap1–2: ${gap12}) – historisk träffsäkerhet 90 %">🎯</span>`;
+                    inner += ` <span title="Spikförslag (Score ${score}, Gap1–2: ${gap12})">🎯</span>`;
                 }
 
                 cell.innerHTML = inner;
