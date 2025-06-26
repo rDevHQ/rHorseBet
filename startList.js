@@ -22,9 +22,9 @@ export function displayStartList(race) {
         columnHeaders.splice(17, 0, "kr/start i år");
         columnHeaders.splice(18, 0, "kr/start 2 år");
     } else {
-        columnHeaders.splice(9, 0, "Tid");
-        columnHeaders.splice(10, 0, "Startspår");
-        columnHeaders.splice(16, 0, "Klass");
+        columnHeaders.splice(16, 0, "Tid");
+        columnHeaders.splice(17, 0, "Startspår");
+        columnHeaders.splice(18, 0, "Klass");
     }
     const theadHtml = `<thead><tr>${columnHeaders.map(h => `<th data-sortable="true">${h}</th>`).join("")}</tr></thead>`;
     container.innerHTML = `<h2>${raceTitle}</h2>${raceDistance} - ${raceName}
@@ -150,13 +150,13 @@ export function displayStartList(race) {
             );
         } else {
             rowValues.push(
-                horse.timePoints,
-                horse.startPositionPoints,
                 horse.formPoints,
                 horse.headToHeadPoints,
                 horse.driverPoints,
                 horse.trainerPoints,
                 horse.equipmentPoints,
+                horse.timePoints,
+                horse.startPositionPoints,
                 horse.classPoints,
             );
         }
