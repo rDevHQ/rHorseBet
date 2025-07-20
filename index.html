@@ -1,48 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horse Racing Data</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-</head>
-
-<body>
-    <header>Horse Racing Data</header>
-
-    <div class="container">
-        <div class="nav-buttons">
-            <button id="prev-day"><</button>
-            <p id="current-date"></p>
-            <button id="next-day">></button>
-        </div>
-
-        <h2>Available Tracks</h2>
-        <div class="grid" id="tracks"></div>
-
-        <h2>Bet types for Selected Track</h2>
-        <div class="grid" id="games"></div>
-
-        <div class="grid" id="races"></div>
-
-        <div id="start-list-container"></div>
-
-        <div id="actions" style="display: flex; gap: 1em; margin-top: 1em;">
-            <button id="copy-startlist-btn">📋 Kopiera till Clipboard</button>
-            <button id="download-json">Download JSON</button>
-            <button id="download-ml-csv">Download CSV for ML</button>
-            <button id="fetch-multi-csv-btn">Ladda ner flera startlistor (CSV)</button>
-            
-        </div>
-        <pre id="details" style="display: none;"></pre>
-    </div>
-
-    <script type="module" src="fetchData.js"></script>
-    <script type="module" src="display.js"></script>
-    <script type="module" src="startList.js"></script>
-   
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

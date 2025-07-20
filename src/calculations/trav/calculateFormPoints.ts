@@ -16,6 +16,29 @@ const FORM_POINTS_CONFIG = {
     },
 };
 
+interface HorseStartRecord {
+    position: string;
+    // Add other properties as needed
+}
+
+interface LastMonthSummary {
+    wins: number;
+    seconds: number;
+    thirds: number;
+}
+
+interface HorseForFormCalculation {
+    name: string;
+    lastTenStarts: HorseStartRecord[];
+    lastMonthSummary: LastMonthSummary;
+}
+
+interface AllHorseData {
+    horse?: { name: string };
+    lastTenStarts?: HorseStartRecord[];
+    lastMonthSummary?: LastMonthSummary;
+}
+
 /**
  * Relativ formpoängsberäkning:
  * 1. Råpoäng räknas ut för varje häst (form + bonus)
@@ -27,18 +50,16 @@ const FORM_POINTS_CONFIG = {
  * Detta gör det enkelt att kombinera flera poängkategorier utan att någon dominerar för mycket.
  **/
 
-export function calculateFormPoints(horseName, lastTenStarts, lastMonthSummary, allHorses) {
+export function calculateFormPoints(horseName: string, lastTenStarts: HorseStartRecord[], lastMonthSummary: LastMonthSummary, allHorses: AllHorseData[]): number {
     const {
         PLACEMENT_POINTS,
         WEIGHT_FACTORS,
         LAST_MONTH_BONUS
     } = FORM_POINTS_CONFIG;
 
-    function calculateRawFormPoints(horse) {
+    function calculateRawFormPoints(horse: HorseForFormCalculation): number {
         const starts = horse.lastTenStarts ?? [];
         const summary = horse.lastMonthSummary ?? {};
-
-//        console.log(`Calculating raw form points for ${horse.name}  - All starts data:`, starts);
 
         let points = starts.reduce((total, start, index) => {
             if (!start || !start.position || start.position === "N/A") return total;
@@ -49,11 +70,9 @@ export function calculateFormPoints(horseName, lastTenStarts, lastMonthSummary, 
             return total + basePoints * weight;
         }, 0);
 
-//        console.log(`Raw points for ${horse.name}: ${points}`);
-
-        let wins = parseInt(summary.wins ?? 0, 10);
-        let seconds = parseInt(summary.seconds ?? 0, 10);
-        let thirds = parseInt(summary.thirds ?? 0, 10);
+        let wins = parseInt(String(summary.wins ?? 0), 10);
+        let seconds = parseInt(String(summary.seconds ?? 0), 10);
+        let thirds = parseInt(String(summary.thirds ?? 0), 10);
         if (isNaN(wins)) wins = 0;
         if (isNaN(seconds)) seconds = 0;
         if (isNaN(thirds)) thirds = 0;
@@ -63,16 +82,14 @@ export function calculateFormPoints(horseName, lastTenStarts, lastMonthSummary, 
             (seconds * LAST_MONTH_BONUS.SECOND) +
             (thirds * LAST_MONTH_BONUS.THIRD);
 
-//        console.log(`Bonus points for ${horse.name}: ${bonusPoints}`);
-
         return Math.log(1 + points + bonusPoints);
     }
 
     const allRawPoints = allHorses.map(h =>
         calculateRawFormPoints({
-            name: h.horse?.name ?? "Okänd",
-            lastTenStarts: h.lastTenStarts,
-            lastMonthSummary: h.lastMonthSummary
+            name: h.horse?.name ?? "Unknown",
+            lastTenStarts: h.lastTenStarts ?? [],
+            lastMonthSummary: h.lastMonthSummary ?? { wins: 0, seconds: 0, thirds: 0 }
         })
     );
 
@@ -83,7 +100,7 @@ export function calculateFormPoints(horseName, lastTenStarts, lastMonthSummary, 
     const rawScore = calculateRawFormPoints({
         name: currentHorse.horse?.name ?? horseName,
         lastTenStarts: currentHorse.lastTenStarts ?? [],
-        lastMonthSummary: currentHorse.lastMonthSummary ?? {}
+        lastMonthSummary: currentHorse.lastMonthSummary ?? { wins: 0, seconds: 0, thirds: 0 }
     });
 
     const minRaw = Math.min(...allRawPoints);
@@ -96,8 +113,5 @@ export function calculateFormPoints(horseName, lastTenStarts, lastMonthSummary, 
     let normalized = ((rawScore - minRaw) / (maxRaw - minRaw)) * 100;
     normalized = Math.max(1, Math.min(100, normalized));
 
-//    console.log(`Normalized points for ${horseName}: ${normalized} (Raw: ${rawScore}, Min: ${minRaw}, Max: ${maxRaw})`);
-
-    // Round to nearest integer
     return Math.round(normalized);
 }

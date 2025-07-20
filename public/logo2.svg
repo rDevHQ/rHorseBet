@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="520" height="120">
+  <style>
+    .title { font: bold 32px 'Segoe UI', sans-serif; fill: #0a2540; }
+    .tagline { font: 14px 'Segoe UI', sans-serif; fill: #0a4d8c; }
+  </style>
+
+  <!-- Horse silhouette (better shape) -->
+  <g transform="translate(0, 0)">
+    <path d="M80,20 C75,5 55,5 50,25 C45,40 35,45 30,55 C20,75 40,90 60,85 C70,82 80,70 80,60 C80,55 78,50 76,48 C78,45 80,40 80,35 C82,30 82,25 80,20 Z" fill="#0a2540"/>
+    
+    <!-- Bars inside the silhouette (representing analytics) -->
+    <rect x="32" y="60" width="4" height="15" fill="#4ea0ff"/>
+    <rect x="39" y="55" width="4" height="20" fill="#4ea0ff"/>
+    <rect x="46" y="50" width="4" height="25" fill="#4ea0ff"/>
+  </g>
+
+  <!-- Brand Name -->
+  <text x="100" y="50" class="title">rHorseBet</text>
+
+  <!-- Tagline -->
+  <text x="100" y="80" class="tagline">Advanced Horse Racing Analytics</text>
+</svg>

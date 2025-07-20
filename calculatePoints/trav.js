@@ -2,7 +2,7 @@ import { calculateBettingPercentagePoints } from "./shared/calculateBettingPerce
 import { calculateOddsPoints } from "./shared/calculateOddsPoints.js";
 import { calculateStartPositionPoints } from "./trav/calculateStartPositionPoints.js";
 import { calculateFormPoints } from "./trav/calculateFormPoints.js";
-import { calculateTimePerformance } from "./trav/calculateTimePerformance.js";
+import { calculateTimePerformanceLastTenStarts } from "./trav/calculateTimePerformanceLastTenStarts.js";
 import { calculateDriverPoints } from "./shared/calculateDriverPoints.js";
 import { calculateTrainerPoints } from "./shared/calculateTrainerPoints.js";
 import { calculateEquipmentPoints } from "./trav/calculateEquipmentPoints.js";
@@ -30,16 +30,15 @@ export function calculatePointsForTrav(race, gameType) {
     let horses = [];
 
     horsesRaw.forEach((start) => {
-        const lastTenStartsCopy = start.lastTenStarts ? [...start.lastTenStarts] : [];
         const startPositionPoints = calculateStartPositionPoints(start, validHorses, race.startMethod);
         const formPoints = calculateFormPoints(
             start.horse?.name ?? "Okänd häst",
-            lastTenStartsCopy,
+            start.lastTenStarts,
             start.lastMonthSummary ?? {},
             validHorses
         );
-        const { timePoints, timeTooltip } = calculateTimePerformance(
-            lastTenStartsCopy,
+        const { timePerformanceLastTenStartsPoints, timePerformanceLastTenStartsTooltip } = calculateTimePerformanceLastTenStarts(
+            start.lastTenStarts,
             race.distance,
             race.startMethod,
             validHorses,
@@ -50,7 +49,8 @@ export function calculatePointsForTrav(race, gameType) {
         const trainerPoints = calculateTrainerPoints(start.trainer, allTrainers) || 1;
         const equipment = calculateEquipmentPoints(start.horse, validHorses);
         const classPoints = calculateClassPoints(start, validHorses);
-        const odds = start.horse?.odds ?? "N/A";
+        // Hämta odds från start.horse.odds (satt i transform.js)
+        const odds = start.horse?.odds;
         let bettingPercentage = getBettingPercentage(start.horse, gameType);
 
         let bettingPercentagePoints;
@@ -70,45 +70,40 @@ export function calculatePointsForTrav(race, gameType) {
             driverName: start.driver?.name ?? "Okänd kusk",
             odds,
             bettingPercentage,
-            bettingPercentagePoints,
-            startPositionPoints,
-            formPoints,
-            timePoints,
-            timeTooltip,
-            driverPoints,
-            trainerPoints,
-            equipmentPoints: equipment.points,
-            equipmentDescription: equipment.description,
-            classPoints,
             scratched: start.scratched ?? false,
             place: start.place ?? start?.horse?.place ?? null,
-            lastTenStartsCopy,
+            // lastTenStartsCopy removed; use start.lastTenStarts directly
             start,
+            categoryPoints: {
+                bettingPercentagePoints,
+                startPositionPoints,
+                formPoints,
+                timePerformanceLastTenStartsPoints,
+                driverPoints,
+                trainerPoints,
+                equipmentPoints: equipment.points,
+                classPoints
+            },
+            categoryTooltips: {
+                equipmentDescription: equipment.description,
+                timePerformanceLastTenStartsTooltip
+            }
         });
     });
 
-    // Assign bettingPercentagePoints to validHorses for lookup
-    validHorses.forEach(horse => {
-        const found = horses.find(h => h.horseName === horse.horse.name);
-        if (found) {
-            horse.bettingPercentagePoints = found.bettingPercentagePoints;
-        } else {
-            horse.bettingPercentagePoints = 0;
-        }
-    });
+    // No need to assign bettingPercentagePoints to validHorses; use horse.categoryPoints.bettingPercentagePoints everywhere
 
     horses.forEach(h => {
-        const lastTenStartsCopy = h.lastTenStartsCopy;
         const { points: headToHeadPoints, meetings } = calculateHeadToHeadPoints(
-            lastTenStartsCopy,
+            h.start.lastTenStarts,
             validHorses,
             h.horseName ?? "Okänd häst"
         );
 
-        h.headToHeadPoints = headToHeadPoints;
+        h.categoryPoints.headToHeadPoints = headToHeadPoints;
         h.h2hMeetings = meetings;
 
-        h.totalPoints = h.bettingPercentagePoints + h.startPositionPoints + h.formPoints + h.timePoints + h.headToHeadPoints + h.driverPoints + h.trainerPoints + h.equipmentPoints + h.classPoints;
+        h.totalPoints = h.categoryPoints.bettingPercentagePoints + h.categoryPoints.startPositionPoints + h.categoryPoints.formPoints + h.categoryPoints.timePerformanceLastTenStartsPoints + h.categoryPoints.headToHeadPoints + h.categoryPoints.driverPoints + h.categoryPoints.trainerPoints + h.categoryPoints.equipmentPoints + h.categoryPoints.classPoints;
     });
 
     const totalMyPoints = horses.reduce((sum, h) => sum + h.totalPoints, 0);
@@ -116,28 +111,28 @@ export function calculatePointsForTrav(race, gameType) {
     // ML Total Points
     horses.forEach(h => {
         h.mlPoints =
-            ML_CATEGORY_WEIGHTS.bettingPercentagePoints * h.bettingPercentagePoints +
-            ML_CATEGORY_WEIGHTS.trainerPoints * h.trainerPoints +
-            ML_CATEGORY_WEIGHTS.headToHeadPoints * h.headToHeadPoints +
-            ML_CATEGORY_WEIGHTS.equipmentPoints * h.equipmentPoints +
-            ML_CATEGORY_WEIGHTS.driverPoints * h.driverPoints +
-            ML_CATEGORY_WEIGHTS.classPoints * h.classPoints +
-            ML_CATEGORY_WEIGHTS.formPoints * h.formPoints +
-            ML_CATEGORY_WEIGHTS.timePoints * h.timePoints +
-            ML_CATEGORY_WEIGHTS.startPositionPoints * h.startPositionPoints;
+            ML_CATEGORY_WEIGHTS.bettingPercentagePoints * h.categoryPoints.bettingPercentagePoints +
+            ML_CATEGORY_WEIGHTS.trainerPoints * h.categoryPoints.trainerPoints +
+            ML_CATEGORY_WEIGHTS.headToHeadPoints * h.categoryPoints.headToHeadPoints +
+            ML_CATEGORY_WEIGHTS.equipmentPoints * h.categoryPoints.equipmentPoints +
+            ML_CATEGORY_WEIGHTS.driverPoints * h.categoryPoints.driverPoints +
+            ML_CATEGORY_WEIGHTS.classPoints * h.categoryPoints.classPoints +
+            ML_CATEGORY_WEIGHTS.formPoints * h.categoryPoints.formPoints +
+            ML_CATEGORY_WEIGHTS.timePoints * h.categoryPoints.timePerformanceLastTenStartsPoints +
+            ML_CATEGORY_WEIGHTS.startPositionPoints * h.categoryPoints.startPositionPoints;
     });
 
     // ML Upset Score
     horses.forEach(h => {
         h.mlUpsetScore =
-            UPSCORE_WEIGHTS.trainerPoints * h.trainerPoints +
-            UPSCORE_WEIGHTS.headToHeadPoints * h.headToHeadPoints +
-            UPSCORE_WEIGHTS.equipmentPoints * h.equipmentPoints +
-            UPSCORE_WEIGHTS.driverPoints * h.driverPoints +
-            UPSCORE_WEIGHTS.classPoints * h.classPoints +
-            UPSCORE_WEIGHTS.formPoints * h.formPoints +
-            UPSCORE_WEIGHTS.timePoints * h.timePoints +
-            UPSCORE_WEIGHTS.startPositionPoints * h.startPositionPoints;
+            UPSCORE_WEIGHTS.trainerPoints * h.categoryPoints.trainerPoints +
+            UPSCORE_WEIGHTS.headToHeadPoints * h.categoryPoints.headToHeadPoints +
+            UPSCORE_WEIGHTS.equipmentPoints * h.categoryPoints.equipmentPoints +
+            UPSCORE_WEIGHTS.driverPoints * h.categoryPoints.driverPoints +
+            UPSCORE_WEIGHTS.classPoints * h.categoryPoints.classPoints +
+            UPSCORE_WEIGHTS.formPoints * h.categoryPoints.formPoints +
+            UPSCORE_WEIGHTS.timePoints * h.categoryPoints.timePerformanceLastTenStartsPoints +
+            UPSCORE_WEIGHTS.startPositionPoints * h.categoryPoints.startPositionPoints;
     });
 
     // ML Percentage
