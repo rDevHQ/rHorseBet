@@ -8,13 +8,25 @@ interface Horse {
 }
 
 export function calculateEquipmentPointsGalopp(horse: Horse): { points: number; description: string } {
-    const MAX_CATEGORY_POINTS = 100;
-
     let points = 0;
     let description = "";
 
-    const current = horse.horse.blinders?.toLowerCase() ?? "";
-    const previous = horse.horse.blindersLastStart?.toLowerCase() ?? "";
+    // Helper function to safely convert blinders to string
+    const blindersToString = (blinders: any): string => {
+        if (typeof blinders === 'string') {
+            return blinders.toLowerCase();
+        }
+        if (typeof blinders === 'boolean') {
+            return blinders ? 'true' : 'false';
+        }
+        if (blinders === null || blinders === undefined) {
+            return '';
+        }
+        return String(blinders).toLowerCase();
+    };
+
+    const current = blindersToString(horse.horse.blinders);
+    const previous = blindersToString(horse.horse.blindersLastStart);
 
     if (current === previous) {
         points  = 0;

@@ -34,9 +34,20 @@ export function calculateTrainerPoints(trainer: Trainer, allTrainers: Trainer[])
     const currentYear = new Date().getFullYear().toString();
     const lastYear = (parseInt(currentYear) - 1).toString();
 
-    const parseWinPercentage = (winPercentage: string | undefined): number => {
+    const parseWinPercentage = (winPercentage: string | number | undefined): number => {
         if (!winPercentage) return 0;
-        return parseFloat(winPercentage.replace("%", "").trim());
+        
+        if (typeof winPercentage === 'number') {
+            // If it's already a number, return as-is (assuming it's already a percentage 0-100)
+            return winPercentage;
+        }
+        
+        if (typeof winPercentage === 'string') {
+            // If it's a string, remove % sign and parse
+            return parseFloat(winPercentage.replace("%", "").trim());
+        }
+        
+        return 0;
     };
 
     // Tränarens viktade vinstprocent

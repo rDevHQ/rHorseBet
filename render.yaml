@@ -1,0 +1,27 @@
+services:
+  # Backend Service
+  - type: web
+    name: rhorsebet-backend
+    env: node
+    plan: free
+    buildCommand: "npm install && npm run build"
+    startCommand: "node dist-backend/server.js"
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "18.17.1"
+
+  # Frontend Static Site
+  - type: web
+    name: rhorsebet-frontend
+    env: static
+    plan: free
+    buildCommand: "npm install && npm run build:frontend"
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /api/*
+        destination: http://rhorsebet-backend.onrender.com/*
+      - type: rewrite
+        source: /*
+        destination: /index.html

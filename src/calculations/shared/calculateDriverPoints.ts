@@ -34,8 +34,14 @@ export function calculateDriverPoints(driver: Driver, allDrivers: Driver[]): num
     const lastYear = (currentYear - 1).toString();
     const thisYear = currentYear.toString();
 
-    const parseWinPercentage = (winPercentage: string | undefined): number => {
+    const parseWinPercentage = (winPercentage: string | number | undefined): number => {
         if (!winPercentage) return 0;
+        
+        if (typeof winPercentage === 'number') {
+            // If it's already a number, return as-is (assuming it's already a percentage 0-100)
+            return winPercentage;
+        }
+        
         return parseFloat(String(winPercentage).replace("%", "").trim());
     };
 

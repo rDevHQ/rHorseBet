@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import GameDetails from './components/GameDetails';
+import DataCollectionPanel from './components/DataCollectionPanel';
 import useTracks from './hooks/useTracks';
 import useGames from './hooks/useGames';
 import { ColumnVisibilityProvider } from './contexts/ColumnVisibilityContext';
@@ -12,6 +13,7 @@ function App() {
   const [selectedGameType, setSelectedGameType] = useState<string | null>(null);
   const [showCustomCalendar, setShowCustomCalendar] = useState(false);
   const [calendarDate, setCalendarDate] = useState(new Date());
+  const [isAdminMode, setIsAdminMode] = useState(false);
   const calendarRef = useRef<HTMLDivElement>(null);
 
   // Get data for dropdowns
@@ -124,6 +126,23 @@ function App() {
     };
   }, [showCustomCalendar]);
 
+  // Admin mode keyboard shortcut (Ctrl+Shift+A)
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.shiftKey && event.key === 'A') {
+        event.preventDefault();
+        setIsAdminMode(prev => !prev);
+        console.log('Admin mode:', !isAdminMode ? 'enabled' : 'disabled');
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isAdminMode]);
+
   return (
     <ColumnVisibilityProvider>
       <style>{`
@@ -162,7 +181,16 @@ function App() {
       {/* Modern Header */}
       <header className="bg-white/80 backdrop-blur-sm shadow-lg border-b border-slate-200/50 sticky top-0 z-50">
         <div className="max-w-screen-2xl mx-auto py-4 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
-          <div className="flex justify-center">
+          <div className="flex justify-center relative">
+            {/* Hidden Admin Toggle Button */}
+            <button
+              onClick={() => setIsAdminMode(prev => !prev)}
+              className="absolute left-0 top-0 w-4 h-4 opacity-0 hover:opacity-20 transition-opacity"
+              title="Toggle Admin Mode"
+            >
+              🔧
+            </button>
+            
             {/* rHorseBet PNG Logo */}
             <img 
               src="/rHorseBet.png" 
@@ -174,6 +202,16 @@ function App() {
       </header>
 
       <main className="max-w-screen-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16">
+        {/* ML Data Collection Panel - Admin Only */}
+        <DataCollectionPanel isVisible={isAdminMode} />
+        
+        {/* Admin Mode Indicator */}
+        {isAdminMode && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6 text-sm">
+            🔧 <strong>Admin Mode Active</strong> - Press Ctrl+Shift+A to toggle
+          </div>
+        )}
+        
         {/* Modern Navigation Interface */}
         <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-slate-200/50 p-6 mb-8 space-y-6">
           
